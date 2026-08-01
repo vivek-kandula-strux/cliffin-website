@@ -37,22 +37,22 @@
 
 /* Cinematic story-flow — a whisper of warm mist bleeds up from the previous
    section so blocks read as chapters of one continuous narrative, not
-   stacked slabs. Kept full-viewport-width (breaks the container edges) and
-   pointer-transparent so it never gets in the way. */
+   stacked slabs. Pointer-transparent so it never gets in the way.
+   The section itself is full-width (no container class); the .container--wide
+   wrapper *inside* the section handles content constraint. This avoids the
+   `100vw`-inside-a-centered-container pattern that overflows by scrollbar-
+   width on classic-scrollbar browsers (Firefox, older Chromium). */
 .section--mist::before {
   content: '';
   position: absolute;
-  left: 50%;
-  top: 0;
-  transform: translateX(-50%);
-  width: 100vw;
+  inset: 0 0 auto 0;
   height: clamp(6rem, 14vw, 12rem);
   background: linear-gradient(180deg, oklch(0.94 0.02 55 / 0.5), transparent 100%);
   pointer-events: none;
   z-index: 0;
 }
 
-.section--mist > * { position: relative; z-index: 1; }
+.section--mist > .container--wide { position: relative; z-index: 1; }
 
 /* Full-width separator image — sits flush between sections, no gap.
    Line-height 0 eliminates the baseline gap browsers add below <img>. */
@@ -69,25 +69,15 @@
   height: auto;
 }
 
-/* Dark-forest section — sits flush beneath the separator. Uses the same
-   full-bleed pseudo-element pattern as section--mist so the background reaches
-   viewport edges even though the section element is a width-constrained container. */
+/* Dark-forest section — sits flush beneath the separator. Full-width
+   background applied directly to the section (no `100vw` pseudo needed
+   because the section itself spans the body, and the .container--wide
+   wrapper inside handles content constraint). */
 .section--forest {
   padding-top: 0;
-}
-.section--forest::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 0;
-  transform: translateX(-50%);
-  width: 100vw;
-  height: 100%;
   background-color: #11271D;
-  pointer-events: none;
-  z-index: 0;
 }
-.section--forest > * { position: relative; z-index: 1; }
+.section--forest > .container--wide { position: relative; z-index: 1; }
 
 .section--forest .section-head h2 {
   color: var(--color-ink-on-dark);

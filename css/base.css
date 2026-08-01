@@ -2,28 +2,12 @@
    Base — typography, links, focus, page background, skip link
    ============================================================ */
 
-/* Defense-in-depth against horizontal overflow.
-   The site is engineered so that nothing is laid out wider than the
-   viewport at any breakpoint (no off-canvas transforms, no >100% widths,
-   no fixed min-widths that exceed narrow viewports). These two rules are
-   a safety net for edge cases (browser rendering differences, future
-   regressions, dynamic content):
-   - `overflow-x: clip` on <html>: modern property that stops horizontal
-     scroll without establishing a scroll container, so position: fixed
-     and position: sticky inside descendants keep working.
-   - `overflow-x: hidden` on <body>: fallback for browsers where `clip`
-     is unsupported or unreliable (some Android WebViews). */
-html {
-  overflow-x: clip;
-}
-
 body {
   font-family: var(--font-body);
   font-size: 16px;
   color: var(--color-text);
   background: var(--color-page);
   background-image: var(--grad-page-wash);
-  overflow-x: hidden;
 }
 
 /* Site sections after the header get the page wash indirectly through body;
