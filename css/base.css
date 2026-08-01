@@ -8,7 +8,6 @@ body {
   color: var(--color-text);
   background: var(--color-page);
   background-image: var(--grad-page-wash);
-  overflow-x: hidden;
 }
 
 /* Site sections after the header get the page wash indirectly through body;
@@ -97,10 +96,6 @@ a:focus-visible {
   color: var(--color-ink-on-dark);
 }
 
-/* Site wrapper (applied to <body>'s main child) */
-.site {
-  overflow-x: hidden;
-}
 
 /* Instrument Serif is always italic in this system */
 .serif {

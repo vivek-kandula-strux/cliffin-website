@@ -142,10 +142,15 @@
 /* ── Feature Split Section ───────────────────────────────────── */
 .feature-split {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 60px;
   align-items: center;
 }
+
+/* Grid children default to min-width: auto (intrinsic content width),
+   so a 1200px img inside forces the cell to 1200px and overflows the
+   viewport on mobile. Explicit min-width: 0 lets cells shrink. */
+.feature-split > * { min-width: 0; }
 
 .feature-split__heading { margin-top: 12px; line-height: 1.15; }
 
@@ -200,7 +205,7 @@
 }
 
 @media (max-width: 900px) {
-  .feature-split { grid-template-columns: 1fr; gap: 32px; }
+  .feature-split { grid-template-columns: minmax(0, 1fr); gap: 32px; }
   .feature-split__body { max-width: unset; }
 }
 

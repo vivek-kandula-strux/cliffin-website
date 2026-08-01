@@ -58,11 +58,11 @@
 }
 .about-team__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 32px;
 }
 @media (max-width: 700px) {
-  .about-team__grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .about-team__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 }
 .about-team__card {
   display: flex;
@@ -70,10 +70,11 @@
   align-items: center;
   gap: 0;
   text-align: center;
+  min-width: 0;
 }
 .about-team__ring {
-  width: 164px;
-  height: 164px;
+  width: min(164px, 100%);
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   padding: 3px;
   background: linear-gradient(135deg, oklch(0.7 0.15 47) 0%, oklch(0.55 0.12 80) 60%, oklch(0.38 0.08 158) 100%);
