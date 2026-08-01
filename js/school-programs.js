@@ -49,7 +49,7 @@
   if (chips.length) {
     ScrollTrigger.create({
       trigger : '.dark-panel',
-      start   : 'top 88%',   // same threshold as the data-animate batch
+      start   : 'top bottom',   // reveal as soon as any part enters viewport (matches data-animate batch)
       once    : true,
       onEnter() {
         gsap.from(chips, {
@@ -107,7 +107,7 @@
       const proxy  = { n: 0 };
       ScrollTrigger.create({
         trigger : el,
-        start   : 'top 88%',
+        start   : 'top bottom',
         once    : true,
         onEnter() {
           gsap.to(proxy, {

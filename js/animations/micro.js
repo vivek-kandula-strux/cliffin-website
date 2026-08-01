@@ -57,7 +57,7 @@ function initCounters(gsap, ScrollTrigger) {
 
     ScrollTrigger.create({
       trigger : el,
-      start   : 'top 90%',
+      start   : 'top bottom',
       once    : true,
       onEnter() {
         // Delay in hero: entrance timeline completes at ~1.8 s
@@ -281,7 +281,7 @@ function initIconBounce(gsap, ScrollTrigger) {
   qsa('.icon-chip').forEach(chip => {
     ScrollTrigger.create({
       trigger : chip,
-      start   : 'top 88%',
+      start   : 'top bottom',
       once    : true,
       onEnter() {
         gsap.fromTo(

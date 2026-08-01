@@ -138,23 +138,29 @@ function playRevealsGSAP(gsap, ScrollTrigger, { isMobile }) {
 
   const dist = isMobile ? 16 : 28;
 
+  // Set the start state BEFORE registering the batch trigger so
+  // ScrollTrigger sees the hidden state on its first evaluation.
+  gsap.set(targets, { autoAlpha: 0, y: dist });
+
   ScrollTrigger.batch('[data-animate]', {
-    start: 'top 88%',
+    // Fire as soon as ANY part of the element enters the viewport
+    // (top of element crosses bottom of viewport). Earlier fixes used
+    // 'top 88%' which meant an element had to be 12% into view before
+    // animating — on mobile this reads as "section only loads when I
+    // scroll past it".
+    start: 'top bottom',
     once: true,
     onEnter: (batch) => {
       gsap.to(batch, {
         autoAlpha: 1,
         y: 0,
-        duration: 0.9,
+        duration: isMobile ? 0.55 : 0.8,
         ease: 'power3.out',
-        stagger: isMobile ? 0.06 : 0.09,
+        stagger: isMobile ? 0.05 : 0.09,
         overwrite: 'auto',
       });
     },
   });
-
-  // Set the start state explicitly so batch has something to animate from.
-  gsap.set(targets, { autoAlpha: 0, y: dist });
 
   // Refresh after fonts load so trigger positions match final layout
   if (document.fonts?.ready) {
@@ -184,7 +190,9 @@ function fallbackReveal() {
         }
       });
     },
-    { rootMargin: '0px 0px -10% 0px' }
+    // Reveal the moment any part of the element enters the viewport
+    // (matches the GSAP path — see start: 'top bottom' above).
+    { rootMargin: '0px 0px 0px 0px', threshold: 0 }
   );
   targets.forEach((el) => io.observe(el));
 }
