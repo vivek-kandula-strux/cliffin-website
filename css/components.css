@@ -3048,9 +3048,9 @@ a.tile--image-flat:focus-visible img {
   }
   .hero-banner--home .hero-banner__media img {
     height: auto;
-    width: 150%;
-    max-width: 150%;
-    margin-right: -25%;
+    width: 100%;
+    max-width: 100%;
+    margin-right: 0;
     -webkit-mask-image: radial-gradient(
       120% 100% at 100% 100%,
       #000 40%,
