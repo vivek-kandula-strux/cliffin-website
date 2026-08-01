@@ -502,7 +502,12 @@
   width: 18px;
 }
 
-/* Full-screen mobile drawer — slides in from right */
+/* Full-screen mobile drawer.
+   IMPORTANT: at rest the panel sits at inset: 0 (fully inside the
+   viewport) with visibility/opacity hidden. It is NEVER positioned
+   off-canvas — an earlier translateX(100%) approach caused the whole
+   page to lay out wider than the viewport in real mobile browsers
+   (Samsung Internet, iOS Safari) even with overflow-x: clip on <html>. */
 .header__mobile {
   position: fixed;
   inset: 0;
@@ -515,19 +520,38 @@
   flex-direction: column;
   padding: 96px var(--container-pad) 48px;
   overflow-y: auto;
-  transform: translateX(100%);
+  opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   transition:
-    transform var(--duration-medium) var(--ease-emphasized),
+    opacity var(--duration-medium) var(--ease-emphasized),
     visibility 0s linear var(--duration-medium);
 }
 
 .header[data-menu-open='true'] .header__mobile {
-  transform: translateX(0);
+  opacity: 1;
   visibility: visible;
+  pointer-events: auto;
   transition:
-    transform var(--duration-medium) var(--ease-emphasized),
+    opacity var(--duration-medium) var(--ease-emphasized),
     visibility 0s linear 0s;
+}
+
+/* Subtle vertical slide-in for the menu contents on open — keeps the
+   drawer's "enter" motion without any horizontal off-canvas positioning. */
+.header__mobile > * {
+  transform: translateY(-6px);
+  transition: transform var(--duration-medium) var(--ease-emphasized);
+}
+.header[data-menu-open='true'] .header__mobile > * {
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .header__mobile > *,
+  .header[data-menu-open='true'] .header__mobile > * {
+    transform: none;
+    transition: none;
+  }
 }
 
 /* Mobile nav — large display-weight links */
