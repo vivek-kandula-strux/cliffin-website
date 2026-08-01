@@ -2,6 +2,15 @@
    Base — typography, links, focus, page background, skip link
    ============================================================ */
 
+/* Contain horizontal overflow at the root. The mobile menu (.header__mobile)
+   is a fixed off-canvas panel positioned at translateX(100%) which sits one
+   viewport-width past the right edge by design. `overflow-x: clip` prevents
+   that from creating a horizontal scrollbar without establishing a scroll
+   container (so it doesn't break position: sticky/fixed inside descendants). */
+html {
+  overflow-x: clip;
+}
+
 body {
   font-family: var(--font-body);
   font-size: 16px;
