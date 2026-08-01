@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="https://images.unsplash.com/photo-1741290162352-cc072eb061c7?auto=format&fit=crop&w=1400&q=80" fetchpriority="high">
+<link rel="preload" as="image" href="assets/Background/Hero Image 2.png" fetchpriority="high">
 <link rel="stylesheet" href="css/main.css">
 <script type="module" src="js/main.js"></script>
 </head>
@@ -32,7 +32,8 @@
 <header class="header" id="site-header" data-menu-open="false" data-scrolled="false">
   <div class="header__inner">
     <a class="brand" href="index.html" aria-label="Cliff-Inn Adventures — Home" data-key="home">
-      <img class="brand__logo" src="assets/Logo/C-A Black.png" alt="Cliff-Inn Adventures" height="107">
+      <img class="brand__logo brand__logo--dark" src="assets/Logo/C-A Black.png" alt="Cliff-Inn Adventures" height="107">
+      <img class="brand__logo brand__logo--light" src="assets/Logo/C-A White (1).png" alt="" height="107" aria-hidden="true">
     </a>
 
     <nav class="nav" id="primary-nav" aria-label="Primary">
@@ -89,48 +90,47 @@
 
 <main id="main" class="site">
 
-  <!-- HERO BENTO -->
-  <section class="section container--wide" aria-labelledby="hero-title" data-hero>
-    <div class="bento">
-      <div class="tile tile--dark span-7 row-2 hero-copy">
-        <div>
-          <span class="eyebrow eyebrow--on-dark" data-hero-eyebrow><span></span>Where learning meets adventure</span>
-          <h1 id="hero-title" data-hero-title>Escape the ordinary,<br>find your <span class="word-highlight" data-scramble>freedom</span></h1>
-          <p data-hero-description>Outdoor experiences for schools, corporates and independent explorers — rappelling, treks, night camps and team challenges designed to build confidence, connection and a taste for the wild.</p>
+  <!-- HERO -->
+  <section class="hero-banner hero-banner--home" aria-labelledby="hero-title" data-hero data-nav-invert>
+    <div class="hero-banner__media" data-hero-media>
+      <img src="assets/Background/Hero Image 2.png" alt="" loading="eager" fetchpriority="high" data-hero-parallax>
+    </div>
+    <div class="hero-banner__scrim" aria-hidden="true"></div>
+    <div class="hero-banner__inner hero-copy">
+      <div>
+        <span class="eyebrow eyebrow--on-dark" data-hero-eyebrow><span></span>Where learning meets adventure</span>
+        <h1 id="hero-title" data-hero-title>Escape the ordinary,<br>find your <span class="word-highlight" data-scramble>freedom</span></h1>
+        <p data-hero-description>Outdoor experiences for schools, corporates and independent explorers — rappelling, treks, night camps and team challenges designed to build confidence, connection and a taste for the wild.</p>
+      </div>
+      <div>
+        <div class="hero-copy__cta" data-hero-actions>
+          <a class="btn btn--primary" href="contact.html" data-magnetic>Plan Your Escape →</a>
+          <a class="btn btn--outline-dark" href="gallery.html">Watch The Film</a>
         </div>
-        <div>
-          <div class="hero-copy__cta" data-hero-actions>
-            <a class="btn btn--primary" href="contact.html">Plan Your Escape →</a>
-            <a class="btn btn--outline-dark" href="gallery.html">Watch The Film</a>
+        <div class="hero-copy__meta">
+          <div class="hero-copy__meta-item">
+            <span class="hero-copy__meta-num" data-count="8">8<span>+ yrs</span></span>
+            <span class="hero-copy__meta-label">Guiding in the wild</span>
           </div>
-          <div class="hero-copy__meta">
-            <div class="hero-copy__meta-item">
-              <span class="hero-copy__meta-num" data-count="8">8<span>+ yrs</span></span>
-              <span class="hero-copy__meta-label">Guiding in the wild</span>
-            </div>
-            <div class="hero-copy__meta-item">
-              <span class="hero-copy__meta-num" data-count="120">120<span>+</span></span>
-              <span class="hero-copy__meta-label">Schools &amp; corporates</span>
-            </div>
-            <div class="hero-copy__meta-item">
-              <span class="hero-copy__meta-num" data-count="5" data-count-k>5k<span>+</span></span>
-              <span class="hero-copy__meta-label">Explorers guided</span>
-            </div>
+          <div class="hero-copy__meta-item">
+            <span class="hero-copy__meta-num" data-count="120">120<span>+</span></span>
+            <span class="hero-copy__meta-label">Schools &amp; corporates</span>
+          </div>
+          <div class="hero-copy__meta-item">
+            <span class="hero-copy__meta-num" data-count="5" data-count-k>5k<span>+</span></span>
+            <span class="hero-copy__meta-label">Explorers guided</span>
           </div>
         </div>
       </div>
-      <div class="tile tile--image span-5 row-2 hero-media" style="min-height:560px;" data-hero-media>
-        <img src="assets/images/cliffinnadventures/adventure-workshops/rappelling-cliff-face.webp" alt="Rock climber rappelling down a red-rock cliff face under blue skies" loading="eager" fetchpriority="high" width="1920" height="1341" data-hero-parallax>
-        <div class="hero-media__badge" aria-hidden="true">
-          <span class="hero-media__badge-star">★★★★★</span>
-          <span class="hero-media__badge-text">Trusted by 120+ schools &amp; brands</span>
-        </div>
-      </div>
+    </div>
+    <div class="hero-media__badge" aria-hidden="true">
+      <span class="hero-media__badge-star">★★★★★</span>
+      <span class="hero-media__badge-text">Trusted by 120+ schools &amp; brands</span>
     </div>
   </section>
 
   <!-- PROGRAMS BENTO -->
-  <section class="section section--mist container--wide" aria-labelledby="programs-title">
+  <section class="section section--mist container--wide" style="padding-bottom:0" aria-labelledby="programs-title">
     <div class="section-head" data-animate>
       <div>
         <span class="eyebrow"><span></span>What we do</span>
@@ -145,7 +145,7 @@
         <div class="tile__body">
           <h3 class="tile__title">School Boot Camps</h3>
           <p class="tile__desc">A thrilling boot camp designed to challenge limits, build teamwork and create unforgettable cliffside adventure experiences.</p>
-          <span class="card__foot-text" style="color:var(--color-amber); margin-top:14px; display:inline-block;">Know More →</span>
+          <span class="card__foot-text" style="margin-top:14px; display:inline-block;">Know More →</span>
         </div>
       </a>
       <a class="tile tile--image span-6" href="corporate-packages.html" style="min-height:220px;" data-animate>
@@ -174,14 +174,19 @@
     </div>
   </section>
 
+  <!-- SECTION SEPARATOR: terrain illustration bridges What We Do → Upcoming Expeditions -->
+  <div class="section-separator" aria-hidden="true">
+    <img src="assets/Background/Separator-cliffin.png" alt="" loading="lazy" decoding="async" width="1774" height="887">
+  </div>
+
   <!-- UPCOMING EXPEDITIONS -->
-  <section class="section container--wide" id="expeditions" aria-labelledby="expeditions-title">
+  <section class="section section--forest container--wide" id="expeditions" aria-labelledby="expeditions-title">
     <div class="section-head" data-animate>
       <div>
-        <span class="eyebrow"><span></span>Upcoming expeditions</span>
+        <span class="eyebrow eyebrow--on-dark"><span></span>Upcoming expeditions</span>
         <h2 id="expeditions-title">Reserve your spot<br>in the wild</h2>
       </div>
-      <p style="max-width:40ch; font-size:14px;">Limited departures, small groups, fully guided. Block your interest and we'll hold a place while we confirm dates with you.</p>
+      <p style="max-width:40ch; font-size:14px; color: var(--color-body-on-dark);">Limited departures, small groups, fully guided. Block your interest and we'll hold a place while we confirm dates with you.</p>
     </div>
     <div class="card-grid">
 
@@ -345,49 +350,37 @@
       </div>
 
       <div class="feature span-4" data-animate>
-        <div class="icon-chip feature__icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6 L14 12 L12 18 L10 12 Z" fill="var(--color-ember)" stroke="none"/></svg>
-        </div>
+        <span class="feature__num" aria-hidden="true">01</span>
         <h3 class="feature__title">Guided Expeditions</h3>
         <p class="feature__desc">Seasoned guides who know the terrain inside out.</p>
       </div>
 
       <div class="feature span-4" data-animate>
-        <div class="icon-chip feature__icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 L21 12 L12 22 L3 12 Z"/></svg>
-        </div>
+        <span class="feature__num" aria-hidden="true">02</span>
         <h3 class="feature__title">Tailored Adventures</h3>
         <p class="feature__desc">Shaped around your group — age, goals and thrill.</p>
       </div>
 
       <div class="feature span-4" data-animate>
-        <div class="icon-chip feature__icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="var(--color-ember)" stroke="none"/></svg>
-        </div>
+        <span class="feature__num" aria-hidden="true">03</span>
         <h3 class="feature__title">Eco-Conscious</h3>
         <p class="feature__desc">Leave-no-trace camps that respect the wild.</p>
       </div>
 
       <div class="feature span-4" data-animate>
-        <div class="icon-chip feature__icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 20 L9 7 L13 14 L16 9 L22 20 Z" stroke-linejoin="round"/></svg>
-        </div>
+        <span class="feature__num" aria-hidden="true">04</span>
         <h3 class="feature__title">Experienced Guides</h3>
         <p class="feature__desc">Passion-driven leaders trained in first response.</p>
       </div>
 
       <div class="feature span-6" data-animate>
-        <div class="icon-chip feature__icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" transform="rotate(45 12 12)"/><circle cx="12" cy="12" r="2.4" fill="var(--color-ember)" stroke="none"/></svg>
-        </div>
+        <span class="feature__num" aria-hidden="true">05</span>
         <h3 class="feature__title">Expert Gear</h3>
         <p class="feature__desc">Inspected, certified equipment for climbing, rappelling and camping.</p>
       </div>
 
       <div class="feature span-6" data-animate>
-        <div class="icon-chip feature__icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7 L12 12 L16 14" stroke-linecap="round"/></svg>
-        </div>
+        <span class="feature__num" aria-hidden="true">06</span>
         <h3 class="feature__title">24/7 Assistance</h3>
         <p class="feature__desc">On-ground support before, during and after every single trip.</p>
       </div>

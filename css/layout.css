@@ -54,6 +54,48 @@
 
 .section--mist > * { position: relative; z-index: 1; }
 
+/* Full-width separator image — sits flush between sections, no gap.
+   Line-height 0 eliminates the baseline gap browsers add below <img>. */
+.section-separator {
+  display: block;
+  line-height: 0;
+  font-size: 0;
+  margin: 0;
+  padding: 0;
+}
+.section-separator img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Dark-forest section — sits flush beneath the separator. Uses the same
+   full-bleed pseudo-element pattern as section--mist so the background reaches
+   viewport edges even though the section element is a width-constrained container. */
+.section--forest {
+  padding-top: 0;
+}
+.section--forest::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 100%;
+  background-color: #11271D;
+  pointer-events: none;
+  z-index: 0;
+}
+.section--forest > * { position: relative; z-index: 1; }
+
+.section--forest .section-head h2 {
+  color: var(--color-ink-on-dark);
+}
+.section--forest .section-head p {
+  color: var(--color-body-on-dark);
+}
+
 /* Editorial hairline — a warm hair-thin gradient rule you can place at the
    top of a section for a "chapter break" feel without visual weight. */
 .section--rule::before {

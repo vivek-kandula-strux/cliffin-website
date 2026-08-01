@@ -137,7 +137,7 @@
   --grad-hero-scrim:
     linear-gradient(90deg, oklch(0.18 0.03 158 / 0.92), oklch(0.18 0.03 158 / 0.5)),
     radial-gradient(70% 90% at 100% 0%, oklch(0.5 0.1 232 / 0.35), transparent 60%);
-  --grad-image-scrim-tall: linear-gradient(0deg, oklch(0.16 0.03 158 / 0.92) 4%, oklch(0.4 0.1 40 / 0.22) 40%, transparent 68%);
+  --grad-image-scrim-tall: linear-gradient(0deg, oklch(0.12 0.03 158 / 0.97) 0%, oklch(0.13 0.03 158 / 0.90) 18%, oklch(0.15 0.03 158 / 0.72) 38%, oklch(0.18 0.03 158 / 0.42) 58%, oklch(0.2 0.03 158 / 0.14) 76%, transparent 90%);
   --grad-image-scrim-short: linear-gradient(0deg, oklch(0.18 0.03 158 / 0.55), transparent 55%);
   --grad-ember: linear-gradient(135deg, var(--color-ember-2), var(--color-ember-3));
   --grad-ember-tile: linear-gradient(135deg, oklch(0.74 0.15 55), oklch(0.62 0.16 42));

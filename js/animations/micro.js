@@ -349,68 +349,26 @@ function initScrollParallax(gsap, ScrollTrigger) {
 
 /* ─────────────────────────────────────────────────────────────
    10. TERRAIN REVEAL
-   Two scrub-linked animations on the closing-scene hiker band:
-     a) mask-image fade — hikers rise from the CTA's darkness as
-        the band enters the viewport (95% → 18% fade zone).
-     b) object-position drift — the crop pans horizontally as the
-        section moves through the viewport (58% → 42%), so the
-        hikers appear to march across.
-   Both driven via CSS variables that CSS references in mask-image
-   and object-position — avoids GSAP inline-style clobbering.
+   Scrub-linked mask-image fade — hikers rise from the CTA's
+   darkness as the band enters the viewport (95% → 18% fade zone).
 ───────────────────────────────────────────────────────────── */
 function initTerrainReveal(gsap, ScrollTrigger) {
   const terrain = qs('.footer-terrain');
   const img     = terrain?.querySelector('img');
   if (!terrain || !img) return;
 
-  // We set mask-image + object-position as full inline strings on every tick.
-  // CSS-var indirection is unreliable across browsers for mask-image repaints
-  // unless the var is registered with @property (which we do in CSS as a
-  // second line of defense) — but string-setting is bulletproof.
-  const applyMask = (fadePct) => {
-    const val = `linear-gradient(to bottom, transparent 0%, black ${fadePct.toFixed(1)}%)`;
-    img.style.maskImage = val;
-    img.style.webkitMaskImage = val;
-  };
-  const applyPan = (panPct) => {
-    img.style.objectPosition = `${panPct.toFixed(1)}% 62%`;
-  };
-
-  // Prime the initial state so the hikers are hidden before the trigger fires.
-  applyMask(95);
-  applyPan(58);
-
-  // (a) Mask reveal — completes as the band settles into view.
-  const revealState = { p: 0 };
-  gsap.to(revealState, {
-    p: 1,
-    ease: 'none',
-    scrollTrigger: {
-      trigger : terrain,
-      start   : 'top bottom',
-      end     : 'top 55%',
-      scrub   : 1,
-      invalidateOnRefresh: true,
-    },
-    onUpdate() {
-      applyMask(95 - (95 - 18) * revealState.p);
-    },
-  });
-
-  // (b) Horizontal drift — subtle march across the full scroll range.
-  const driftState = { p: 0 };
-  gsap.to(driftState, {
-    p: 1,
-    ease: 'none',
-    scrollTrigger: {
-      trigger : terrain,
-      start   : 'top bottom',
-      end     : 'bottom top',
-      scrub   : 1.4,
-      invalidateOnRefresh: true,
-    },
-    onUpdate() {
-      applyPan(58 - (58 - 42) * driftState.p);
-    },
-  });
+  gsap.fromTo(img,
+    { autoAlpha: 0 },
+    {
+      autoAlpha: 1,
+      ease: 'none',
+      scrollTrigger: {
+        trigger : terrain,
+        start   : 'top bottom',
+        end     : '+=220',
+        scrub   : 1,
+        invalidateOnRefresh: true,
+      },
+    }
+  );
 }

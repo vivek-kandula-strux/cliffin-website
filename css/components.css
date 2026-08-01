@@ -322,6 +322,29 @@
   transition: opacity var(--duration-fast) var(--ease-standard);
 }
 
+/* White logo sits on top of black; both share the same grid cell */
+.brand__logo--light {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* .brand needs relative positioning so the absolute logo is anchored */
+.brand {
+  position: relative;
+}
+
+/* Swap to white logo on dark-theme header */
+.header[data-theme='dark'] .brand__logo--dark {
+  opacity: 0;
+}
+
+.header[data-theme='dark'] .brand__logo--light {
+  opacity: 1;
+}
+
 .brand:hover .brand__logo {
   opacity: 0.8;
 }
@@ -635,7 +658,7 @@
 ----------------------------------------------------------- */
 .hero-banner {
   position: relative;
-  background: var(--color-panel);
+  background: #FAE6C1;
   overflow: hidden;
   color: var(--color-ink-on-dark);
 }
@@ -643,13 +666,14 @@
 .hero-banner__media {
   position: absolute;
   inset: 0;
-  background-color: oklch(0.28 0.03 158);
+  background-color: #FAE6C1;
 }
 
 .hero-banner__media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: right center;
 }
 
 .hero-banner__scrim {
@@ -804,6 +828,10 @@
   bottom: clamp(1.75rem, 2.4vw, 2.25rem);
   color: var(--color-ink-on-dark);
   z-index: 1;
+  /* Two-layer shadow: tight rim kills ambient bleed, wide diffuse creates depth */
+  text-shadow:
+    0 0 8px oklch(0.07 0.02 158 / 0.85),
+    0 2px 22px oklch(0.07 0.02 158 / 0.65);
 }
 
 .tile__eyebrow {
@@ -812,6 +840,24 @@
   text-transform: uppercase;
   color: var(--color-amber);
   font-weight: 600;
+}
+
+/* All text on image tiles: pure white regardless of image tone */
+.tile--image .tile__eyebrow,
+.tile--image .tile__title,
+.tile--image .tile__desc,
+.tile--image .card__foot-text {
+  color: #fff;
+}
+
+/* Eyebrow stays slightly dimmed — preserves hierarchy below bright title */
+.tile--image .tile__eyebrow {
+  color: oklch(0.88 0.01 88);
+}
+
+/* Desc: 88% white — reads clearly but doesn't compete with title */
+.tile--image .tile__desc {
+  color: oklch(0.88 0.01 88);
 }
 
 .tile__title {
@@ -1071,7 +1117,7 @@ a.tile--image-flat:focus-visible img {
   font-size: 11px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--color-ink-soft);
+  color: var(--color-ink-muted);
 }
 
 .card__price {
@@ -1093,8 +1139,9 @@ a.tile--image-flat:focus-visible img {
 
 /* Program feature card used on Home / About / Workshops flow */
 .feature {
-  background: var(--grad-card-sheen);
+  background: var(--color-card);
   border: 1px solid var(--color-border);
+  border-top: 2px solid var(--color-border-strong);
   border-radius: var(--radius-tile);
   box-shadow: var(--shadow-elev), var(--shadow-edge-inset);
   padding: clamp(1.75rem, 2.4vw, 2.25rem);
@@ -1105,53 +1152,56 @@ a.tile--image-flat:focus-visible img {
   overflow: hidden;
   transition:
     border-color var(--duration-fast) var(--ease-standard),
+    border-top-color var(--duration-fast) var(--ease-standard),
     box-shadow var(--duration-medium) var(--ease-standard),
     transform var(--duration-medium) var(--ease-emphasized);
 }
 
-/* Soft topographic wash — evokes contour lines without the SaaS-y white slab. */
-.feature::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(140% 100% at 100% 0%, oklch(0.67 0.15 47 / 0.05), transparent 55%),
-    radial-gradient(120% 100% at 0% 100%, oklch(0.52 0.1 232 / 0.05), transparent 60%);
-  pointer-events: none;
-  opacity: 0.9;
-  transition: opacity var(--duration-medium) var(--ease-standard);
-}
-
-.feature > * { position: relative; z-index: 1; }
-
 .feature:hover,
 .feature:focus-within {
-  border-color: var(--color-ember);
+  border-color: var(--color-border);
+  border-top-color: var(--color-ember);
   box-shadow: var(--shadow-elev-hover), var(--shadow-edge-inset);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .feature:hover { transform: translateY(-3px); }
-  .feature:hover::after { opacity: 1; }
 }
 
-.feature__icon {
-  margin-bottom: 16px;
+/* Numbered counter — replaces icon chip */
+.feature__num {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--color-ember);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.feature__num::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-ember-soft) 0%, transparent 85%);
 }
 
 .feature__title {
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 21px;
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: -0.025em;
   margin: 0;
 }
 
 .feature__desc {
-  font-size: 13px;
-  line-height: 1.6;
+  font-size: 13.5px;
+  line-height: 1.65;
   color: var(--color-ink-muted);
-  margin: 8px 0 0;
+  margin: 10px 0 0;
 }
 
 .feature--sm .feature__title {
@@ -2006,9 +2056,7 @@ a.tile--image-flat:focus-visible img {
 .footer-terrain {
   display: block;
   line-height: 0;
-  background: var(--color-panel);
-  margin-top: -1px;
-  margin-bottom: -1px;
+  margin-top: clamp(1rem, 2vw, 2rem);
   overflow: hidden;
 }
 
@@ -2020,51 +2068,49 @@ a.tile--image-flat:focus-visible img {
 ----------------------------------------------------------- */
 .closing-scene {
   position: relative;
-  background:
-    radial-gradient(50% 40% at 8% 55%, oklch(0.6 0.16 47 / 0.28), transparent 62%),
-    radial-gradient(50% 35% at 92% 10%, oklch(0.52 0.1 232 / 0.24), transparent 62%),
-    linear-gradient(180deg,
-      oklch(0.22 0.035 158) 0%,
-      oklch(0.18 0.03 156) 30%,
-      oklch(0.15 0.028 156) 65%,
-      oklch(0.12 0.025 156) 100%);
+  background: #112119;
+}
+
+.closing-scene .footer__cta-band {
+  position: relative;
+  z-index: 1;
+}
+
+.closing-scene .footer-terrain {
+  position: relative;
+  z-index: 0;
+  margin-top: -clamp(5rem, 13vw, 10rem);
+}
+
+.closing-scene .footer__cta-band-inner {
+  padding-bottom: 0;
+  margin-bottom: -3rem;
 }
 
 .closing-scene .footer__cta-band,
 .closing-scene .footer-terrain,
-.closing-scene .footer {
-  background: none;
+.closing-scene .footer,
+.closing-scene .footer__trust,
+.closing-scene .footer__safety,
+.closing-scene .footer__grid,
+.closing-scene .footer__bar {
+  background: transparent;
 }
 
-.closing-scene .footer::before {
+.closing-scene .footer::before,
+.closing-scene .footer__cta-band::before,
+.closing-scene .footer__cta-band::after {
   display: none;
-}
-
-/* Registered custom properties — required for mask-image / object-position
-   to actually repaint when GSAP drives these values. Without @property the
-   browser treats var references inside mask-image as opaque strings and
-   skips the repaint on var change. */
-@property --terrain-mask {
-  syntax: '<percentage>';
-  inherits: false;
-  initial-value: 28%;
-}
-@property --terrain-pan {
-  syntax: '<percentage>';
-  inherits: false;
-  initial-value: 50%;
 }
 
 .footer-terrain img {
   display: block;
   width: 100%;
-  height: clamp(200px, 22vw, 300px);
+  height: clamp(320px, 36vw, 520px);
   object-fit: cover;
-  object-position: var(--terrain-pan) 62%;
-  /* Fade the top edge into the CTA above so the hiker band appears to rise
-     from the darkness instead of butting against a hard horizontal line. */
-  mask-image: linear-gradient(to bottom, transparent 0%, black var(--terrain-mask));
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black var(--terrain-mask));
+  object-position: 50% 40%;
+  mask-image: linear-gradient(to bottom, black 0%, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 90%, transparent 100%);
 }
 
 /* -----------------------------------------------------------
@@ -2092,11 +2138,7 @@ a.tile--image-flat:focus-visible img {
 
 /* ---- Zone 2: CTA Band ---- */
 .footer__cta-band {
-  background:
-    radial-gradient(85% 65% at 90% 0%, oklch(0.52 0.1 232 / 0.48), transparent 60%),
-    radial-gradient(75% 75% at 4% 105%, oklch(0.6 0.16 47 / 0.46), transparent 58%),
-    radial-gradient(55% 45% at 55% 45%, oklch(0.32 0.05 158 / 0.5), transparent 72%),
-    linear-gradient(155deg, oklch(0.24 0.035 160), oklch(0.16 0.03 156));
+  background: var(--grad-panel-base);
 }
 
 .footer__cta-band-inner {
@@ -2630,7 +2672,7 @@ a.tile--image-flat:focus-visible img {
 .hero-copy__meta-num span {
   font-size: 0.55em;
   font-weight: 500;
-  color: oklch(0.86 0.02 88 / 0.7);
+  color: oklch(0.86 0.02 88 / 0.85);
   margin-left: 2px;
 }
 
@@ -2639,7 +2681,7 @@ a.tile--image-flat:focus-visible img {
   font-size: 12px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: oklch(0.86 0.02 88 / 0.72);
+  color: oklch(0.86 0.02 88 / 0.88);
 }
 
 /* Hero media — parallax-ready image container with a floating glass
@@ -2821,4 +2863,220 @@ a.tile--image-flat:focus-visible img {
     height: 26px;
   }
   .wa-float__label { display: none; }
+}
+
+/* -----------------------------------------------------------
+   HERO BANNER — home modifier
+   Editorial split: cream left canvas (copy) + illustration right,
+   blended together via a CSS mask on the illustration (soft
+   painted-fog transition) and a low-opacity paper grain overlay.
+----------------------------------------------------------- */
+.hero-banner--home {
+  min-height: 100vh;
+  min-height: 100svh;
+  background: #FAE6C1;
+}
+
+/* Flex-end so image hugs the right edge at full natural height */
+.hero-banner--home .hero-banner__media {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background: transparent;
+}
+
+/* Height-driven sizing: image fills viewport height, width scales
+   proportionally. Mask fades the illustration's left edge into
+   transparency so the cream underneath reads as painted fog rather
+   than a hard slab edge. */
+.hero-banner--home .hero-banner__media img {
+  height: 100%;
+  width: auto;
+  max-width: none;
+  object-fit: unset;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.18) 8%,
+    rgba(0, 0, 0, 0.7) 22%,
+    #000 42%,
+    #000 100%
+  );
+          mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.18) 8%,
+    rgba(0, 0, 0, 0.7) 22%,
+    #000 42%,
+    #000 100%
+  );
+}
+
+/* Paper-grain texture: SVG fractal noise scattered at very low opacity,
+   multiplied over the whole hero to break up the mask gradient and add
+   a hand-printed feel. No new asset added. */
+.hero-banner--home::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.16;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='420' height='420'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='7'/><feColorMatrix values='0 0 0 0 0.35  0 0 0 0 0.28  0 0 0 0 0.18  0 0 0 0.7 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size: 420px 420px;
+  background-repeat: repeat;
+}
+
+/* Scrim was for dark overlay on dark bg — not needed on cream */
+.hero-banner--home .hero-banner__scrim {
+  display: none;
+}
+
+/* Left canvas: sits on top of the mask-blended illustration. No solid
+   background — the page cream shows through and the mask handles the
+   fade. A whisper of warmth boosts text readability on the far left
+   without creating a visible edge. */
+.hero-banner--home .hero-banner__inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: auto;
+  width: clamp(360px, 46vw, 680px);
+  padding-inline: var(--container-pad) clamp(2rem, 4vw, 3.5rem);
+  padding-block: clamp(4.5rem, 9vh, 7rem);
+  margin-inline: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 3;
+}
+
+/* Constrain content width inside the canvas so headlines never
+   over-run into the illustration. */
+.hero-banner--home .hero-copy > div { max-width: 640px; }
+.hero-banner--home .hero-copy h1    { max-width: 640px; text-wrap: balance; }
+.hero-banner--home .hero-copy p     { max-width: 560px; }
+
+/* --- copy colours: dark text on cream + illustration --- */
+.hero-banner--home .hero-copy h1         { color: var(--color-ink); }
+.hero-banner--home .hero-copy p          { color: var(--color-ink-muted); }
+.hero-banner--home .hero-copy .eyebrow   { color: var(--color-ember-text); }
+.hero-banner--home .hero-copy .eyebrow::before { background: var(--color-ember-text); }
+.hero-banner--home .hero-copy__meta      { border-top-color: oklch(0 0 0 / 0.1); }
+.hero-banner--home .hero-copy__meta-num  { color: var(--color-ember-text); }
+.hero-banner--home .hero-copy__meta-label { color: var(--color-ink-soft); }
+
+/* Outline btn: remap for light background */
+.hero-banner--home .btn--outline-dark {
+  color: var(--color-ink);
+  border-color: oklch(0 0 0 / 0.25);
+}
+.hero-banner--home .btn--outline-dark:hover,
+.hero-banner--home .btn--outline-dark:focus-visible {
+  color: var(--color-ember-text);
+  border-color: var(--color-ember-text);
+}
+
+/* Short viewports (laptops with the browser chrome open): tighten
+   the type scale so the CTA + metrics stay above the fold. */
+@media (min-width: 1024px) and (max-height: 780px) {
+  .hero-banner--home .hero-copy h1 {
+    font-size: clamp(38px, 4.6vw, 60px);
+  }
+  .hero-banner--home .hero-copy p {
+    margin-top: 12px;
+    line-height: 1.55;
+  }
+  .hero-banner--home .hero-copy__meta {
+    margin-top: 18px;
+    padding-top: 14px;
+  }
+}
+
+/* Tablet: the mask % is relative to image width; when the image
+   overflows the viewport (height-driven sizing at narrower widths),
+   the mask fade lands offscreen and the copy gets buried. Cap the
+   image width to the viewport, use object-fit to keep the right-side
+   detail visible, and lay a soft cream gradient behind the copy to
+   guarantee readability. */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .hero-banner--home .hero-banner__media img {
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    object-position: 78% center;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.25) 18%,
+      #000 48%,
+      #000 100%
+    );
+            mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.25) 18%,
+      #000 48%,
+      #000 100%
+    );
+  }
+  .hero-banner--home .hero-banner__inner {
+    width: clamp(320px, 50vw, 520px);
+    padding-block: clamp(5rem, 10vh, 6rem);
+    background: linear-gradient(
+      to right,
+      rgba(250, 230, 193, 0.92) 0%,
+      rgba(250, 230, 193, 0.75) 55%,
+      transparent 100%
+    );
+  }
+}
+
+/* Mobile: stack copy on top, illustration anchored to the bottom-right
+   corner so the paraglider and peaks read as a horizon behind the CTA
+   instead of interrupting the headline. */
+@media (max-width: 767px) {
+  .hero-banner--home {
+    min-height: auto;
+  }
+  .hero-banner--home .hero-banner__media {
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+  .hero-banner--home .hero-banner__media img {
+    height: auto;
+    width: 150%;
+    max-width: 150%;
+    margin-right: -25%;
+    -webkit-mask-image: radial-gradient(
+      120% 100% at 100% 100%,
+      #000 40%,
+      rgba(0, 0, 0, 0.7) 60%,
+      transparent 88%
+    );
+            mask-image: radial-gradient(
+      120% 100% at 100% 100%,
+      #000 40%,
+      rgba(0, 0, 0, 0.7) 60%,
+      transparent 88%
+    );
+  }
+  .hero-banner--home .hero-banner__inner {
+    position: relative;
+    width: 100%;
+    padding-inline: var(--container-pad);
+    padding-block: 6.5rem 18rem;
+    justify-content: flex-start;
+  }
+  .hero-banner--home .hero-copy > div,
+  .hero-banner--home .hero-copy h1,
+  .hero-banner--home .hero-copy p {
+    max-width: none;
+  }
+  .hero-banner--home .hero-copy__meta {
+    gap: 20px;
+  }
 }
