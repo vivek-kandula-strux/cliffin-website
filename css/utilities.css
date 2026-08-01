@@ -1,0 +1,40 @@
+/* ============================================================
+   Utilities — small, single-purpose helpers
+   ============================================================ */
+
+/* Text helpers */
+.u-text-center { text-align: center; }
+.u-max-46 { max-width: 46rem; }
+.u-max-40 { max-width: 40ch; }
+.u-max-24 { max-width: 24ch; }
+
+/* Spacing helpers */
+.u-mt-0 { margin-top: 0; }
+.u-mt-2 { margin-top: 0.5rem; }
+.u-mt-4 { margin-top: 1rem; }
+.u-mt-6 { margin-top: 1.5rem; }
+.u-mt-8 { margin-top: 2rem; }
+.u-mt-12 { margin-top: 3rem; }
+
+/* Flex helpers */
+.u-flex-wrap { display: flex; flex-wrap: wrap; gap: 12px; }
+.u-flex-col  { display: flex; flex-direction: column; gap: 12px; }
+
+/* Grid helpers */
+.u-grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; }
+
+/* Show/hide */
+[hidden] { display: none !important; }
+
+.u-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

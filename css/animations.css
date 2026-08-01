@@ -1,0 +1,251 @@
+/* ============================================================
+   Animations — initial states set by JS-enhancement class,
+   reduced-motion fallbacks, non-GSAP CSS transitions
+   ============================================================ */
+
+/* Elements marked [data-animate] start hidden ONLY when JS is present.
+   Fallback: without JS, everything is visible immediately. */
+.js [data-animate] {
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: opacity, transform;
+}
+
+/* Hero elements are staged for the GSAP hero timeline. Hiding them via CSS
+   prevents a flash while the GSAP module downloads. Restored by the timeline
+   itself (.from() animates from opacity 0 back to 1) — or by the safety
+   fallback that adds .hero-ready after 400ms. */
+.js [data-hero-eyebrow],
+.js [data-hero-title],
+.js [data-hero-description],
+.js [data-hero-actions],
+.js [data-hero-media] {
+  opacity: 0;
+  transition: opacity 400ms var(--ease-standard);
+}
+
+.js .hero-ready [data-hero-eyebrow],
+.js .hero-ready [data-hero-title],
+.js .hero-ready [data-hero-description],
+.js .hero-ready [data-hero-actions],
+.js .hero-ready [data-hero-media] {
+  opacity: 1;
+}
+
+.js [data-animate='fade'] {
+  transform: none;
+}
+
+.js [data-animate='rise-lg'] {
+  transform: translateY(40px);
+}
+
+.js [data-animate='rise-line'] {
+  transform: translateY(110%);
+}
+
+/* When an animation container is marked "in" (added by IntersectionObserver
+   fallback if GSAP is unavailable) reveal children cleanly */
+.js [data-animate].is-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--duration-slow) var(--ease-standard),
+    transform var(--duration-slow) var(--ease-standard);
+}
+
+/* Reduced motion — collapse all animation into an immediate show */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .js [data-animate] {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
+}
+
+/* Nav mobile-menu smoothing */
+.header__mobile {
+  transition: max-height var(--duration-medium) var(--ease-standard);
+}
+
+/* Focus-visible ring smoothing */
+:focus-visible {
+  transition:
+    outline-offset var(--duration-fast) var(--ease-standard),
+    outline-color var(--duration-fast) var(--ease-standard);
+}
+
+/* View Transition API — cross-page fade (progressive enhancement) */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+::view-transition-old(root) {
+  animation-name: viewfade-out;
+  /* Exit shorter than enter feels responsive (Material motion guidance) */
+  animation-duration: 220ms;
+}
+
+::view-transition-new(root) {
+  animation-name: viewfade-in;
+  animation-duration: 340ms;
+}
+
+@keyframes viewfade-out {
+  to { opacity: 0; transform: translateY(-6px); }
+}
+
+@keyframes viewfade-in {
+  from { opacity: 0; transform: translateY(6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 1ms;
+  }
+}
+
+/* ============================================================
+   MICRO-INTERACTIONS — added by micro.js
+   ============================================================ */
+
+/* ── Scroll progress bar ─────────────────────────────────── */
+[data-scroll-progress] {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 2.5px;
+  background: var(--grad-ember);
+  transform-origin: left center;
+  transform: scaleX(0);
+  z-index: calc(var(--z-nav) + 5);
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ── Custom cursor ───────────────────────────────────────── */
+/* Hide native cursor when JS has added .custom-cursor */
+.custom-cursor,
+.custom-cursor * {
+  cursor: none !important;
+}
+
+#cursor-dot {
+  position: fixed;
+  /* Offset by half size so transform origin is cursor hotspot */
+  top: -4px;
+  left: -4px;
+  width: 8px;
+  height: 8px;
+  background: var(--color-ember);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform;
+  transition: opacity 0.3s;
+  /* Starts off-screen; JS overrides via inline transform */
+}
+
+#cursor-ring {
+  position: fixed;
+  top: -20px;
+  left: -20px;
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid oklch(0.23 0.03 158 / 0.3);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  will-change: transform;
+  /* Only scale and border-color use transitions;
+     position is driven by JS every frame (no transition needed). */
+  transition:
+    scale 0.28s var(--ease-emphasized),
+    border-color 0.22s var(--ease-standard),
+    opacity 0.3s;
+}
+
+#cursor-ring.is-hover {
+  scale: 1.55;
+  border-color: var(--color-ember);
+}
+
+/* ── Button ripple ───────────────────────────────────────── */
+/* .btn already has position:relative in components.css; add overflow:hidden */
+.btn {
+  overflow: hidden;
+}
+
+.btn-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: oklch(1 0 0 / 0.22);
+  width: 6px;
+  height: 6px;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0);
+  animation: btn-ripple 0.65s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes btn-ripple {
+  to {
+    transform: translate(-50%, -50%) scale(65);
+    opacity: 0;
+  }
+}
+
+/* ── Play-button pulse rings ─────────────────────────────── */
+.play-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid oklch(1 0 0 / 0.55);
+  pointer-events: none;
+}
+
+/* ── Urgency chip — spots left ───────────────────────────── */
+@keyframes ember-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.67 0.15 47 / 0.5); }
+  55%       { box-shadow: 0 0 0 7px oklch(0.67 0.15 47 / 0); }
+}
+
+.chip--ember-sm {
+  animation: ember-pulse 2.4s ease-in-out infinite;
+}
+
+/* ── 3-D tilt — performance hints ───────────────────────── */
+.tile--image,
+.card,
+.feature {
+  will-change: transform;
+}
+
+/* ── Eyebrow dot — pulse on load ─────────────────────────── */
+@keyframes dot-pop {
+  0%   { transform: scale(0) rotate(-45deg); opacity: 0; }
+  65%  { transform: scale(1.35) rotate(0deg); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+.eyebrow span {
+  display: inline-block;
+  animation: dot-pop 0.55s var(--ease-emphasized) both;
+  animation-delay: 0.6s;
+}
+
+/* Counter numbers — tabular figures for stable width during count-up */
+[data-count] {
+  font-variant-numeric: tabular-nums;
+}

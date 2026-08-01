@@ -1,0 +1,175 @@
+/* ============================================================
+   Design tokens — Cliff-Inn Adventures
+   Source of truth: design-system.md
+   All color values are oklch(). Fluid sizing uses clamp().
+   ============================================================ */
+
+:root {
+  /* ---- Core palette ---- */
+  --color-ink: oklch(0.23 0.03 158);          /* Deep pine text on light */
+  --color-ink-muted: oklch(0.42 0.025 160);   /* Body copy — darkened to pass WCAG AA 4.5:1 */
+  --color-ink-soft: oklch(0.48 0.02 160);     /* Labels, meta — darkened to pass WCAG AA */
+  --color-ember-text: oklch(0.44 0.14 47);    /* Amber safe for text on light bg (links, eyebrows) */
+  --color-panel: oklch(0.2 0.03 158);         /* Dark bento / panels */
+  --color-panel-2: oklch(0.22 0.03 158);      /* Nav topbar */
+
+  --color-ember: oklch(0.67 0.15 47);         /* Primary accent */
+  --color-ember-2: oklch(0.72 0.16 52);       /* Ember gradient start */
+  --color-ember-3: oklch(0.62 0.16 42);       /* Ember gradient end */
+  --color-ember-soft: oklch(0.67 0.15 47 / 0.12);
+
+  --color-sky: oklch(0.52 0.1 232);           /* Secondary accent */
+  --color-sky-2: oklch(0.58 0.11 230);
+  --color-sky-3: oklch(0.44 0.1 238);
+  --color-sky-glow: oklch(0.5 0.1 232 / 0.35);
+
+  --color-amber: oklch(0.8 0.14 52);          /* Star / warm accent */
+  --color-amber-2: oklch(0.8 0.13 55);        /* On-dark eyebrow */
+
+  /* ---- Neutrals ---- */
+  --color-page: oklch(0.955 0.012 88);
+  --color-page-top: oklch(0.975 0.014 88);
+  --color-card: oklch(0.99 0.006 88);
+  --color-card-2: oklch(0.97 0.012 85);
+  /* Warm-tinted hairlines. Alpha keeps them a whisper on the off-white page so
+     cards don't read like cut-out outlines. `-strong` is reserved for interactive
+     surfaces (inputs, filter chips) that still need a visible edge. */
+  --color-border: oklch(0.9 0.014 78 / 0.55);
+  --color-border-soft: oklch(0.92 0.012 78 / 0.35);
+  --color-border-strong: oklch(0.86 0.015 82);
+  --color-border-on-dark: oklch(1 0 0 / 0.07);
+  --color-border-on-dark-strong: oklch(1 0 0 / 0.12);
+  --color-ink-on-dark: oklch(0.98 0.01 88);
+  --color-body-on-dark: oklch(0.86 0.02 88);
+  --color-soft-on-dark: oklch(0.8 0.02 88);
+
+  /* ---- Semantic ---- */
+  --color-text: var(--color-ink);
+  --color-text-muted: var(--color-ink-muted);
+  --color-link: var(--color-ember-text);
+  --color-link-hover: var(--color-ink);
+  --color-focus-ring: var(--color-ember);
+
+  /* ---- Type ---- */
+  --font-display: 'Outfit', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+
+  --fs-eyebrow: clamp(20px, 2.2vw, 26px);
+  --fs-hero: clamp(42px, 5.6vw, 82px);
+  --fs-hero-inner: clamp(38px, 6vw, 74px);
+  --fs-h2: clamp(30px, 4.2vw, 52px);
+  --fs-h2-inner: clamp(28px, 4.4vw, 48px);
+  --fs-h3: clamp(20px, 2vw, 24px);
+  --fs-body: clamp(15px, 1.2vw, 17px);
+  --fs-body-large: clamp(17px, 1.4vw, 18px);
+  --fs-small: 13.5px;
+  --fs-micro: 11.5px;
+
+  /* ---- Space (rem-based; 1rem = 16px) ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* Section rhythm — generous but not cinematic. Adjacent sections stack
+     to 96-160px of vertical air, which is the sweet spot for a booking-
+     oriented adventure site that still wants editorial feel. */
+  --section-y: clamp(3rem, 5.5vw, 5rem);
+  --section-y-large: clamp(4rem, 7vw, 6.5rem);
+  --section-y-hero: clamp(3rem, 5.5vw, 5rem);
+
+  /* Space between a section's headline row and its content. */
+  --section-head-gap: clamp(2rem, 3vw, 2.75rem);
+
+  /* ---- Container ----
+     Editorial gutter grows from 20 → 64px on wide desktops so the page reads
+     as *placed* rather than filling the viewport. Max content caps at 1320px
+     — spacious enough for premium travel/adventure editorial without losing
+     the intimate rhythm of a curated page. */
+  --container-pad: clamp(1.25rem, 5.5vw, 4rem);
+  --container: min(1160px, calc(100% - 2 * var(--container-pad)));
+  --container-wide: min(1320px, calc(100% - 2 * var(--container-pad)));
+
+  /* Bento/card grid gaps — bigger inter-tile air reads as "placed" not
+     "packed". Fluid so it scales down cleanly on tablet. */
+  --grid-gap: clamp(1.25rem, 2vw, 1.75rem);
+  --grid-gap-lg: clamp(1.5rem, 2.4vw, 2rem);
+
+  /* ---- Radii ---- */
+  --radius-tile: 26px;      /* bento tiles / large cards / panels */
+  --radius-card: 22px;      /* content cards */
+  --radius-input: 12px;
+  --radius-chip: 14px;
+  --radius-pill: 40px;
+
+  /* ---- Elevation ----
+     Two-layer resting shadow (crisp contact + wide diffusion) gives cards a
+     physical sit on the page — replaces the old flat outline aesthetic. Inset
+     highlights simulate a refracted glass edge on the top pixel row. */
+  --shadow-elev: 0 1px 2px oklch(0.22 0.03 158 / 0.04), 0 12px 28px -14px oklch(0.22 0.03 158 / 0.13);
+  --shadow-elev-hover: 0 1px 2px oklch(0.22 0.03 158 / 0.05), 0 24px 48px -18px oklch(0.22 0.03 158 / 0.2);
+  --shadow-edge-inset: inset 0 1px 0 oklch(1 0 0 / 0.85);
+  --shadow-edge-inset-dark: inset 0 1px 0 oklch(1 0 0 / 0.04);
+  --shadow-card-hover: var(--shadow-elev-hover);
+  --shadow-tile-hover: var(--shadow-elev-hover);
+  --shadow-ember: 0 10px 26px oklch(0.6 0.16 45 / 0.4);
+  --shadow-ember-soft: 0 14px 34px oklch(0.6 0.16 45 / 0.28);
+  --shadow-sky: 0 14px 34px oklch(0.45 0.1 235 / 0.3);
+
+  /* ---- Gradients ---- */
+  --grad-panel-base: linear-gradient(155deg, oklch(0.24 0.035 160), oklch(0.16 0.03 156));
+  --grad-panel-mesh:
+    radial-gradient(85% 65% at 90% 0%, oklch(0.52 0.1 232 / 0.48), transparent 60%),
+    radial-gradient(75% 75% at 4% 105%, oklch(0.6 0.16 47 / 0.46), transparent 58%),
+    radial-gradient(55% 45% at 55% 45%, oklch(0.32 0.05 158 / 0.5), transparent 72%);
+  --grad-panel-mesh-soft:
+    radial-gradient(90% 90% at 100% 0%, oklch(0.52 0.1 232 / 0.45), transparent 60%),
+    radial-gradient(70% 70% at 0% 100%, oklch(0.6 0.15 47 / 0.3), transparent 65%);
+  --grad-hero-scrim:
+    linear-gradient(90deg, oklch(0.18 0.03 158 / 0.92), oklch(0.18 0.03 158 / 0.5)),
+    radial-gradient(70% 90% at 100% 0%, oklch(0.5 0.1 232 / 0.35), transparent 60%);
+  --grad-image-scrim-tall: linear-gradient(0deg, oklch(0.16 0.03 158 / 0.92) 4%, oklch(0.4 0.1 40 / 0.22) 40%, transparent 68%);
+  --grad-image-scrim-short: linear-gradient(0deg, oklch(0.18 0.03 158 / 0.55), transparent 55%);
+  --grad-ember: linear-gradient(135deg, var(--color-ember-2), var(--color-ember-3));
+  --grad-ember-tile: linear-gradient(135deg, oklch(0.74 0.15 55), oklch(0.62 0.16 42));
+  --grad-sky-tile: linear-gradient(135deg, var(--color-sky-2), var(--color-sky-3));
+  --grad-card-sheen: linear-gradient(160deg, oklch(1 0 0), oklch(0.97 0.012 85));
+  /* Page wash — layered radial gradients that give the off-white page
+     ambient depth (a hint of warm morning light from top-right, a whisper of
+     cool shadow bottom-left). Reads as one continuous space, not a slab. */
+  --grad-page-wash:
+    radial-gradient(120% 60% at 50% -10%, var(--color-page-top), var(--color-page) 55%),
+    radial-gradient(60% 50% at 100% 15%, oklch(0.94 0.02 55 / 0.55), transparent 60%),
+    radial-gradient(70% 60% at 0% 80%, oklch(0.94 0.014 200 / 0.35), transparent 65%);
+  --grad-gold-text: linear-gradient(100deg, oklch(0.85 0.13 60), oklch(0.72 0.16 42));
+
+  /* ---- Motion ---- */
+  --duration-instant: 120ms;
+  --duration-fast: 180ms;
+  --duration-medium: 400ms;
+  --duration-slow: 800ms;
+  --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ---- Z ---- */
+  --z-nav: 200;
+  --z-skiplink: 300;
+  --z-mobile-menu: 210;
+}
+
+/* Local overrides on dark contexts */
+.on-dark {
+  --color-text: var(--color-ink-on-dark);
+  --color-text-muted: var(--color-body-on-dark);
+  --color-link: var(--color-amber);
+  --color-link-hover: var(--color-ink-on-dark);
+}

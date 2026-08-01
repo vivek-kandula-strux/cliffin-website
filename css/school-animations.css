@@ -1,0 +1,282 @@
+/* ============================================================
+   school-animations.css  —  School Programs design elevation
+   Motion and hover layer only. No colour, font or copy changes.
+
+   What the global stack already provides (no duplication here):
+     • [data-animate] batch stagger    — animations/index.js
+     • .card 3-D tilt + specular       — micro.js initCardTilt
+     • .btn ripple                     — micro.js initButtonRipple
+     • [data-magnetic] pull            — interactions.js
+     • Hero mouse parallax             — interactions.js (data-hero-parallax)
+     • Custom cursor                   — micro.js (#cursor-dot / #cursor-ring)
+     • Scroll-progress bar             — interactions.js ([data-scroll-progress])
+     • Counter up                      — micro.js ([data-count])
+     • Nav underline draw              — components.css (.nav__link::after)
+     • Eyebrow dot pop                 — animations.css (.eyebrow span)
+     • .btn overflow + .btn-ripple     — animations.css
+   ============================================================ */
+
+/* ── Card images: zoom on hover (card 3-D tilt is on the .card
+   element via GSAP inline transform; image uses CSS `scale`
+   property which composes without conflict)                 ─── */
+.card__media { overflow: hidden; }
+
+.card__media img {
+  transition: scale 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: scale;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card:hover .card__media img { scale: 1.07; }
+}
+
+/* ── Media-frame image: zoom on hover (GSAP yPercent parallax
+   uses `transform`; this uses the CSS `scale` property so they
+   coexist and compose correctly)                            ─── */
+.media-frame { overflow: hidden; }
+
+.media-frame img {
+  transition: scale 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: scale;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .media-frame:hover img { scale: 1.05; }
+}
+
+/* ── Chip tiles: hover lift ─────────────────────────────────── */
+/* Entrance animation is GSAP-driven (school-programs.js); this
+   block is the persistent hover interaction after reveal.      */
+@media (hover: hover) and (pointer: fine) {
+  .chip-tile {
+    transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .chip-tile:hover { transform: translateY(-5px) scale(1.04); }
+}
+
+/* ── Stat pillars: lift on hover ────────────────────────────── */
+@media (hover: hover) and (pointer: fine) {
+  .pillar {
+    transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: default;
+  }
+  .pillar:hover { transform: translateY(-4px); }
+}
+
+/* ── Mini-gallery + Photo Bento: zoom + warm vignette on hover ── */
+.mini-gallery .gallery-item,
+.photo-bento .gallery-item { cursor: zoom-in; }
+
+.mini-gallery .gallery-item img,
+.photo-bento .gallery-item img {
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .mini-gallery .gallery-item:hover img,
+  .mini-gallery .gallery-item:focus-visible img,
+  .photo-bento .gallery-item:hover img,
+  .photo-bento .gallery-item:focus-visible img {
+    transform: scale(1.09);
+  }
+}
+
+/* Gradient vignette that lifts in on hover */
+.mini-gallery .gallery-item::after,
+.photo-bento .gallery-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 45%,
+    oklch(0.13 0.03 158 / 0.6) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .mini-gallery .gallery-item:hover::after,
+  .photo-bento .gallery-item:hover::after { opacity: 1; }
+}
+
+/* ── Footer social links: spring-lift on hover ───────────────── */
+@media (hover: hover) and (pointer: fine) {
+  .footer__social {
+    transition:
+      transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+      opacity   0.2s ease;
+  }
+  .footer__social:hover { transform: translateY(-5px) scale(1.15); }
+}
+
+/* ── WhatsApp float: dual emanation rings ────────────────────── */
+.wa-float__btn { position: relative; }
+
+.wa-float__btn::before,
+.wa-float__btn::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0;
+  pointer-events: none;
+  animation: wa-emanate 2.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.wa-float__btn::after { animation-delay: 1.4s; }
+
+@keyframes wa-emanate {
+  0%   { transform: scale(1);    opacity: 0.4; }
+  70%  { transform: scale(1.6);  opacity: 0;   }
+  100% { transform: scale(1.6);  opacity: 0;   }
+}
+
+/* ── CTA banner: press feedback ─────────────────────────────── */
+.cta-banner .btn:active { transform: scale(0.97); }
+
+/* ── Feature Split Section ───────────────────────────────────── */
+.feature-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.feature-split__heading { margin-top: 12px; line-height: 1.15; }
+
+.feature-split__body {
+  margin-top: 20px;
+  font-size: 15px;
+  line-height: 1.72;
+  max-width: 46ch;
+}
+
+.feature-split__media { aspect-ratio: 4 / 3; }
+
+/* ── Stat Strip ───────────────────────────────────────────────── */
+.stat-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 52px;
+  padding-top: 40px;
+  border-top: 1px solid oklch(0.23 0.03 158 / 0.1);
+}
+
+.stat-strip__item {
+  padding: 0 32px;
+  border-left: 1px solid oklch(0.23 0.03 158 / 0.1);
+}
+
+.stat-strip__item:first-child { padding-left: 0; border-left: none; }
+
+.stat-strip__num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(38px, 4vw, 56px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: oklch(0.58 0.14 47);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-strip__label {
+  margin-top: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.52;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .stat-strip__item { transition: opacity 0.22s ease; }
+  .stat-strip:hover .stat-strip__item { opacity: 0.42; }
+  .stat-strip:hover .stat-strip__item:hover { opacity: 1; }
+}
+
+@media (max-width: 900px) {
+  .feature-split { grid-template-columns: 1fr; gap: 32px; }
+  .feature-split__body { max-width: unset; }
+}
+
+@media (max-width: 767px) {
+  .stat-strip { grid-template-columns: repeat(2, 1fr); gap: 0; }
+  .stat-strip__item { padding: 28px 20px; border-left: 1px solid oklch(0.23 0.03 158 / 0.1); }
+  .stat-strip__item:first-child,
+  .stat-strip__item:nth-child(3) { border-left: none; padding-left: 0; }
+  .stat-strip__item:nth-child(3),
+  .stat-strip__item:nth-child(4) { border-top: 1px solid oklch(0.23 0.03 158 / 0.1); }
+}
+
+/* ── Photo Bento Grid ─────────────────────────────────────────── */
+.photo-bento {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 320px 240px 200px;
+  gap: 10px;
+}
+
+.photo-bento .gallery-item {
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.photo-bento .gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Row 1: wide feature left + tall right spanning rows 1–2 */
+.photo-bento .gallery-item:nth-child(1) { grid-column: 1 / span 8; grid-row: 1; }
+.photo-bento .gallery-item:nth-child(2) { grid-column: 9 / span 4; grid-row: 1 / span 2; }
+
+/* Row 2: two square tiles (tall right continues on col 9–12) */
+.photo-bento .gallery-item:nth-child(3) { grid-column: 1 / span 4; grid-row: 2; }
+.photo-bento .gallery-item:nth-child(4) { grid-column: 5 / span 4; grid-row: 2; }
+
+/* Row 3: four equal tiles */
+.photo-bento .gallery-item:nth-child(5) { grid-column: 1  / span 3; grid-row: 3; }
+.photo-bento .gallery-item:nth-child(6) { grid-column: 4  / span 3; grid-row: 3; }
+.photo-bento .gallery-item:nth-child(7) { grid-column: 7  / span 3; grid-row: 3; }
+.photo-bento .gallery-item:nth-child(8) { grid-column: 10 / span 3; grid-row: 3; }
+
+@media (max-width: 767px) {
+  .photo-bento {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: unset;
+    grid-auto-rows: 180px;
+  }
+
+  .photo-bento .gallery-item:nth-child(n) { grid-column: auto; grid-row: auto; }
+  .photo-bento .gallery-item:nth-child(1) { grid-column: span 2; }
+}
+
+/* ── Reduced motion: hard disable all new motion ─────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .card__media img,
+  .media-frame img,
+  .mini-gallery .gallery-item img,
+  .photo-bento .gallery-item img {
+    transition: none !important;
+    scale: 1 !important;
+  }
+
+  .chip-tile:hover,
+  .pillar:hover,
+  .footer__social:hover {
+    transform: none !important;
+  }
+
+  .wa-float__btn::before,
+  .wa-float__btn::after {
+    animation: none !important;
+  }
+}

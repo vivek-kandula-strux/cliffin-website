@@ -1,0 +1,95 @@
+/* ============================================================
+   Modern reset — pragmatic subset of Andy Bell + josh-comeau resets
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -moz-tab-size: 4;
+  tab-size: 4;
+  scroll-behavior: smooth;
+}
+
+body,
+h1, h2, h3, h4, h5, h6,
+p, blockquote,
+figure, dl, dd,
+pre {
+  margin: 0;
+}
+
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  min-height: 100dvh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  text-wrap: balance;
+  line-height: 1.05;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+}
+
+textarea:not([rows]) {
+  min-height: 10em;
+}
+
+:target {
+  /* Sticky header is ~130 px on desktop (topbar + main). Match it so anchor
+     jumps and "skip to content" don't land under the sticky nav. */
+  scroll-margin-block: 8.5rem;
+}
+
+@media (max-width: 1040px) {
+  :target {
+    scroll-margin-block: 6.5rem;
+  }
+}
+
+/* Hide the default focus outline only when the browser can distinguish
+   pointer vs. keyboard input. Explicit :focus-visible styles are in base.css. */
+:focus:not(:focus-visible) {
+  outline: none;
+}

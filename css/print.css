@@ -1,0 +1,97 @@
+/* ============================================================
+   Print — clean, ink-friendly render of any page
+   ============================================================ */
+
+@media print {
+  :root {
+    --color-page: #ffffff;
+    --color-text: #111111;
+    --color-text-muted: #444444;
+    --color-panel: #ffffff;
+    --color-ink-on-dark: #111111;
+    --color-body-on-dark: #333333;
+    --color-amber: #7a5b1e;
+    --color-amber-2: #7a5b1e;
+    --color-ember: #a04a1f;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #111111 !important;
+    print-color-adjust: economy;
+    -webkit-print-color-adjust: economy;
+  }
+
+  .header,
+  .footer,
+  .cta-banner,
+  .interest,
+  .filter-row,
+  .header__mobile,
+  .skip-link,
+  .form,
+  video,
+  iframe {
+    display: none !important;
+  }
+
+  .tile--dark,
+  .tile--dark-soft,
+  .dark-panel,
+  .quote,
+  .hero-banner,
+  .talk-card {
+    background: #ffffff !important;
+    color: #111111 !important;
+    border: 1px solid #cccccc !important;
+    box-shadow: none !important;
+  }
+
+  .tile--dark::before,
+  .tile--dark-soft::before,
+  .dark-panel::before,
+  .quote::before,
+  .hero-banner__scrim,
+  .footer::before {
+    display: none !important;
+  }
+
+  h1, h2, h3, h4 {
+    page-break-after: avoid;
+    color: #111111 !important;
+  }
+
+  p, li {
+    orphans: 3;
+    widows: 3;
+  }
+
+  a {
+    color: #111111 !important;
+    text-decoration: underline;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 90%;
+  }
+
+  .card,
+  .feature,
+  .pillar,
+  .contact-card {
+    border: 1px solid #cccccc !important;
+    background: #ffffff !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+
+  .container,
+  .container--wide {
+    width: 100% !important;
+  }
+
+  .section {
+    padding-block: 1rem !important;
+  }
+}

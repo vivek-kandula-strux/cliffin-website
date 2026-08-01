@@ -1,0 +1,30 @@
+# OS + editor
+.DS_Store
+Thumbs.db
+.thumbnail
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local server / build output (nothing today, but future-proofing)
+node_modules/
+dist/
+.cache/
+.tmp/
+
+# Env
+.env
+.env.local
+.gstack/
+
+# Large local-only working folders — not part of the shipped site
+scraped-data/
+archive/
+_qa/
+
+# Logs / cruft
+*.log
+desktop.ini
+*.lnk
+~$*
