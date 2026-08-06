@@ -257,6 +257,18 @@
   font-family: var(--font-display);
   background: oklch(0.97 0.012 88);
   border-bottom: 1px solid transparent;
+  /* Paint + layout containment. The header is sticky and always in the
+     viewport during scroll, so its backdrop-filter repaints every frame the
+     source pixels behind it change. Containment tells Chrome:
+       - layout: my box's size doesn't depend on the outside world;
+       - paint:  my pixels never overflow my padding box, and my paint
+                 invalidations can't propagate outward.
+     Combined effect: the compositor can cache the header as its own layer
+     and skip walking paint invalidation up the tree on every scroll tick.
+     Safe now because the fixed-position mobile drawer (#mobile-nav) was
+     moved out to be a sibling — see the corresponding <header> block in
+     partials/nav.html and every page's inlined nav. */
+  contain: layout paint;
   transition:
     background var(--duration-medium) var(--ease-standard),
     border-color var(--duration-medium) var(--ease-standard),
@@ -265,17 +277,25 @@
 
 .header[data-scrolled='true'] {
   background: oklch(0.97 0.012 88 / 0.82);
-  backdrop-filter: blur(24px) saturate(1.6);
-  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  /* Blur reduced 24 -> 12 (source pixels behind sticky header change every
+     scroll frame, so the blur is redone every frame; blur cost is roughly
+     O(radius^2) on integrated GPUs). 12px still reads as a clear glass
+     effect against the near-opaque background layer above. */
+  backdrop-filter: blur(12px) saturate(1.4);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
   border-bottom-color: var(--color-border);
   box-shadow: 0 1px 0 oklch(0.9 0.012 80 / 0.4), 0 8px 28px oklch(0.22 0.03 158 / 0.05);
 }
 
 /* Adaptive dark-theme: nav flips when a [data-nav-invert] section scrolls behind it */
 .header[data-theme='dark'] {
-  background: oklch(0.18 0.03 158 / 0.72);
-  backdrop-filter: blur(28px) saturate(1.4);
-  -webkit-backdrop-filter: blur(28px) saturate(1.4);
+  background: oklch(0.18 0.03 158 / 0.82);
+  /* Same reasoning as the light state — 28 -> 14. The dark state runs over
+     hero/parallax images that are being GSAP-scrubbed, so the source pixels
+     under the blur change continuously; keeping the radius small matters
+     more here than in the light state. */
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
   border-bottom-color: oklch(1 0 0 / 0.08);
   box-shadow: 0 8px 28px oklch(0 0 0 / 0.18);
 }
@@ -528,7 +548,10 @@
     visibility 0s linear var(--duration-medium);
 }
 
-.header[data-menu-open='true'] .header__mobile {
+/* Drawer is now a sibling of <header> (moved out so .header can safely
+   `contain: paint layout`). Selectors therefore key off body[data-menu-open]
+   mirrored by navigation.js — see js/components/navigation.js setOpen(). */
+body[data-menu-open='true'] .header__mobile {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
@@ -543,12 +566,12 @@
   transform: translateY(-6px);
   transition: transform var(--duration-medium) var(--ease-emphasized);
 }
-.header[data-menu-open='true'] .header__mobile > * {
+body[data-menu-open='true'] .header__mobile > * {
   transform: translateY(0);
 }
 @media (prefers-reduced-motion: reduce) {
   .header__mobile > *,
-  .header[data-menu-open='true'] .header__mobile > * {
+  body[data-menu-open='true'] .header__mobile > * {
     transform: none;
     transition: none;
   }
@@ -721,7 +744,70 @@
 }
 
 .hero-banner .eyebrow {
-  color: var(--color-amber-2);
+  color: var(--color-subheading);
+}
+
+/* Adventure Workshops hero — 16:9 editorial composition. Coral eyebrow,
+   massive white display title, illustration flows full-width beneath.
+   Background matches the PNG's own green so text sits on one continuous
+   surface with the artwork. */
+.hero-banner--workshops {
+  background: #122219;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+}
+.hero-banner--workshops .hero-banner__inner {
+  order: 1;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding-block: clamp(3rem, 6vw, 5.5rem) 0;
+}
+.hero-banner--workshops .hero-banner__media {
+  order: 2;
+  position: relative;
+  z-index: 1;
+  inset: auto;
+  width: 100%;
+  background: transparent;
+  margin-top: clamp(-10rem, -8vw, -2rem);
+}
+.hero-banner--workshops .hero-banner__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: bottom center;
+}
+.hero-banner--workshops .eyebrow {
+  justify-content: center;
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: 700;
+  font-size: clamp(14px, 2vw, 38px);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-subheading);
+}
+.hero-banner--workshops .eyebrow::before,
+.hero-banner--workshops .eyebrow::after {
+  display: none;
+}
+.hero-banner--workshops .hero-banner__title {
+  margin-top: clamp(14px, 1.8vw, 32px);
+  font-family: var(--font-display);
+  font-size: clamp(22px, 4.3vw, 86px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-wrap: balance;
+}
+.hero-banner--workshops .breadcrumb {
+  display: none;
 }
 
 /* -----------------------------------------------------------
@@ -868,10 +954,13 @@
 
 /* All text on image tiles: pure white regardless of image tone */
 .tile--image .tile__eyebrow,
-.tile--image .tile__title,
 .tile--image .tile__desc,
 .tile--image .card__foot-text {
   color: #fff;
+}
+
+.tile--image .tile__title {
+  color: var(--color-subheading);
 }
 
 /* Eyebrow stays slightly dimmed — preserves hierarchy below bright title */
@@ -1104,7 +1193,7 @@ a.tile--image-flat:focus-visible img {
   font-weight: 700;
   font-size: 22px;
   letter-spacing: -0.02em;
-  color: var(--color-ink);
+  color: var(--color-subheading);
   margin: 0;
 }
 
@@ -1457,12 +1546,12 @@ a.tile--image-flat:focus-visible img {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 22px;
-  color: var(--color-ink);
+  color: var(--color-subheading);
   letter-spacing: -0.02em;
 }
 
 .success-panel--on-dark .success-panel__title {
-  color: var(--color-ink-on-dark);
+  color: var(--color-subheading);
   font-size: 26px;
 }
 
@@ -1827,7 +1916,7 @@ a.tile--image-flat:focus-visible img {
   font-size: 19px;
   letter-spacing: -0.02em;
   margin-top: 12px;
-  color: var(--color-ink-on-dark);
+  color: var(--color-subheading);
 }
 
 .benefit__body {
@@ -2032,7 +2121,7 @@ a.tile--image-flat:focus-visible img {
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 17px;
-  color: var(--color-ink-on-dark);
+  color: var(--color-subheading);
   margin-top: 2px;
 }
 
@@ -2456,7 +2545,7 @@ a.tile--image-flat:focus-visible img {
 }
 
 .footer__heading {
-  color: var(--color-ink-on-dark);
+  color: var(--color-subheading);
   font-weight: 600;
   font-size: 11px;
   letter-spacing: 0.16em;
@@ -2638,14 +2727,14 @@ a.tile--image-flat:focus-visible img {
    HOME hero-specific micro layout (bento hero copy tile)
 ----------------------------------------------------------- */
 .hero-copy .eyebrow {
-  color: var(--color-amber-2);
+  color: var(--color-subheading);
   gap: 14px;
   font-size: 26px;
 }
 
 .hero-copy .eyebrow::before {
   width: 40px;
-  background: var(--color-amber-2);
+  background: var(--color-subheading);
 }
 
 .hero-copy h1 {
@@ -2993,8 +3082,8 @@ a.tile--image-flat:focus-visible img {
 /* --- copy colours: dark text on cream + illustration --- */
 .hero-banner--home .hero-copy h1         { color: var(--color-ink); }
 .hero-banner--home .hero-copy p          { color: var(--color-ink-muted); }
-.hero-banner--home .hero-copy .eyebrow   { color: var(--color-ember-text); }
-.hero-banner--home .hero-copy .eyebrow::before { background: var(--color-ember-text); }
+.hero-banner--home .hero-copy .eyebrow   { color: var(--color-subheading); }
+.hero-banner--home .hero-copy .eyebrow::before { background: var(--color-subheading); }
 .hero-banner--home .hero-copy__meta      { border-top-color: oklch(0 0 0 / 0.1); }
 .hero-banner--home .hero-copy__meta-num  { color: var(--color-ember-text); }
 .hero-banner--home .hero-copy__meta-label { color: var(--color-ink-soft); }

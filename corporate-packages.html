@@ -17,7 +17,7 @@
 <link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Lora:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/main.css">
 <script type="module" src="js/main.js"></script>
 </head>
@@ -54,33 +54,38 @@
       </button>
     </div>
   </div>
-
-  <div class="header__mobile" id="mobile-nav" role="region" aria-label="Mobile menu">
-    <nav class="header__mobile-nav">
-      <a href="index.html" data-key="home">Home</a>
-      <a href="school-programs.html" data-key="school">School Programs</a>
-      <a href="adventure-workshops.html" data-key="workshops">Adventure Workshops</a>
-      <a href="corporate-packages.html" data-key="corporate">Corporate &amp; Groups</a>
-      <a href="camp-sites.html" data-key="camps">Camp Sites</a>
-      <a href="gallery.html" data-key="gallery">Gallery</a>
-      <a href="about.html" data-key="about">About</a>
-      <a href="contact.html" data-key="contact">Contact</a>
-    </nav>
-    <div class="header__mobile-footer">
-      <div class="header__mobile-contact">
-        <a href="tel:+919573199863">+91 95731 99863</a>
-        <a href="tel:+919010739847">+91 90107 39847</a>
-        <a href="mailto:cliffinnadventures@gmail.com">cliffinnadventures@gmail.com</a>
-      </div>
-      <a class="header__mobile-cta" href="contact.html">
-        Plan Your Escape
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-          <path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-    </div>
-  </div>
 </header>
+
+<!-- Mobile drawer — sibling of <header> (not descendant) so that .header can
+     safely use `contain: paint layout` for scroll performance. Paint/layout
+     containment establishes a new containing block for fixed descendants,
+     which would collapse this full-viewport drawer to the header's rect if
+     it were nested inside. Open state is signalled via body[data-menu-open]. -->
+<div class="header__mobile" id="mobile-nav" role="region" aria-label="Mobile menu">
+  <nav class="header__mobile-nav">
+    <a href="index.html" data-key="home">Home</a>
+    <a href="school-programs.html" data-key="school">School Programs</a>
+    <a href="adventure-workshops.html" data-key="workshops">Adventure Workshops</a>
+    <a href="corporate-packages.html" data-key="corporate">Corporate &amp; Groups</a>
+    <a href="camp-sites.html" data-key="camps">Camp Sites</a>
+    <a href="gallery.html" data-key="gallery">Gallery</a>
+    <a href="about.html" data-key="about">About</a>
+    <a href="contact.html" data-key="contact">Contact</a>
+  </nav>
+  <div class="header__mobile-footer">
+    <div class="header__mobile-contact">
+      <a href="tel:+919573199863">+91 95731 99863</a>
+      <a href="tel:+919010739847">+91 90107 39847</a>
+      <a href="mailto:cliffinnadventures@gmail.com">cliffinnadventures@gmail.com</a>
+    </div>
+    <a class="header__mobile-cta" href="contact.html">
+      Plan Your Escape
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+</div>
 <!-- END partials/nav.html -->
 
 <main id="main" class="site">
@@ -147,12 +152,29 @@
         </div>
         <div class="card__body">
           <span class="tile__eyebrow">Focused</span>
-          <h3 class="card__title card__title--lg" style="margin-top:6px;">Corporate Workshops</h3>
+          <h3 class="card__title card__title--lg" style="margin-top:6px;">Corporate Engagements</h3>
           <p class="card__desc">Structured leadership and problem-solving sessions set outdoors, designed to translate straight back to work.</p>
           <div class="u-flex-col" style="gap:9px;">
-            <span class="bullet"><span>Leadership challenges</span></span>
-            <span class="bullet"><span>Facilitated debriefs</span></span>
-            <span class="bullet"><span>Custom objectives</span></span>
+            <span class="bullet"><span>Team Bonding activities</span></span>
+            <span class="bullet"><span>Fun Game Challenges</span></span>
+            <span class="bullet"><span>Fitness Challenges</span></span>
+          </div>
+          <a class="btn btn--dark btn--sm" href="contact.html" style="margin-top:22px; text-align:center;">Request A Quote →</a>
+        </div>
+      </article>
+
+      <article class="card" data-animate>
+        <div class="card__media card__media--tall">
+          <img src="assets/images/cliffinnadventures/hero/campfire-group-wide.webp" alt="Corporate group on a curated retreat trip" loading="lazy" width="1920" height="1080">
+        </div>
+        <div class="card__body">
+          <span class="tile__eyebrow">End To End</span>
+          <h3 class="card__title card__title--lg" style="margin-top:6px;">Corporate Trips</h3>
+          <p class="card__desc">Fully organised corporate townhalls and executive programs — local tours, stay and premium experiences handled from start to finish.</p>
+          <div class="u-flex-col" style="gap:9px;">
+            <span class="bullet"><span>Townhalls &amp; executive programs</span></span>
+            <span class="bullet"><span>Local tours &amp; curated stay</span></span>
+            <span class="bullet"><span>Premium experiences</span></span>
           </div>
           <a class="btn btn--dark btn--sm" href="contact.html" style="margin-top:22px; text-align:center;">Request A Quote →</a>
         </div>

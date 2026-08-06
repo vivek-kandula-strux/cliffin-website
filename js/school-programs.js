@@ -22,6 +22,75 @@
  *      from 0 to their data-count value on first scroll-in
  */
 
+/* ── SCHOOL TRIPS — IDEA PICKER MODAL ────────────────────────────
+   Runs unconditionally (not gated by reduced motion) because this is
+   functional UI, not decorative. Progressive enhancement — without
+   JS the trigger anchor falls through to contact.html?trip=school-trips.
+─────────────────────────────────────────────────────────────────── */
+(function initIdeasModal() {
+  'use strict';
+
+  const modal = document.getElementById('ideas-modal');
+  if (!modal) return;
+
+  const container = modal.querySelector('.modal__container');
+  const triggers  = document.querySelectorAll('[data-open-ideas]');
+  const closers   = modal.querySelectorAll('[data-close-ideas]');
+  let lastFocused = null;
+
+  function open(triggerEl) {
+    lastFocused = triggerEl || document.activeElement;
+    modal.removeAttribute('hidden');
+    document.body.style.overflow = 'hidden';
+
+    // Re-play the .modal__container[data-entering] slide-up animation
+    container.removeAttribute('data-entering');
+    void container.offsetWidth;
+    container.setAttribute('data-entering', '');
+
+    requestAnimationFrame(() => container.focus());
+  }
+
+  function close() {
+    modal.setAttribute('hidden', '');
+    document.body.style.overflow = '';
+    container.removeAttribute('data-entering');
+    lastFocused?.focus();
+  }
+
+  triggers.forEach(el => {
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      open(el);
+    });
+  });
+
+  closers.forEach(el => el.addEventListener('click', close));
+
+  document.addEventListener('keydown', e => {
+    if (modal.hasAttribute('hidden')) return;
+
+    if (e.key === 'Escape') { close(); return; }
+    if (e.key !== 'Tab') return;
+
+    const focusable = Array.from(
+      modal.querySelectorAll('button:not([disabled]), [href], [tabindex]:not([tabindex="-1"])')
+    ).filter(el => getComputedStyle(el).display !== 'none');
+
+    if (focusable.length < 2) return;
+    const first = focusable[0];
+    const last  = focusable[focusable.length - 1];
+
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
+}());
+
 (async function schoolPrograms() {
   'use strict';
 
@@ -72,9 +141,15 @@
      split section moves through the viewport. CSS hover uses
      the `scale` CSS property (separate from `transform`), so
      the two effects compose without fighting each other.
+
+     Mobile skipped — matches the guard on the shared
+     initScrollParallax / initCardMediaParallax utilities in
+     micro.js. Native touch scroll + scrub reads jerky, and the
+     ±7% translate is barely perceptible at phone widths.
   ─────────────────────────────────────────────────────────────── */
   const mediaImg = document.querySelector('.feature-split .media-frame img');
-  if (mediaImg) {
+  const isMobileVP = window.matchMedia('(max-width: 767px)').matches;
+  if (mediaImg && !isMobileVP) {
     gsap.fromTo(
       mediaImg,
       { yPercent: -7 },

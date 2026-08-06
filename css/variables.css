@@ -25,6 +25,7 @@
 
   --color-amber: oklch(0.8 0.14 52);          /* Star / warm accent */
   --color-amber-2: oklch(0.8 0.13 55);        /* On-dark eyebrow */
+  --color-subheading: #ED7D34;                /* H3-level subheadings, site-wide */
 
   /* ---- Neutrals ---- */
   --color-page: oklch(0.955 0.012 88);
@@ -53,7 +54,7 @@
   /* ---- Type ---- */
   --font-display: 'Outfit', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --font-serif: 'Lora', Georgia, 'Times New Roman', serif;
 
   --fs-eyebrow: clamp(20px, 2.2vw, 26px);
   --fs-hero: clamp(42px, 5.6vw, 82px);

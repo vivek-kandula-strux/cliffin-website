@@ -285,3 +285,351 @@
     animation: none !important;
   }
 }
+
+/* ================================================================
+   SCHOOL TRIPS — Interactive card + idea-picker modal
+   The 4th program card is a clickable anchor that opens a modal
+   showing six curated trip destinations. Modal reuses the global
+   .modal / .modal__backdrop / .modal__container shell so the
+   ember accent line, enter animation and mobile bottom-sheet
+   behaviour are inherited without duplication.
+   ================================================================ */
+
+/* When a .card-grid contains the interactive card (only on this page),
+   force 4 equal columns at wide widths so the interactive card sits on
+   the same row as the other three — otherwise the 300px auto-fit min
+   collapses to 3 columns and the 4th card orphans on its own row. */
+@media (min-width: 1024px) {
+  .card-grid:has(> .card--interactive) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* ---- Card variant: interactive (School Trips) ---- */
+.card--interactive {
+  cursor: pointer;
+  position: relative;
+  text-decoration: none;
+}
+
+/* Inset ring on hover/focus — communicates "this one takes action" */
+.card--interactive::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-tile);
+  pointer-events: none;
+  box-shadow: inset 0 0 0 0 var(--color-ember);
+  transition: box-shadow var(--duration-medium) var(--ease-standard);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card--interactive:hover::after { box-shadow: inset 0 0 0 2px var(--color-ember); }
+}
+
+.card--interactive:focus-visible::after {
+  box-shadow: inset 0 0 0 2px var(--color-ember);
+}
+
+.card--interactive:focus-visible { outline: none; }
+
+/* Floating chip on the media — the "6 destinations" affordance */
+.card__pin {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: oklch(0.98 0 0);
+  background: oklch(0.16 0.03 156 / 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid oklch(1 0 0 / 0.14);
+  padding: 6px 10px;
+  border-radius: 999px;
+}
+
+/* Location tag on top-left of the card media — communicates where the
+   program happens (In-School / Within City / Outside City). Same visual
+   language as .card__pin but with an ember dot prefix that reads as a
+   map-pin at small sizes. */
+.card__loc {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: oklch(0.98 0 0);
+  background: oklch(0.16 0.03 156 / 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid oklch(1 0 0 / 0.14);
+  padding: 6px 10px 6px 8px;
+  border-radius: 999px;
+}
+
+.card__loc-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-ember);
+  box-shadow: 0 0 0 2px oklch(1 0 0 / 0.18);
+  flex: none;
+}
+
+/* Bottom CTA inside the card body — matches ember accent language */
+.card__cta {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border-soft);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 12.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-ember);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card__cta > span {
+  display: inline-block;
+  transition: transform var(--duration-medium) var(--ease-standard);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card--interactive:hover .card__cta > span { transform: translateX(4px); }
+}
+
+/* ---- Idea-picker modal (single-column, light) ---- */
+.modal--ideas .modal__container {
+  /* Override the two-panel horizontal flex from modal.css */
+  display: block;
+  max-width: 1080px;
+  background: var(--color-card);
+  padding: clamp(28px, 4vw, 52px) clamp(24px, 3.5vw, 44px) clamp(24px, 3.2vw, 40px);
+  overflow-y: auto;
+}
+
+/* Close button re-tinted for light surface */
+.modal--ideas .modal__close {
+  background: oklch(0.94 0.008 80);
+  color: var(--color-ink);
+  border-color: var(--color-border);
+}
+.modal--ideas .modal__close:hover { background: oklch(0.9 0.012 80); }
+
+.ideas__head {
+  max-width: 640px;
+  margin-bottom: clamp(24px, 3vw, 34px);
+  padding-right: 40px; /* clear space for the close button */
+}
+
+.ideas__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(24px, 3vw, 34px);
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  color: var(--color-ink);
+  margin: 12px 0 10px;
+}
+
+.ideas__sub {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--color-ink-muted);
+  margin: 0;
+  max-width: 56ch;
+}
+
+.ideas__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 16px;
+  margin-bottom: clamp(24px, 3vw, 32px);
+}
+
+/* Individual idea tile */
+.idea {
+  background: oklch(0.99 0.005 85);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition:
+    border-color var(--duration-fast) var(--ease-standard),
+    box-shadow   var(--duration-fast) var(--ease-standard),
+    transform    var(--duration-medium) var(--ease-standard);
+}
+
+.idea--custom {
+  background: oklch(0.985 0.008 62);
+  border-style: dashed;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .idea:hover {
+    border-color: var(--color-ember);
+    box-shadow: 0 12px 30px oklch(0.15 0.03 156 / 0.09);
+    transform: translateY(-2px);
+  }
+}
+
+.idea__media {
+  aspect-ratio: 5 / 3;
+  overflow: hidden;
+  background: oklch(0.35 0.03 158);
+}
+
+.idea__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .idea:hover .idea__media img { transform: scale(1.06); }
+}
+
+.idea__body {
+  padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.idea__meta {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.idea__chip {
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: 999px;
+  color: oklch(0.44 0.11 47);
+  background: oklch(0.94 0.04 62);
+}
+
+.idea__chip--muted {
+  color: var(--color-ink-muted);
+  background: oklch(0.95 0.008 80);
+}
+
+.idea__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  color: var(--color-subheading);
+  margin: 0 0 6px;
+}
+
+.idea__desc {
+  font-size: 13px;
+  line-height: 1.62;
+  color: var(--color-ink-muted);
+  margin: 0 0 14px;
+  flex: 1;
+}
+
+.idea__cta {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-ember);
+  text-decoration: none;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding-bottom: 4px;
+  border-bottom: 1.5px solid var(--color-ember);
+  transition: gap var(--duration-fast) var(--ease-standard);
+}
+
+.idea__cta:hover { gap: 10px; }
+
+/* Modal footer */
+.ideas__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: clamp(18px, 2.4vw, 24px);
+  border-top: 1px solid var(--color-border-soft);
+}
+
+.ideas__foot-eyebrow {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--color-ink);
+  display: block;
+}
+
+.ideas__foot-note {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--color-ink-muted);
+  margin: 4px 0 0;
+  max-width: 42ch;
+}
+
+.ideas__foot .btn { flex: none; }
+
+/* Mobile — stack the footer */
+@media (max-width: 640px) {
+  .modal--ideas .modal__container {
+    padding: 24px 20px 20px;
+    max-height: 92svh;
+  }
+
+  .ideas__foot {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .ideas__foot .btn { width: 100%; text-align: center; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .card--interactive::after,
+  .card__cta > span,
+  .idea,
+  .idea__media img,
+  .idea__cta {
+    transition: none !important;
+  }
+
+  .idea:hover,
+  .idea:hover .idea__media img {
+    transform: none !important;
+  }
+}

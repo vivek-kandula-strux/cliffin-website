@@ -2,16 +2,20 @@
  * Premium micro-interactions — React-quality motion, vanilla GSAP stack.
  *
  * Catalogue:
- *   1. initCounters       — hero stats count up on scroll-enter
- *   2. initTextScramble   — "freedom" word resolves from random chars post-hero
- *   3. initCardTilt       — 3-D perspective tilt + specular highlight on hover
- *   4. initCustomCursor   — dot + lagging ring cursor, morphs over interactives
- *   5. initPlayPulse      — repeating emanation rings on the video play button
- *   6. initButtonRipple   — material-style click ripple on all .btn elements
- *   7. initIconBounce     — .icon-chip pops in with back.out spring on scroll
- *   8. initImageHoverPan  — tile images drift toward cursor on hover
- *   9. initScrollParallax — scrub-based depth shift on section feature images
- *  10. initTerrainReveal  — closing-scene hiker band: mask fade-in + horizontal drift on scroll
+ *   1. initCounters          — hero stats count up on scroll-enter
+ *   2. initTextScramble      — "freedom" word resolves from random chars post-hero
+ *   3. initCardTilt          — 3-D perspective tilt + specular highlight on hover
+ *   4. initCustomCursor      — dot + lagging ring cursor, morphs over interactives
+ *   5. initPlayPulse         — repeating emanation rings on the video play button
+ *   6. initButtonRipple      — material-style click ripple on all .btn elements
+ *   7. initIconBounce        — .icon-chip pops in with back.out spring on scroll
+ *   8. initImageHoverPan     — tile images drift toward cursor on hover
+ *   9. initScrollParallax    — scrub-based depth shift on tile feature images
+ *  10. initCardMediaParallax — scrub-based depth shift on .card__media images
+ *  11. initInteriorHeroDrift — inner-page hero image drifts up as section scrolls out
+ *  12. initParallaxScenes    — sticky-pinned scene with layered depth (base/mist/scrim)
+ *  13. initTerrainReveal     — closing-scene mountain band: mask fade-in + Y-drift
+ *  14. initDataParallax      — reusable [data-parallax] API for any element
  */
 
 import { qs, qsa, prefersReducedMotion } from '../utils/dom.js';
@@ -29,7 +33,11 @@ export function initMicro(gsap, ScrollTrigger) {
   initCounters(gsap, ScrollTrigger);
   initIconBounce(gsap, ScrollTrigger);
   initScrollParallax(gsap, ScrollTrigger);
+  initCardMediaParallax(gsap, ScrollTrigger);
+  initInteriorHeroDrift(gsap, ScrollTrigger);
+  initParallaxScenes(gsap, ScrollTrigger);
   initTerrainReveal(gsap, ScrollTrigger);
+  initDataParallax(gsap, ScrollTrigger);
   initTextScramble(gsap);
 
   if (!fine) return;
@@ -322,8 +330,16 @@ function initImageHoverPan(gsap) {
    Each non-hero tile image shifts ±8 % on its Y axis as the
    tile scrolls through the viewport — a subtle depth layer that
    makes the page feel cinematic without full Lenis overhead.
+
+   Mobile skipped: touch scroll velocity is uneven and Lenis is
+   disabled there (smoothTouch: false), so scrub reads as jerky
+   rather than smooth. The extra per-frame inline-transform writes
+   also cost more on mobile GPUs relative to the barely-visible
+   ±8 % effect on a small viewport.
 ───────────────────────────────────────────────────────────── */
 function initScrollParallax(gsap, ScrollTrigger) {
+  if (window.matchMedia('(max-width: 767px)').matches) return;
+
   qsa('.tile--image img')
     .filter(img => !img.hasAttribute('data-hero-parallax') && !img.closest('[data-hero]'))
     .forEach(img => {
@@ -348,9 +364,60 @@ function initScrollParallax(gsap, ScrollTrigger) {
 }
 
 /* ─────────────────────────────────────────────────────────────
-   10. TERRAIN REVEAL
-   Scrub-linked mask-image fade — hikers rise from the CTA's
-   darkness as the band enters the viewport (95% → 18% fade zone).
+   10. PARALLAX SCENE
+   Sticky-pinned scene with 3 depth layers. Sticky positioning
+   handles the pin (cheaper than ScrollTrigger.pin — no element
+   cloning); GSAP handles the layer transforms across the full
+   scene scroll range for a smooth breathing motion through pin.
+
+   Bails on mobile / reduced-motion where the CSS collapses the
+   sticky element to static — no animation needed then.
+───────────────────────────────────────────────────────────── */
+function initParallaxScenes(gsap, ScrollTrigger) {
+  qsa('[data-parallax-scene]').forEach(scene => {
+    const sticky = scene.querySelector('.parallax-scene__sticky');
+    if (!sticky || getComputedStyle(sticky).position !== 'sticky') return;
+
+    const base = scene.querySelector('.parallax-scene__layer--base');
+    const mist = scene.querySelector('.parallax-scene__layer--mist');
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger : scene,
+        start   : 'top bottom',
+        end     : 'bottom top',
+        scrub   : 1.2,
+        invalidateOnRefresh: true,
+      },
+    });
+
+    if (base) {
+      tl.fromTo(base,
+        { scale: 1.15, yPercent: -4 },
+        { scale: 1.0,  yPercent: 4, ease: 'none' },
+        0
+      );
+    }
+    if (mist) {
+      tl.fromTo(mist,
+        { autoAlpha: 0,   yPercent: -8 },
+        { autoAlpha: 0.7, yPercent: 6, ease: 'none' },
+        0
+      );
+    }
+  });
+}
+
+/* ─────────────────────────────────────────────────────────────
+   11. TERRAIN REVEAL
+   Two coordinated scrub tweens on the closing-scene mountain band:
+     • Fade-in as the band first enters the viewport (0 → 220 px)
+     • Slow Y-drift across the full traversal (image sits with a
+       small base scale so translate stays within cover bounds and
+       never exposes bare background at the top or bottom).
+   Distance is deliberately restrained (~6 % of image height) so
+   the mountains feel like they're being observed from a boat that
+   is barely moving — not tumbling past.
 ───────────────────────────────────────────────────────────── */
 function initTerrainReveal(gsap, ScrollTrigger) {
   const terrain = qs('.footer-terrain');
@@ -371,4 +438,145 @@ function initTerrainReveal(gsap, ScrollTrigger) {
       },
     }
   );
+
+  // Y-drift: image starts slightly below its rest position and drifts
+  // up as the section moves through the viewport. Base scale 1.06 keeps
+  // object-fit:cover fully covered at both extremes of the translate.
+  gsap.fromTo(img,
+    { yPercent: 6, scale: 1.06 },
+    {
+      yPercent: -6,
+      scale: 1.06,
+      ease: 'none',
+      scrollTrigger: {
+        trigger : terrain,
+        start   : 'top bottom',
+        end     : 'bottom top',
+        scrub   : 1.4,
+        invalidateOnRefresh: true,
+      },
+    }
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
+   10b. CARD MEDIA PARALLAX
+   Mirrors initScrollParallax but for .card__media images (used on
+   Upcoming Expeditions, Adventure Workshops, Corporate & School
+   Programs pages). Same ±8 % Y range and same overflow contract
+   (parent .card__media has overflow:hidden) so nothing spills.
+   Skips the light-tilt cards (initCardTilt) target set — GSAP just
+   composes the y transform into the tilt matrix at animation time.
+───────────────────────────────────────────────────────────── */
+function initCardMediaParallax(gsap, ScrollTrigger) {
+  // Mobile skipped — same reasoning as initScrollParallax above. Also,
+  // card grids on mobile often collapse to single-column with the card
+  // media occupying most of the visible viewport, which means many
+  // scrub tweens would all be firing simultaneously per scroll frame.
+  if (window.matchMedia('(max-width: 767px)').matches) return;
+
+  qsa('.card__media img').forEach(img => {
+    const media = img.closest('.card__media');
+    if (!media) return;
+    // Base scale 1.1 keeps the ±8 % Y translate inside object-fit:cover
+    // bounds so bare card background never peeks through at the edges.
+    gsap.fromTo(
+      img,
+      { yPercent: -8, scale: 1.1 },
+      {
+        yPercent: 8,
+        scale: 1.1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger           : media,
+          start             : 'top bottom',
+          end               : 'bottom top',
+          scrub             : 1.8,
+          invalidateOnRefresh: true,
+        },
+      }
+    );
+  });
+}
+
+/* ─────────────────────────────────────────────────────────────
+   11b. INTERIOR HERO DRIFT
+   Inner-page heroes (.hero-banner, not .hero-banner--home) use a
+   full-bleed background image inside .hero-banner__media. As the
+   hero scrolls out of view, the image drifts up by ~14 % of its
+   own height, giving the header a "camera continuing to move"
+   feel. Home hero is skipped — its cursor parallax owns the img
+   transform, and mixing scrub + pointer writes causes flicker.
+   Mobile skipped: interior heroes are short there and the effect
+   reads as a jump rather than depth. Base scale 1.14 keeps the
+   translate inside cover bounds.
+───────────────────────────────────────────────────────────── */
+function initInteriorHeroDrift(gsap, ScrollTrigger) {
+  if (window.matchMedia('(max-width: 767px)').matches) return;
+
+  qsa('.hero-banner').forEach(hero => {
+    if (hero.classList.contains('hero-banner--home')) return;
+    const img = hero.querySelector('.hero-banner__media img');
+    if (!img) return;
+
+    gsap.fromTo(
+      img,
+      { yPercent: 0, scale: 1.14 },
+      {
+        yPercent: -14,
+        scale: 1.14,
+        ease: 'none',
+        scrollTrigger: {
+          trigger           : hero,
+          start             : 'top top',
+          end               : 'bottom top',
+          scrub             : 1.2,
+          invalidateOnRefresh: true,
+        },
+      }
+    );
+  });
+}
+
+/* ─────────────────────────────────────────────────────────────
+   14. DATA-PARALLAX — REUSABLE API
+   Any element marked [data-parallax="0.15"] gets a scroll-driven
+   translate whose speed is the numeric value (0 = static, 1 = as
+   fast as scroll). Optional attributes:
+     • data-parallax-direction="horizontal"  → translateX instead
+     • data-parallax-mobile="false"          → disable on ≤767 px
+   Distance is derived from the element's own height so the tween
+   stays proportional across break-points. Only elements whose
+   layout can absorb the translate should be tagged (i.e. inside
+   an overflow:hidden parent or with room to move).
+───────────────────────────────────────────────────────────── */
+function initDataParallax(gsap, ScrollTrigger) {
+  const isMobile = window.matchMedia('(max-width: 767px)').matches;
+
+  qsa('[data-parallax]').forEach(el => {
+    if (isMobile && el.dataset.parallaxMobile === 'false') return;
+
+    const speed = parseFloat(el.dataset.parallax) || 0.15;
+    const clampedSpeed = Math.max(-1, Math.min(1, speed));
+    const horizontal = el.dataset.parallaxDirection === 'horizontal';
+
+    // Distance in px: viewport-relative so tall & short elements both
+    // feel calibrated. 100vh * speed → 15 vh for the default 0.15.
+    const distance = window.innerHeight * clampedSpeed;
+
+    const from = horizontal ? { x: -distance / 2 } : { y: -distance / 2 };
+    const to   = horizontal ? { x:  distance / 2 } : { y:  distance / 2 };
+
+    gsap.fromTo(el, from, {
+      ...to,
+      ease: 'none',
+      scrollTrigger: {
+        trigger           : el,
+        start             : 'top bottom',
+        end               : 'bottom top',
+        scrub             : 1.4,
+        invalidateOnRefresh: true,
+      },
+    });
+  });
 }

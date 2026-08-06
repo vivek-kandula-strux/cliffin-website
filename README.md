@@ -206,6 +206,6 @@ Before deploying, load each page and:
 
 ## Attribution
 
-- **Fonts:** [Space Grotesk](https://fonts.google.com/specimen/Space+Grotesk), [Archivo](https://fonts.google.com/specimen/Archivo), [Instrument Serif](https://fonts.google.com/specimen/Instrument+Serif) — via Google Fonts.
+- **Fonts:** [Space Grotesk](https://fonts.google.com/specimen/Space+Grotesk), [Archivo](https://fonts.google.com/specimen/Archivo), [Lora](https://fonts.google.com/specimen/Lora) — via Google Fonts.
 - **Stock imagery:** [Unsplash](https://unsplash.com) (free-to-use). Individual attributions live in the `alt` text; swap out before launch.
 - **Animation:** [GSAP 3](https://gsap.com) via [esm.sh](https://esm.sh).

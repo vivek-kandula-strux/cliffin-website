@@ -130,11 +130,20 @@ function initScrollProgress() {
   const bar = qs('[data-scroll-progress]');
   if (!bar) return;
 
+  // Cache the scrollable range. Reading `scrollHeight` inside the scroll RAF
+  // forces a synchronous layout every frame; with Lenis emitting ~60
+  // scroll ticks/sec, that adds up. Recompute only when the page can
+  // actually change size (resize, orientation, load).
+  let max = document.documentElement.scrollHeight - window.innerHeight;
+  const recomputeMax = () => {
+    max = document.documentElement.scrollHeight - window.innerHeight;
+  };
+  window.addEventListener('resize', recomputeMax, { passive: true });
+  window.addEventListener('load', recomputeMax, { once: true });
+
   let rafId = null;
   function update() {
-    const scrollTop = window.scrollY;
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    const pct = max > 0 ? Math.min(1, Math.max(0, scrollTop / max)) : 0;
+    const pct = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
     bar.style.transform = `scaleX(${pct.toFixed(4)})`;
     rafId = null;
   }

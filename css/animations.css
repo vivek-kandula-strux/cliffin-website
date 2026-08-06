@@ -225,11 +225,22 @@
   animation: ember-pulse 2.4s ease-in-out infinite;
 }
 
-/* ── 3-D tilt — performance hints ───────────────────────── */
-.tile--image,
-.card,
-.feature {
-  will-change: transform;
+/* ── 3-D tilt — performance hints ─────────────────────────
+   Deliberately empty: an earlier version permanently promoted every card,
+   tile, and feature to its own compositor layer with `will-change: transform`.
+   With 20-40 such elements per page, that created 20-40 permanent GPU
+   textures and measurably hurt scroll performance on integrated GPUs.
+   GSAP already promotes elements implicitly when it writes inline
+   transforms (tilt, hover pan, scroll parallax), so no CSS hint is needed.
+   Kept as a comment so a future contributor doesn't re-add it. */
+
+/* ── Reusable [data-parallax] API — reset under reduced motion
+   so tagged elements sit at their natural rest position instead
+   of the -50% start state the JS would otherwise set. ─── */
+@media (prefers-reduced-motion: reduce) {
+  [data-parallax] {
+    transform: none !important;
+  }
 }
 
 /* ── Eyebrow dot — pulse on load ─────────────────────────── */

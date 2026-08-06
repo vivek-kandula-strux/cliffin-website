@@ -17,7 +17,7 @@
 <link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Lora:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/main.css">
 <script type="module" src="js/main.js"></script>
 </head>
@@ -54,33 +54,38 @@
       </button>
     </div>
   </div>
-
-  <div class="header__mobile" id="mobile-nav" role="region" aria-label="Mobile menu">
-    <nav class="header__mobile-nav">
-      <a href="index.html" data-key="home">Home</a>
-      <a href="school-programs.html" data-key="school">School Programs</a>
-      <a href="adventure-workshops.html" data-key="workshops">Adventure Workshops</a>
-      <a href="corporate-packages.html" data-key="corporate">Corporate &amp; Groups</a>
-      <a href="camp-sites.html" data-key="camps">Camp Sites</a>
-      <a href="gallery.html" data-key="gallery">Gallery</a>
-      <a href="about.html" data-key="about">About</a>
-      <a href="contact.html" data-key="contact">Contact</a>
-    </nav>
-    <div class="header__mobile-footer">
-      <div class="header__mobile-contact">
-        <a href="tel:+919573199863">+91 95731 99863</a>
-        <a href="tel:+919010739847">+91 90107 39847</a>
-        <a href="mailto:cliffinnadventures@gmail.com">cliffinnadventures@gmail.com</a>
-      </div>
-      <a class="header__mobile-cta" href="contact.html">
-        Plan Your Escape
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-          <path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-    </div>
-  </div>
 </header>
+
+<!-- Mobile drawer — sibling of <header> (not descendant) so that .header can
+     safely use `contain: paint layout` for scroll performance. Paint/layout
+     containment establishes a new containing block for fixed descendants,
+     which would collapse this full-viewport drawer to the header's rect if
+     it were nested inside. Open state is signalled via body[data-menu-open]. -->
+<div class="header__mobile" id="mobile-nav" role="region" aria-label="Mobile menu">
+  <nav class="header__mobile-nav">
+    <a href="index.html" data-key="home">Home</a>
+    <a href="school-programs.html" data-key="school">School Programs</a>
+    <a href="adventure-workshops.html" data-key="workshops">Adventure Workshops</a>
+    <a href="corporate-packages.html" data-key="corporate">Corporate &amp; Groups</a>
+    <a href="camp-sites.html" data-key="camps">Camp Sites</a>
+    <a href="gallery.html" data-key="gallery">Gallery</a>
+    <a href="about.html" data-key="about">About</a>
+    <a href="contact.html" data-key="contact">Contact</a>
+  </nav>
+  <div class="header__mobile-footer">
+    <div class="header__mobile-contact">
+      <a href="tel:+919573199863">+91 95731 99863</a>
+      <a href="tel:+919010739847">+91 90107 39847</a>
+      <a href="mailto:cliffinnadventures@gmail.com">cliffinnadventures@gmail.com</a>
+    </div>
+    <a class="header__mobile-cta" href="contact.html">
+      Plan Your Escape
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+</div>
 <!-- END partials/nav.html -->
 
 <main id="main" class="site">
@@ -103,10 +108,10 @@
     <div class="split">
       <div class="photo-pair" data-animate>
         <div class="photo-pair__back">
-          <img src="assets/images/cliffinnadventures/camp-sites/keesara/mulch.webp" alt="Tents pitched under trees" loading="lazy" width="1920" height="1280">
+          <img src="assets/images/cliffinnadventures/camp-sites/village-trials/village-trials-01.webp" alt="Row of tents pitched under fairy-lit trees at twilight" loading="lazy" width="1920" height="1280">
         </div>
         <div class="photo-pair__front">
-          <img src="assets/images/cliffinnadventures/camp-sites/ananthagiri/2021-03-05.webp" alt="Sunrise over the campsite" loading="lazy" width="1280" height="720">
+          <img src="assets/images/cliffinnadventures/camp-sites/ananthagiri/2021-03-05.webp" alt="Sunset over the Ananthagiri campsite" loading="lazy" width="1280" height="720">
         </div>
       </div>
       <div data-animate>
@@ -176,24 +181,194 @@
     </div>
   </section>
 
-  <section class="section container section--last" aria-labelledby="around-title">
+  <section class="section section--large container" aria-labelledby="destinations-title">
+    <div class="section-head section-head--center" data-animate>
+      <span class="eyebrow eyebrow--center"><span></span>Under the moon</span>
+      <h2 id="destinations-title" style="margin-top:12px; font-size: clamp(28px, 4.4vw, 48px);">Browse through our collection of camp sites</h2>
+      <p style="margin-top:20px; font-size:15px;">Eight distinct basecamps across Telangana and beyond — from a quick day-out at Sanjeevni to deep-forest camps at Tipeswar and Mayuri. Pick a distance, a duration and an adventure that fits your group.</p>
+    </div>
+
+    <div class="card-grid" style="margin-top:44px;">
+
+      <article class="card" data-animate>
+        <div class="card__media">
+          <img src="assets/images/cliffinnadventures/school-programs/school-programs-11.webp" alt="School students climbing a cargo net obstacle" loading="lazy" width="1920" height="1440">
+          <span class="chip chip--glass card__badge">Day Camp</span>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">One Day Adventure for Schools</h3>
+          <p class="card__desc">A curated day of adventure activities, teamwork games and instructor-led challenges — designed for school groups big and small.</p>
+          <span class="card__foot-text">Full Day · Schools</span>
+        </div>
+      </article>
+
+      <article class="card" data-animate>
+        <div class="card__media">
+          <img src="assets/images/cliffinnadventures/school-programs/school-programs-15.webp" alt="Climber on a large artificial rock-climbing wall" loading="lazy" width="1440" height="1920">
+          <span class="chip chip--glass card__badge">Day Out</span>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">Sanjeevni Day Out</h3>
+          <p class="card__desc">Zipline, sky-cycling, kayaking, rappelling, rope activities, map reading, archery, rifle shooting and jungle cycling — all in one high-energy day.</p>
+          <span class="card__foot-text">Full Day · Adventure Zone</span>
+        </div>
+      </article>
+
+      <article class="card" data-animate>
+        <div class="card__media">
+          <img src="assets/images/cliffinnadventures/camp-sites/village-trials/village-trials-03.webp" alt="Group around a firepit with tents at night on Village Trails camp" loading="lazy" width="1920" height="1280">
+          <span class="chip chip--glass card__badge">60 km · 2–3 Days</span>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">Village Trails · Ghatkesar</h3>
+          <p class="card__desc">A private, fenced 100% safe zone 60 km from Hyderabad. Tented and room stays, survival boot camps, rope courses, swimming, rain dance and hiking.</p>
+          <span class="card__foot-text">2–3 Day Camps</span>
+        </div>
+      </article>
+
+      <article class="card" data-animate>
+        <div class="card__media">
+          <img src="assets/images/cliffinnadventures/camp-sites/keesara/2022-01-24-1.webp" alt="Fairy-lit camping cabins at Keesara at dusk" loading="lazy" width="1920" height="1441">
+          <span class="chip chip--glass card__badge">70 km · 2–5 Days</span>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">Keesara Hills · Keesara</h3>
+          <p class="card__desc">A 100% safe zone with mobile network on private property. Zipline, rappelling, climbing, valley crossing, trekking and survival boot camps.</p>
+          <span class="card__foot-text">2–5 Day Camps</span>
+        </div>
+      </article>
+
+      <article class="card" data-animate>
+        <div class="card__media">
+          <img src="assets/images/cliffinnadventures/camp-sites/vanavasam/vanavasam-04.webp" alt="Bonfire with tents and fairy lights at a forest campsite" loading="lazy" width="1600" height="902">
+          <span class="chip chip--glass card__badge">100 km · 2–5 Days</span>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">Mayuri Forest · Mahaboobnagar</h3>
+          <p class="card__desc">A reserved-forest basecamp with forest guards on patrol. Wildlife safari, boating, climbing &amp; rappelling, rope courses, zipline and zip-cycle.</p>
+          <span class="card__foot-text">2–5 Day Camps</span>
+        </div>
+      </article>
+
+      <article class="card" data-animate>
+        <div class="card__media">
+          <img src="assets/images/cliffinnadventures/camp-sites/ananthagiri/ananthagiri-06.webp" alt="Hilltop viewing tower overlooking the Ananthagiri Hills" loading="lazy" width="1920" height="1280">
+          <span class="chip chip--glass card__badge">Featured · ₹1,999</span>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">Ananthagiri Hills · Vikarabad</h3>
+          <p class="card__desc">Two hours from Hyderabad. Tent pitching, kayaking, campfires and star-gazing — AC rooms, triangle dorms and camping tents on offer.</p>
+          <span class="card__foot-text">Overnight · From ₹1,999</span>
+        </div>
+      </article>
+
+      <article class="card" data-animate>
+        <div class="card__media">
+          <img src="assets/images/cliffinnadventures/school-programs/school-programs-19.webp" alt="Group trekking toward a rocky hilltop at Pandavulla Gutta" loading="lazy" width="1440" height="1920">
+          <span class="chip chip--glass card__badge">270 km · 2–5 Days</span>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">Pandavulla Gutta · Warangal</h3>
+          <p class="card__desc">A 100% safe zone at an ancient geological and historical site near Bhupalapally. Rock climbing, rappelling, rope walk, trekking, wildlife sanctuary and forest cooking.</p>
+          <span class="card__foot-text">2–5 Day Camps</span>
+        </div>
+      </article>
+
+      <article class="card" data-animate>
+        <div class="card__media">
+          <img src="assets/images/cliffinnadventures/night-camping/night-camp-1.webp" alt="Group gathered around a fire ring surrounded by tents in a wooded camp" loading="lazy" width="1920" height="1280">
+          <span class="chip chip--glass card__badge">300 km · 2–3 Days</span>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">Tipeswar · Adilabad</h3>
+          <p class="card__desc">A secure private property in Adilabad's tiger country. Tented and room stays, survival boot camp, rappelling, trekking, map reading and a full tiger safari.</p>
+          <span class="card__foot-text">2–3 Day Camps</span>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="section section--large container" aria-labelledby="featured-title">
+    <div class="split">
+      <div class="photo-pair" data-animate>
+        <div class="photo-pair__back">
+          <img src="assets/images/cliffinnadventures/camp-sites/ananthagiri/2023-02-14-1.webp" alt="Thatched-roof open dining pavilion at the Ananthagiri camp" loading="lazy" width="1920" height="1440">
+        </div>
+        <div class="photo-pair__front">
+          <img src="assets/images/cliffinnadventures/camp-sites/ananthagiri/ananthagiri-10.webp" alt="Group around a bonfire with tents and red-lit trees at Ananthagiri" loading="lazy" width="1920" height="1280">
+        </div>
+      </div>
+      <div data-animate>
+        <span class="eyebrow"><span></span>A featured escape</span>
+        <h2 id="featured-title" style="margin-top:10px; font-size: clamp(26px, 4vw, 42px);">Ananthagiri Hills, Vikarabad</h2>
+        <p style="margin-top:22px; font-size:15px;">Just two hours from Hyderabad, Ananthagiri is our go-to for a first-time overnight in the wild. Pitch tents by the hillside, kayak in the morning, and end the night around a fire under an open sky.</p>
+
+        <div class="steps" style="margin-top:28px;">
+          <div class="step">
+            <span class="step__num">1</span>
+            <div>
+              <h3 class="step__title">4:00 PM · Arrive &amp; settle in</h3>
+              <p class="step__body">Tent allocation, welcome drink, outdoor and indoor games as the group finds its rhythm.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step__num">2</span>
+            <div>
+              <h3 class="step__title">Evening · Tea, music &amp; bonfire</h3>
+              <p class="step__body">Tea and snacks, campfire, music, and swimming or rain-dancing on select packages.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step__num">3</span>
+            <div>
+              <h3 class="step__title">9:30 PM · Dinner under the stars</h3>
+              <p class="step__body">A hearty vegetarian or non-vegetarian dinner served in the open air.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step__num">4</span>
+            <div>
+              <h3 class="step__title">9:00 AM · Breakfast · 11:00 AM · Check-out</h3>
+              <p class="step__body">Buffet breakfast, one last walk around the hills and an unhurried check-out.</p>
+            </div>
+          </div>
+        </div>
+
+        <p style="margin-top:26px; font-size:14px; color: oklch(0.42 0.03 90);">
+          <strong>From ₹1,999 per person</strong> · group discounts available · AC rooms, triangle dorms &amp; camping tents · meals, tea &amp; snacks included · Aadhaar card mandatory · transport not included.
+        </p>
+
+        <a class="btn btn--dark btn--md" href="contact.html" style="margin-top:28px;">Enquire About Ananthagiri →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container" aria-labelledby="around-title">
     <div class="section-head section-head--center" data-animate style="margin-bottom:34px;">
       <span class="eyebrow eyebrow--center"><span></span>Around the camp</span>
       <h2 id="around-title" style="margin-top:12px; font-size: clamp(28px, 4.4vw, 48px);">A look at the site</h2>
     </div>
     <div class="mini-gallery">
       <div class="gallery-item gallery-item--wide gallery-item--tall" data-animate>
-        <img src="assets/images/cliffinnadventures/camp-sites/ananthagiri/2023-02-14-1.webp" alt="Wide view of the campsite" loading="lazy" width="1920" height="1440">
+        <img src="assets/images/cliffinnadventures/camp-sites/ananthagiri/2023-02-14-2.webp" alt="Group walking through the golden Ananthagiri hills" loading="lazy" width="1920" height="1440">
       </div>
       <div class="gallery-item" data-animate>
-        <img src="assets/images/cliffinnadventures/camp-sites/keesara/2022-01-24-1.webp" alt="Bonfire" loading="lazy" width="1920" height="1441">
+        <img src="assets/images/cliffinnadventures/camp-sites/vanavasam/vanavasam-06.webp" alt="Evening celebration under fairy lights and prayer flags" loading="lazy" width="1080" height="1920">
       </div>
       <div class="gallery-item" data-animate>
-        <img src="assets/images/cliffinnadventures/night-camping/night-camp-3.webp" alt="Tent interior" loading="lazy" width="1920" height="1280">
+        <img src="assets/images/cliffinnadventures/camp-sites/ananthagiri/2020-08-24.webp" alt="Open dining hall lit by lantern pendants" loading="lazy" width="1920" height="1280">
       </div>
       <div class="gallery-item gallery-item--wide" data-animate>
-        <img src="assets/images/cliffinnadventures/camp-sites/vanavasam/vanavasam-04.webp" alt="Group dinner at camp" loading="lazy" width="1600" height="902">
+        <img src="assets/images/cliffinnadventures/night-camping/night-camp-3.webp" alt="Cliff-Inn Adventures campsite under fairy lights at night" loading="lazy" width="1920" height="1280">
       </div>
+    </div>
+  </section>
+
+  <section class="section container section--last">
+    <div class="cta-banner" data-animate>
+      <h2 class="cta-banner__title" style="max-width:22ch;">Ready to pick your camp?</h2>
+      <a class="btn btn--dark-invert" href="contact.html">Check Availability →</a>
     </div>
   </section>
 

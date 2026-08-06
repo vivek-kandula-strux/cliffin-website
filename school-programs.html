@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://static.wixstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Lora:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/main.css">
 <link rel="stylesheet" href="css/school-animations.css">
 <script type="module" src="js/main.js"></script>
@@ -56,33 +56,38 @@
       </button>
     </div>
   </div>
-
-  <div class="header__mobile" id="mobile-nav" role="region" aria-label="Mobile menu">
-    <nav class="header__mobile-nav">
-      <a href="index.html" data-key="home">Home</a>
-      <a href="school-programs.html" data-key="school">School Programs</a>
-      <a href="adventure-workshops.html" data-key="workshops">Adventure Workshops</a>
-      <a href="corporate-packages.html" data-key="corporate">Corporate &amp; Groups</a>
-      <a href="camp-sites.html" data-key="camps">Camp Sites</a>
-      <a href="gallery.html" data-key="gallery">Gallery</a>
-      <a href="about.html" data-key="about">About</a>
-      <a href="contact.html" data-key="contact">Contact</a>
-    </nav>
-    <div class="header__mobile-footer">
-      <div class="header__mobile-contact">
-        <a href="tel:+919573199863">+91 95731 99863</a>
-        <a href="tel:+919010739847">+91 90107 39847</a>
-        <a href="mailto:cliffinnadventures@gmail.com">cliffinnadventures@gmail.com</a>
-      </div>
-      <a class="header__mobile-cta" href="contact.html">
-        Plan Your Escape
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-          <path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-    </div>
-  </div>
 </header>
+
+<!-- Mobile drawer — sibling of <header> (not descendant) so that .header can
+     safely use `contain: paint layout` for scroll performance. Paint/layout
+     containment establishes a new containing block for fixed descendants,
+     which would collapse this full-viewport drawer to the header's rect if
+     it were nested inside. Open state is signalled via body[data-menu-open]. -->
+<div class="header__mobile" id="mobile-nav" role="region" aria-label="Mobile menu">
+  <nav class="header__mobile-nav">
+    <a href="index.html" data-key="home">Home</a>
+    <a href="school-programs.html" data-key="school">School Programs</a>
+    <a href="adventure-workshops.html" data-key="workshops">Adventure Workshops</a>
+    <a href="corporate-packages.html" data-key="corporate">Corporate &amp; Groups</a>
+    <a href="camp-sites.html" data-key="camps">Camp Sites</a>
+    <a href="gallery.html" data-key="gallery">Gallery</a>
+    <a href="about.html" data-key="about">About</a>
+    <a href="contact.html" data-key="contact">Contact</a>
+  </nav>
+  <div class="header__mobile-footer">
+    <div class="header__mobile-contact">
+      <a href="tel:+919573199863">+91 95731 99863</a>
+      <a href="tel:+919010739847">+91 90107 39847</a>
+      <a href="mailto:cliffinnadventures@gmail.com">cliffinnadventures@gmail.com</a>
+    </div>
+    <a class="header__mobile-cta" href="contact.html">
+      Plan Your Escape
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+</div>
 <!-- END partials/nav.html -->
 
 <!-- Custom cursor — micro.js guards on (hover:hover)+(pointer:fine) -->
@@ -174,39 +179,55 @@
   <section class="section container section--large-bottom" aria-labelledby="progs-title">
     <div style="margin-bottom:34px;" data-animate>
       <span class="eyebrow"><span></span>Our programs</span>
-      <h2 id="progs-title" style="margin-top:10px;">Three experiences. One unforgettable year.</h2>
+      <h2 id="progs-title" style="margin-top:10px;">Every way to get your class outside.</h2>
     </div>
     <div class="card-grid">
 
       <article class="card" data-animate>
         <div class="card__media card__media--tall">
-          <img src="https://static.wixstatic.com/media/17bef8_f8eae6996e60456ea135c5e5a002ed70~mv2.jpg" alt="Students swinging across monkey bars on an outdoor boot camp obstacle course" loading="lazy" width="1200" height="800">
+          <img src="https://static.wixstatic.com/media/17bef8_dc44de1997e34bc5af0718a41fd21ff7~mv2.jpg" alt="Students in a team-building huddle during an in-school adventure camp" loading="lazy" width="1200" height="900">
+          <span class="card__loc" aria-hidden="true"><span class="card__loc-dot"></span>In-School</span>
         </div>
         <div class="card__body">
-          <h3 class="card__title card__title--lg">School Boot Camps</h3>
-          <p class="card__desc">High-energy obstacle drills, physical challenges and team missions that push every limit — and send students back with a confidence no classroom can give.</p>
+          <h3 class="card__title card__title--lg">In-School Adventure Camps</h3>
+          <p class="card__desc">We bring the adventure to your grounds — mobile obstacle rigs, team missions and skill stations set up on your school premises so every student gets the full experience without leaving campus.</p>
         </div>
       </article>
 
       <article class="card" data-animate>
         <div class="card__media card__media--tall">
-          <img src="https://static.wixstatic.com/media/17bef8_c3b8c4da52b2410eb626a5ad8dae5de6~mv2.jpg" alt="Student tents pitched at night with the illuminated Mysore Palace glowing in the background" loading="lazy" width="1200" height="800">
+          <img src="https://static.wixstatic.com/media/17bef8_f8eae6996e60456ea135c5e5a002ed70~mv2.jpg" alt="Students swinging across monkey bars on an outdoor boot camp obstacle course" loading="lazy" width="1200" height="800">
+          <span class="card__loc" aria-hidden="true"><span class="card__loc-dot"></span>Within City</span>
         </div>
         <div class="card__body">
-          <h3 class="card__title card__title--lg">Night Camps</h3>
-          <p class="card__desc">Tents under open skies, giant bonfires and star-filled nights. Overnight camps where students unplug, form real friendships and discover who they are beyond the screen.</p>
+          <h3 class="card__title card__title--lg">Outdoor School Bootcamps</h3>
+          <p class="card__desc">High-energy obstacle drills, physical challenges and team missions at our purpose-built city adventure park — full-day sessions that push every limit and send students back changed.</p>
         </div>
       </article>
 
       <article class="card" data-animate>
         <div class="card__media card__media--tall">
           <img src="https://static.wixstatic.com/media/17bef8_b69a1613636b4b8899b00ea758b830a7~mv2.jpg" alt="Students scaling a military-pattern rock climbing wall with zipline visible in the background" loading="lazy" width="1200" height="800">
+          <span class="card__loc" aria-hidden="true"><span class="card__loc-dot"></span>Within City</span>
         </div>
         <div class="card__body">
           <h3 class="card__title card__title--lg">Adventure Skill Learning</h3>
           <p class="card__desc">Rock walls, sky cycles, archery ranges and ziplines — structured sessions that turn hesitation into skill and build step-by-step courage across every activity.</p>
         </div>
       </article>
+
+      <a class="card card--interactive" href="contact.html?trip=school-trips" data-open-ideas="school-trips" aria-haspopup="dialog" aria-controls="ideas-modal" data-animate>
+        <div class="card__media card__media--tall">
+          <img src="https://static.wixstatic.com/media/17bef8_c3b8c4da52b2410eb626a5ad8dae5de6~mv2.jpg" alt="Student tents pitched at night with the illuminated Mysore Palace behind — a classic school trip destination" loading="lazy" width="1200" height="800">
+          <span class="card__loc" aria-hidden="true"><span class="card__loc-dot"></span>Outside City</span>
+          <span class="card__pin" aria-hidden="true">6 destinations</span>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title card__title--lg">School Trips</h3>
+          <p class="card__desc">Multi-day trips beyond our campus — heritage circuits, wildlife safaris and custom itineraries built around your calendar, group size and budget.</p>
+          <span class="card__cta">Explore destinations <span aria-hidden="true">→</span></span>
+        </div>
+      </a>
 
     </div>
   </section>
@@ -243,6 +264,126 @@
       <a class="btn btn--dark-invert" href="contact.html" data-magnetic>Enquire Now →</a>
     </div>
   </section>
+
+  <!-- SCHOOL TRIPS — IDEA PICKER MODAL -->
+  <div class="modal modal--ideas" id="ideas-modal" hidden aria-modal="true" role="dialog" aria-labelledby="ideas-modal-title">
+    <div class="modal__backdrop" data-close-ideas></div>
+    <div class="modal__container modal__container--wide" tabindex="-1">
+      <button class="modal__close" type="button" aria-label="Close" data-close-ideas>
+        <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <header class="ideas__head">
+        <span class="eyebrow"><span></span>School Trips</span>
+        <h2 class="ideas__title" id="ideas-modal-title">Six ways to take the class outside.</h2>
+        <p class="ideas__sub">Pick a destination that fits your calendar. Every trip is fully supervised, transport-inclusive, and shaped around your group size and budget.</p>
+      </header>
+
+      <div class="ideas__grid">
+
+        <article class="idea">
+          <div class="idea__media">
+            <img src="https://static.wixstatic.com/media/17bef8_c3b8c4da52b2410eb626a5ad8dae5de6~mv2.jpg" alt="Illuminated Mysore Palace at night behind student tents" loading="lazy" width="800" height="600">
+          </div>
+          <div class="idea__body">
+            <div class="idea__meta">
+              <span class="idea__chip">2 Days</span>
+              <span class="idea__chip idea__chip--muted">Heritage</span>
+            </div>
+            <h3 class="idea__title">Heritage Circuit</h3>
+            <p class="idea__desc">Mysore Palace, Srirangapatna and Chamundi Hills — a cultural loop with guided storytelling and a night under the palace lights.</p>
+            <a class="idea__cta" href="contact.html?trip=heritage-circuit">Enquire <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+
+        <article class="idea">
+          <div class="idea__media">
+            <img src="https://static.wixstatic.com/media/17bef8_a64e4367d199468e809739a551ad5ef2~mv2.jpg" alt="Students gathered around a giant bonfire on a wildlife camp night" loading="lazy" width="800" height="600">
+          </div>
+          <div class="idea__body">
+            <div class="idea__meta">
+              <span class="idea__chip">3 Days</span>
+              <span class="idea__chip idea__chip--muted">Wildlife</span>
+            </div>
+            <h3 class="idea__title">Wildlife Camp</h3>
+            <p class="idea__desc">Forest camp in Nallamalla or Bhadra — night walks with a naturalist, dawn safari, and star-gazing far from city lights.</p>
+            <a class="idea__cta" href="contact.html?trip=wildlife-camp">Enquire <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+
+        <article class="idea">
+          <div class="idea__media">
+            <img src="https://static.wixstatic.com/media/17bef8_b69a1613636b4b8899b00ea758b830a7~mv2.jpg" alt="Students scaling a rock climbing wall on an adventure combo trip" loading="lazy" width="800" height="600">
+          </div>
+          <div class="idea__body">
+            <div class="idea__meta">
+              <span class="idea__chip">2 Days</span>
+              <span class="idea__chip idea__chip--muted">Adventure</span>
+            </div>
+            <h3 class="idea__title">Adventure Combo</h3>
+            <p class="idea__desc">Full-menu adventure weekend — rock walls, sky cycles, ziplines, archery and rappelling stacked into two action-packed days.</p>
+            <a class="idea__cta" href="contact.html?trip=adventure-combo">Enquire <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+
+        <article class="idea">
+          <div class="idea__media">
+            <img src="https://static.wixstatic.com/media/17bef8_5d97b1b2b2474435bc7c07117b5da099~mv2.jpg" alt="Student sky cycling above a forest canopy on a multi-day expedition" loading="lazy" width="800" height="600">
+          </div>
+          <div class="idea__body">
+            <div class="idea__meta">
+              <span class="idea__chip">5 Days</span>
+              <span class="idea__chip idea__chip--muted">Expedition</span>
+            </div>
+            <h3 class="idea__title">Multi-Day Expedition</h3>
+            <p class="idea__desc">Long-form journeys — trek, camp and adventure sports stitched across five days of shared meals, campfires and unforgettable firsts.</p>
+            <a class="idea__cta" href="contact.html?trip=multi-day-expedition">Enquire <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+
+        <article class="idea">
+          <div class="idea__media">
+            <img src="https://static.wixstatic.com/media/17bef8_4aea2cfbd60f4b0abb63c94b60e21e14~mv2.jpg" alt="Student aiming at an archery target on an educational discovery trip" loading="lazy" width="800" height="600">
+          </div>
+          <div class="idea__body">
+            <div class="idea__meta">
+              <span class="idea__chip">3 Days</span>
+              <span class="idea__chip idea__chip--muted">Curriculum</span>
+            </div>
+            <h3 class="idea__title">Educational Discovery</h3>
+            <p class="idea__desc">Curriculum-linked trips — coffee estates, ecology walks, water-body studies and workshops that turn a syllabus chapter into a lived experience.</p>
+            <a class="idea__cta" href="contact.html?trip=educational-discovery">Enquire <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+
+        <article class="idea idea--custom">
+          <div class="idea__media">
+            <img src="https://static.wixstatic.com/media/17bef8_62c22ab052cf40c6817e9c58df4431a3~mv2.jpg" alt="Students climbing a cargo net on a custom outdoor programme" loading="lazy" width="800" height="600">
+          </div>
+          <div class="idea__body">
+            <div class="idea__meta">
+              <span class="idea__chip">Flexible</span>
+              <span class="idea__chip idea__chip--muted">Bespoke</span>
+            </div>
+            <h3 class="idea__title">Custom Itinerary</h3>
+            <p class="idea__desc">Have a theme, a budget or a dream week in mind? Share the brief — we design a trip around your students, dates and outcomes.</p>
+            <a class="idea__cta" href="contact.html?trip=custom-itinerary">Design mine <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+
+      </div>
+
+      <footer class="ideas__foot">
+        <div>
+          <span class="ideas__foot-eyebrow">Not sure which fits?</span>
+          <p class="ideas__foot-note">Share your dates and group size — we'll shortlist the two best options for you within a day.</p>
+        </div>
+        <a class="btn btn--primary" href="contact.html">Talk to us <span aria-hidden="true">→</span></a>
+      </footer>
+    </div>
+  </div>
 
 </main>
 

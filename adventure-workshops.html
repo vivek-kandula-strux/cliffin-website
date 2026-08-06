@@ -17,7 +17,7 @@
 <link rel="manifest" href="site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Lora:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/main.css">
 <script type="module" src="js/main.js"></script>
 </head>
@@ -54,42 +54,46 @@
       </button>
     </div>
   </div>
-
-  <div class="header__mobile" id="mobile-nav" role="region" aria-label="Mobile menu">
-    <nav class="header__mobile-nav">
-      <a href="index.html" data-key="home">Home</a>
-      <a href="school-programs.html" data-key="school">School Programs</a>
-      <a href="adventure-workshops.html" data-key="workshops">Adventure Workshops</a>
-      <a href="corporate-packages.html" data-key="corporate">Corporate &amp; Groups</a>
-      <a href="camp-sites.html" data-key="camps">Camp Sites</a>
-      <a href="gallery.html" data-key="gallery">Gallery</a>
-      <a href="about.html" data-key="about">About</a>
-      <a href="contact.html" data-key="contact">Contact</a>
-    </nav>
-    <div class="header__mobile-footer">
-      <div class="header__mobile-contact">
-        <a href="tel:+919573199863">+91 95731 99863</a>
-        <a href="tel:+919010739847">+91 90107 39847</a>
-        <a href="mailto:cliffinnadventures@gmail.com">cliffinnadventures@gmail.com</a>
-      </div>
-      <a class="header__mobile-cta" href="contact.html">
-        Plan Your Escape
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-          <path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-    </div>
-  </div>
 </header>
+
+<!-- Mobile drawer — sibling of <header> (not descendant) so that .header can
+     safely use `contain: paint layout` for scroll performance. Paint/layout
+     containment establishes a new containing block for fixed descendants,
+     which would collapse this full-viewport drawer to the header's rect if
+     it were nested inside. Open state is signalled via body[data-menu-open]. -->
+<div class="header__mobile" id="mobile-nav" role="region" aria-label="Mobile menu">
+  <nav class="header__mobile-nav">
+    <a href="index.html" data-key="home">Home</a>
+    <a href="school-programs.html" data-key="school">School Programs</a>
+    <a href="adventure-workshops.html" data-key="workshops">Adventure Workshops</a>
+    <a href="corporate-packages.html" data-key="corporate">Corporate &amp; Groups</a>
+    <a href="camp-sites.html" data-key="camps">Camp Sites</a>
+    <a href="gallery.html" data-key="gallery">Gallery</a>
+    <a href="about.html" data-key="about">About</a>
+    <a href="contact.html" data-key="contact">Contact</a>
+  </nav>
+  <div class="header__mobile-footer">
+    <div class="header__mobile-contact">
+      <a href="tel:+919573199863">+91 95731 99863</a>
+      <a href="tel:+919010739847">+91 90107 39847</a>
+      <a href="mailto:cliffinnadventures@gmail.com">cliffinnadventures@gmail.com</a>
+    </div>
+    <a class="header__mobile-cta" href="contact.html">
+      Plan Your Escape
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M2.5 7h9M7 2.5l4.5 4.5L7 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+</div>
 <!-- END partials/nav.html -->
 
 <main id="main" class="site">
 
-  <section class="hero-banner" data-hero aria-labelledby="hero-title">
+  <section class="hero-banner hero-banner--workshops" data-hero aria-labelledby="hero-title">
     <div class="hero-banner__media" data-hero-media>
-      <img src="assets/images/cliffinnadventures/adventure-workshops/rock-climbing-instruction.webp" alt="Instructor teaching rock climbing on a real rock face" loading="eager" fetchpriority="high" width="1344" height="1007">
+      <img src="assets/Background/adventure-workshops-hero-cliffin.png" alt="Illustration of climbers, hikers, cyclists, campers, ziplining and paragliding across a mountain landscape" loading="eager" fetchpriority="high" width="1920" height="785">
     </div>
-    <div class="hero-banner__scrim"></div>
     <div class="hero-banner__inner">
       <span class="eyebrow" data-hero-eyebrow><span></span>Skills for the wild</span>
       <h1 class="hero-banner__title" id="hero-title" data-hero-title>Adventure Workshops</h1>
@@ -109,25 +113,13 @@
 
       <article class="card" data-animate>
         <div class="card__media">
-          <img src="assets/images/cliffinnadventures/adventure-workshops/rappelling-cliff-face.webp" alt="Climber ascending a rock face" loading="lazy" width="1920" height="1341">
+          <img src="assets/images/cliffinnadventures/adventure-workshops/rappelling-cliff-face.webp" alt="Climber and rappeller on a real cliff face" loading="lazy" width="1920" height="1341">
           <span class="chip chip--glass card__badge">Beginner–Pro</span>
         </div>
         <div class="card__body">
-          <h3 class="card__title">Rock Climbing</h3>
-          <p class="card__desc">Master grip, footwork and belay basics on real rock with certified instructors and full safety gear.</p>
+          <h3 class="card__title">Rock Climbing &amp; Rappelling Workshop</h3>
+          <p class="card__desc">Master grip, footwork, belay and rappel technique on real cliffs and waterfalls — certified instructors and full safety gear at every step.</p>
           <span class="card__foot-text">Half / Full Day</span>
-        </div>
-      </article>
-
-      <article class="card" data-animate>
-        <div class="card__media">
-          <img src="assets/images/cliffinnadventures/adventure-workshops/workshop-action-1.webp" alt="Rappelling down a cliff face" loading="lazy" width="1920" height="1440">
-          <span class="chip chip--glass card__badge">All Levels</span>
-        </div>
-        <div class="card__body">
-          <h3 class="card__title">Rock &amp; Water Rappelling</h3>
-          <p class="card__desc">Descend cliffs and waterfalls under expert supervision — the ultimate confidence builder.</p>
-          <span class="card__foot-text">Half Day</span>
         </div>
       </article>
 
@@ -137,7 +129,7 @@
           <span class="chip chip--glass card__badge">Intermediate</span>
         </div>
         <div class="card__body">
-          <h3 class="card__title">Survival Skills</h3>
+          <h3 class="card__title">Survival Skills Workshop</h3>
           <p class="card__desc">Fire-craft, shelter building, navigation and knots — practical wilderness know-how that lasts.</p>
           <span class="card__foot-text">Full Day</span>
         </div>
@@ -145,12 +137,12 @@
 
       <article class="card" data-animate>
         <div class="card__media">
-          <img src="assets/images/cliffinnadventures/expeditions/friendship-peak-himalaya.webp" alt="Trekkers walking a ridge with a wide view" loading="lazy" width="1536" height="650">
+          <img src="assets/images/cliffinnadventures/expeditions/friendship-peak-himalaya.webp" alt="Hikers walking a ridge with a wide view" loading="lazy" width="1536" height="650">
           <span class="chip chip--glass card__badge">All Levels</span>
         </div>
         <div class="card__body">
-          <h3 class="card__title">Trekking &amp; Hiking</h3>
-          <p class="card__desc">Guided treks through forests and hills, blending fitness, teamwork and stunning views.</p>
+          <h3 class="card__title">Hiking Workshop</h3>
+          <p class="card__desc">Guided hikes through forests and hills, blending fitness, teamwork and stunning views.</p>
           <span class="card__foot-text">1–2 Days</span>
         </div>
       </article>
@@ -161,7 +153,7 @@
           <span class="chip chip--glass card__badge">All Levels</span>
         </div>
         <div class="card__body">
-          <h3 class="card__title">Zipline &amp; Rope Course</h3>
+          <h3 class="card__title">Zipline &amp; Rope Course Workshop</h3>
           <p class="card__desc">High-adrenaline aerial challenges built to push comfort zones in a safe, controlled setup.</p>
           <span class="card__foot-text">Half Day</span>
         </div>
@@ -169,12 +161,24 @@
 
       <article class="card" data-animate>
         <div class="card__media">
-          <img src="assets/images/cliffinnadventures/night-camping/night-camp-1.webp" alt="Night bonfire circle" loading="lazy" width="1056" height="792">
+          <img src="assets/images/cliffinnadventures/adventure-workshops/workshop-portrait.webp" alt="Adventurer with climbing gear laid out" loading="lazy" width="1920" height="1440">
+          <span class="chip chip--glass card__badge">Beginner</span>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">Adventure Gear Discovery Workshop</h3>
+          <p class="card__desc">Hands-on with ropes, harnesses, carabiners and camping kit — learn what every piece does and how to use it safely.</p>
+          <span class="card__foot-text">Half Day</span>
+        </div>
+      </article>
+
+      <article class="card" data-animate>
+        <div class="card__media">
+          <img src="assets/images/cliffinnadventures/night-camping/night-camp-2.webp" alt="Clear night sky over a camp" loading="lazy" width="1056" height="792">
           <span class="chip chip--glass card__badge">All Levels</span>
         </div>
         <div class="card__body">
-          <h3 class="card__title">Bonfire &amp; Night Craft</h3>
-          <p class="card__desc">Storytelling, games and star-gazing around the fire — the perfect close to an adventure day.</p>
+          <h3 class="card__title">Star Gazing Workshop</h3>
+          <p class="card__desc">Read constellations, spot planets and learn the night sky under wide rural skies — a quiet, unforgettable close to the day.</p>
           <span class="card__foot-text">Evening</span>
         </div>
       </article>

@@ -13,22 +13,23 @@ Adventurous, aspirational, warm. Copy speaks to freedom and escape ("Escape the 
 ## 2. Typography
 
 Loaded via Google Fonts:
-`Space+Grotesk:400,500,600,700` · `Archivo:400,500,600,700` · `Instrument+Serif:ital`
+`Space+Grotesk:400,500,600,700` · `Archivo:400,500,600,700` · `Lora:ital,wght@1,400;1,500`
 
 | Role | Family | Usage |
 |------|--------|-------|
 | Display / headings | **Space Grotesk** | All `h1`–`h3`, stat numbers, buttons, nav, labels. `font-weight: 700` for headlines, `600` for buttons/subheads. |
 | Body | **Archivo** | Paragraphs, form fields, meta labels, chips. `400` body, `500`–`600` emphasis. |
-| Accent | **Instrument Serif** *(italic)* | Eyebrow/kicker labels, a single highlighted word inside a headline, pull-quotes. Always `font-style: italic`, `font-weight: 400`. |
+| Accent | **Lora** *(italic)* | Eyebrow/kicker labels, a single highlighted word inside a headline, pull-quotes. Always `font-style: italic`, `font-weight: 500`. |
 
 **Headline treatment**
 - `font-size: clamp(42px, 5.6vw, 82px)` for hero `h1`; section `h2` `clamp(30px, 4.2vw, 52px)`.
 - `line-height: 0.94`–`1.0`, `letter-spacing: -0.03em`.
-- Highlight one word per headline in Instrument Serif italic + ember color, `letter-spacing: 0`.
+- Highlight one word per headline in Lora italic + ember color, `letter-spacing: 0`.
+- **Subheading color:** every `h3` (card titles, feature titles, step titles, pillar titles, benefit titles, gallery captions, footer column headers, idea titles, success-panel titles) uses the token `--color-subheading: #ED7D34` — a bright ember-orange. H1 and H2 remain deep-pine ink. On dark surfaces, the same orange reads as an accent glow.
 
 **Eyebrow / kicker pattern** (repeated above every section title):
 ```html
-<span style="font-family: 'Instrument Serif', serif; font-style: italic; font-size: 26px;
+<span style="font-family: 'Lora', serif; font-style: italic; font-weight: 500; font-size: 26px;
   color: oklch(0.67 0.15 47); display: inline-flex; align-items: center; gap: 12px;">
   <span style="width: 34px; height: 1px; background: oklch(0.67 0.15 47);"></span>Eyebrow text</span>
 ```

@@ -22,7 +22,13 @@ export function initNavigation() {
   let previouslyOpen = false;
 
   const setOpen = (open) => {
+    // Mirror the open state onto BOTH the header (kept for backwards compat)
+    // and <body>. The drawer is now a sibling of <header> — moved out so the
+    // header can safely use `contain: paint layout` — so the CSS that reveals
+    // it now keys off `body[data-menu-open='true'] .header__mobile` instead
+    // of the old descendant selector. See components.css: mobile drawer rules.
     header.dataset.menuOpen = String(open);
+    document.body.dataset.menuOpen = String(open);
     toggle.setAttribute('aria-expanded', String(open));
 
     if (open) {

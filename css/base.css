@@ -34,6 +34,7 @@ h3 {
   font-size: var(--fs-h3);
   font-weight: 600;
   letter-spacing: -0.02em;
+  color: var(--color-subheading);
 }
 
 p {
@@ -97,11 +98,11 @@ a:focus-visible {
 }
 
 
-/* Instrument Serif is always italic in this system */
+/* The serif family (Lora) is always italic in this system */
 .serif {
   font-family: var(--font-serif);
   font-style: italic;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 /* Eyebrow / kicker — small italic serif label with a rule
@@ -112,9 +113,9 @@ a:focus-visible {
   gap: 12px;
   font-family: var(--font-serif);
   font-style: italic;
-  font-weight: 400;
+  font-weight: 500;
   font-size: var(--fs-eyebrow);
-  color: var(--color-ember-text);
+  color: var(--color-subheading);
   line-height: 1;
 }
 
@@ -143,7 +144,7 @@ a:focus-visible {
 }
 
 .eyebrow--on-dark {
-  color: var(--color-amber-2);
+  color: var(--color-subheading);
 }
 
 /* Section headline row */
@@ -182,7 +183,7 @@ a:focus-visible {
 .word-highlight {
   font-family: var(--font-serif);
   font-style: italic;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 0;
   background: var(--grad-gold-text);
   -webkit-background-clip: text;
