@@ -1,30 +1,70 @@
 <!--
-  Site footer partial — source of truth.
+  Site FOOTER SCENE partial — source of truth.
   Inlined into every page between the markers
-  <!-- BEGIN partials/footer.html -->  and  <!-- END partials/footer.html -->.
-  The mountain-terrain SVG bridge belongs OUTSIDE this partial (sits above it).
--->
-<footer class="footer on-dark" role="contentinfo">
+    <!-- BEGIN partials/footer.html -->
+    <!-- END   partials/footer.html -->
+  If you edit this file, propagate the change into every page manually
+  (this site doesn't run a build step; the partial is copy-pasted, not included).
 
-  <!-- Zone 2: Pre-footer CTA Band -->
-  <div class="footer__cta-band">
-    <div class="footer__cta-band-inner container--wide">
-      <div class="footer__cta-copy">
-        <span class="footer__cta-eyebrow serif">Let's plan your escape</span>
-        <h2 class="footer__cta-title">Ready for your<br>next adventure?</h2>
-        <p class="footer__cta-sub">Whether you're a school, a company, or a soul craving the wild — we'll build the perfect experience around you.</p>
-      </div>
-      <div class="footer__cta-actions">
-        <a class="btn btn--primary" href="contact.html">Plan Your Escape →</a>
-        <a class="footer__wa-btn" href="https://wa.me/919573199863" target="_blank" rel="noopener noreferrer">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.533 5.85L.057 23.527a.5.5 0 0 0 .615.606l5.88-1.543A11.942 11.942 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.021-1.378l-.36-.214-3.733.979.998-3.648-.235-.374A9.818 9.818 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
-          Chat on WhatsApp
-        </a>
+  Contents (in visual order, top → bottom):
+    1. Pre-footer CTA band  — "Ready for your next adventure?" + quick form
+    2. Mountain terrain transition — bridges the CTA into the footer
+    3. Footer                — trust strip, safety credentials, grid, bottom bar
+
+  All three sit inside ONE unified dark gradient closing scene
+  (`.closing-scene`) so the color flows seamlessly from CTA → footer.
+-->
+
+<!-- ============================================================
+     SECTION: FOOTER SCENE  (CTA band + terrain illustration + footer)
+     ============================================================ -->
+<div class="closing-scene" data-section="footer-scene">
+
+<!-- 1) Pre-footer CTA Band -->
+<div class="footer__cta-band on-dark" data-nav-invert>
+  <div class="footer__cta-band-inner container--wide">
+    <div class="footer__cta-copy">
+      <span class="footer__cta-eyebrow serif">Let's plan your escape</span>
+      <h2 class="footer__cta-title">Ready for your<br>next adventure?</h2>
+      <p class="footer__cta-sub">Whether you're a school, a company, or a soul craving the wild — we'll build the perfect experience around you.</p>
+    </div>
+    <div class="footer__cta-actions">
+      <form class="footer__cta-form form--on-dark" data-form="cta-quick" novalidate>
+        <div class="field">
+          <label class="field__label" for="cta-name">Full name</label>
+          <input class="input" id="cta-name" name="fullName" type="text" placeholder="Your name" required autocomplete="name">
+          <p class="field__error" role="alert">Please enter your name.</p>
+        </div>
+        <div class="field">
+          <label class="field__label" for="cta-phone">Phone</label>
+          <input class="input" id="cta-phone" name="phone" type="tel" placeholder="+91 " required autocomplete="tel" inputmode="tel">
+          <p class="field__error" role="alert">Please enter your phone number.</p>
+        </div>
+        <div class="field">
+          <label class="field__label" for="cta-email">Email</label>
+          <input class="input" id="cta-email" name="email" type="email" placeholder="you@email.com" required autocomplete="email">
+          <p class="field__error" role="alert">Please enter a valid email.</p>
+        </div>
+        <button class="btn btn--primary footer__cta-submit" type="submit">Plan My Escape →</button>
+        <p class="form-status" data-form-status aria-live="polite"></p>
+      </form>
+      <div class="footer__cta-success success-panel" data-form-success hidden role="status">
+        <div class="success-panel__title">You're on the list</div>
+        <p class="success-panel__body">We'll reach out within 24 hours with dates and the full plan.</p>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Zone 3: Trust Strip -->
+<!-- 2) Mountain terrain transition — bridges CTA to footer -->
+<div class="footer-terrain" aria-hidden="true" data-nav-invert>
+  <img src="assets/Background/bg-image-cliffin-1600.webp" srcset="assets/Background/bg-image-cliffin-1200.webp 1200w, assets/Background/bg-image-cliffin-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async" width="1600" height="640">
+</div>
+
+<!-- 3) Footer -->
+<footer class="footer on-dark" role="contentinfo" data-nav-invert>
+
+  <!-- Trust Strip -->
   <div class="footer__trust">
     <div class="footer__trust-inner container--wide">
       <div class="footer__trust-item">
@@ -43,17 +83,51 @@
       </div>
       <div class="footer__trust-divider" aria-hidden="true"></div>
       <div class="footer__trust-item">
-        <span class="footer__trust-num footer__trust-num--stars">★★★★★</span>
+        <span class="footer__trust-num footer__trust-num--stars" aria-label="5 out of 5 stars">★★★★★</span>
         <span class="footer__trust-label">Top-rated experiences</span>
       </div>
     </div>
   </div>
 
-  <!-- Zone 4: Main Footer Grid -->
+  <!-- Safety Credentials -->
+  <div class="footer__safety" aria-label="Safety credentials">
+    <div class="footer__safety-inner container--wide">
+      <div class="footer__safety-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5v7c0 4.5 3.5 8.5 8 10 4.5-1.5 8-5.5 8-10V5l-8-3Z"/><path d="M9 12l2 2 4-4"/></svg>
+        <div>
+          <div class="footer__safety-title">Wilderness First Aid</div>
+          <div class="footer__safety-sub">Certified guides on every trip</div>
+        </div>
+      </div>
+      <div class="footer__safety-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22c5-2 8-6 8-11V6l-8-3-8 3v5c0 5 3 9 8 11Z"/></svg>
+        <div>
+          <div class="footer__safety-title">Fully Insured</div>
+          <div class="footer__safety-sub">Comprehensive trip &amp; liability cover</div>
+        </div>
+      </div>
+      <div class="footer__safety-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div>
+          <div class="footer__safety-title">Small Group Ratios</div>
+          <div class="footer__safety-sub">Up to 1:8 instructor:participant</div>
+        </div>
+      </div>
+      <div class="footer__safety-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="18" rx="2"/><path d="M9 2h6v4H9z"/><path d="M9 12l2 2 4-4"/><path d="M9 18h6"/></svg>
+        <div>
+          <div class="footer__safety-title">Written Safety Protocol</div>
+          <div class="footer__safety-sub">Gear checks &amp; briefings on every activity</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Footer Grid -->
   <div class="footer__grid container--wide">
 
     <div class="footer__brand">
-      <img class="footer__brand-logo" src="assets/Logo/C-A White (1).png" alt="Cliff-Inn Adventures" height="112">
+      <img class="footer__brand-logo" src="assets/Logo/c-a-white-260.webp" srcset="assets/Logo/c-a-white-180.webp 180w, assets/Logo/c-a-white-260.webp 260w, assets/Logo/c-a-white-360.webp 360w" sizes="112px" alt="Cliff-Inn Adventures" width="112" height="112" decoding="async">
       <p class="footer__brand-desc">We craft outdoor experiences for schools and corporates — camps, workshops and team-building that build confidence, leadership and lasting bonds.</p>
       <div class="footer__socials" aria-label="Follow us on social media">
         <a class="footer__social" href="https://instagram.com/cliffinnadventures" aria-label="Instagram" rel="noopener noreferrer" target="_blank">
@@ -117,7 +191,7 @@
 
   </div>
 
-  <!-- Zone 5: Bottom Bar -->
+  <!-- Bottom Bar -->
   <div class="footer__bar">
     <div class="footer__bar-inner container--wide">
       <span>© 2020–2026 Cliff-Inn Adventures. All rights reserved.</span>
@@ -131,3 +205,6 @@
   </div>
 
 </footer>
+
+</div>
+<!-- /closing-scene — END FOOTER SCENE -->

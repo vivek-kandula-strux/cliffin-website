@@ -90,17 +90,13 @@
 
 <main id="main" class="site">
 
-  <section class="hero-banner" data-hero aria-labelledby="hero-title">
+  <section class="hero-banner hero-banner--workshops" data-hero aria-labelledby="hero-title">
     <div class="hero-banner__media" data-hero-media>
-      <img src="assets/images/cliffinnadventures/hero/camping-amidst-fog.webp" alt="Wide adventure shot from a coastal camp" loading="eager" fetchpriority="high" width="1920" height="1266">
+      <img src="assets/Background/adventure-workshops-hero-cliffin.png" alt="Illustration of climbers, hikers, cyclists, campers, ziplining and paragliding across a mountain landscape" loading="eager" fetchpriority="high" width="1920" height="785">
     </div>
-    <div class="hero-banner__scrim"></div>
     <div class="hero-banner__inner">
       <span class="eyebrow" data-hero-eyebrow><span></span>Moments from the trail</span>
       <h1 class="hero-banner__title" id="hero-title" data-hero-title>Gallery</h1>
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="index.html">Home</a> &nbsp;/&nbsp; Gallery
-      </nav>
     </div>
   </section>
 
@@ -237,32 +233,132 @@
 
 </main>
 
+<!-- ============================================================
+     SECTION: FOOTER SCENE  (CTA band + terrain illustration + footer)
+     Source of truth: partials/footer.html
+     ============================================================ -->
 <!-- BEGIN partials/footer.html -->
-<footer class="footer" role="contentinfo">
-  <div class="footer__top container--wide">
-    <div class="footer__lead">
-      <span class="serif" style="font-size: 24px; color: oklch(0.78 0.13 55); line-height: 1;">Let's plan your escape</span>
-      <h2 class="footer__lead-title">Ready for your next adventure?</h2>
+<div class="closing-scene" data-section="footer-scene">
+
+<!-- 1) Pre-footer CTA Band -->
+<div class="footer__cta-band on-dark" data-nav-invert>
+  <div class="footer__cta-band-inner container--wide">
+    <div class="footer__cta-copy">
+      <span class="footer__cta-eyebrow serif">Let's plan your escape</span>
+      <h2 class="footer__cta-title">Ready for your<br>next adventure?</h2>
+      <p class="footer__cta-sub">Whether you're a school, a company, or a soul craving the wild — we'll build the perfect experience around you.</p>
     </div>
-    <form class="footer__cta-row" data-newsletter-form aria-label="Quick enquiry">
-      <label class="visually-hidden" for="footer-email">Your email address</label>
-      <input class="input" id="footer-email" name="email" type="email" placeholder="Enter your email" autocomplete="email" required>
-      <a class="btn btn--primary" href="contact.html">Enquire →</a>
-    </form>
+    <div class="footer__cta-actions">
+      <form class="footer__cta-form form--on-dark" data-form="cta-quick" novalidate>
+        <div class="field">
+          <label class="field__label" for="cta-name">Full name</label>
+          <input class="input" id="cta-name" name="fullName" type="text" placeholder="Your name" required autocomplete="name">
+          <p class="field__error" role="alert">Please enter your name.</p>
+        </div>
+        <div class="field">
+          <label class="field__label" for="cta-phone">Phone</label>
+          <input class="input" id="cta-phone" name="phone" type="tel" placeholder="+91 " required autocomplete="tel" inputmode="tel">
+          <p class="field__error" role="alert">Please enter your phone number.</p>
+        </div>
+        <div class="field">
+          <label class="field__label" for="cta-email">Email</label>
+          <input class="input" id="cta-email" name="email" type="email" placeholder="you@email.com" required autocomplete="email">
+          <p class="field__error" role="alert">Please enter a valid email.</p>
+        </div>
+        <button class="btn btn--primary footer__cta-submit" type="submit">Plan My Escape →</button>
+        <p class="form-status" data-form-status aria-live="polite"></p>
+      </form>
+      <div class="footer__cta-success success-panel" data-form-success hidden role="status">
+        <div class="success-panel__title">You're on the list</div>
+        <p class="success-panel__body">We'll reach out within 24 hours with dates and the full plan.</p>
+      </div>
+    </div>
   </div>
-  <div class="footer__grid container--wide">
-    <div class="footer__brand">
-      <div class="footer__brand-row">
-        <img class="footer__brand-logo" src="assets/Logo/c-a-white-260.webp" srcset="assets/Logo/c-a-white-180.webp 180w, assets/Logo/c-a-white-260.webp 260w, assets/Logo/c-a-white-360.webp 360w" sizes="125px" alt="Cliff-Inn Adventures" width="125" height="125" decoding="async">
+</div>
+
+<!-- 2) Mountain terrain transition — bridges CTA to footer -->
+<div class="footer-terrain" aria-hidden="true" data-nav-invert>
+  <img src="assets/Background/bg-image-cliffin-1600.webp" srcset="assets/Background/bg-image-cliffin-1200.webp 1200w, assets/Background/bg-image-cliffin-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async" width="1600" height="640">
+</div>
+
+<!-- 3) Footer -->
+<footer class="footer on-dark" role="contentinfo" data-nav-invert>
+
+  <!-- Trust Strip -->
+  <div class="footer__trust">
+    <div class="footer__trust-inner container--wide">
+      <div class="footer__trust-item">
+        <span class="footer__trust-num">8<span class="footer__trust-sup">+</span></span>
+        <span class="footer__trust-label">Years guiding in the wild</span>
       </div>
-      <p class="footer__brand-desc">We craft outdoor experiences for schools and corporates — camps, workshops and team-building that build confidence, leadership and lasting bonds.</p>
-      <div class="footer__socials" aria-label="Social links">
-        <a class="footer__social" href="https://instagram.com/cliffinnadventures" aria-label="Instagram" rel="noopener noreferrer" target="_blank">IG</a>
-        <a class="footer__social" href="#" aria-label="YouTube" rel="noopener noreferrer">YT</a>
-        <a class="footer__social" href="#" aria-label="Facebook" rel="noopener noreferrer">FB</a>
-        <a class="footer__social" href="#" aria-label="LinkedIn" rel="noopener noreferrer">IN</a>
+      <div class="footer__trust-divider" aria-hidden="true"></div>
+      <div class="footer__trust-item">
+        <span class="footer__trust-num">120<span class="footer__trust-sup">+</span></span>
+        <span class="footer__trust-label">Schools &amp; corporates</span>
+      </div>
+      <div class="footer__trust-divider" aria-hidden="true"></div>
+      <div class="footer__trust-item">
+        <span class="footer__trust-num">5k<span class="footer__trust-sup">+</span></span>
+        <span class="footer__trust-label">Explorers guided</span>
+      </div>
+      <div class="footer__trust-divider" aria-hidden="true"></div>
+      <div class="footer__trust-item">
+        <span class="footer__trust-num footer__trust-num--stars" aria-label="5 out of 5 stars">★★★★★</span>
+        <span class="footer__trust-label">Top-rated experiences</span>
       </div>
     </div>
+  </div>
+
+  <!-- Safety Credentials -->
+  <div class="footer__safety" aria-label="Safety credentials">
+    <div class="footer__safety-inner container--wide">
+      <div class="footer__safety-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5v7c0 4.5 3.5 8.5 8 10 4.5-1.5 8-5.5 8-10V5l-8-3Z"/><path d="M9 12l2 2 4-4"/></svg>
+        <div>
+          <div class="footer__safety-title">Wilderness First Aid</div>
+          <div class="footer__safety-sub">Certified guides on every trip</div>
+        </div>
+      </div>
+      <div class="footer__safety-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22c5-2 8-6 8-11V6l-8-3-8 3v5c0 5 3 9 8 11Z"/></svg>
+        <div>
+          <div class="footer__safety-title">Fully Insured</div>
+          <div class="footer__safety-sub">Comprehensive trip &amp; liability cover</div>
+        </div>
+      </div>
+      <div class="footer__safety-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div>
+          <div class="footer__safety-title">Small Group Ratios</div>
+          <div class="footer__safety-sub">Up to 1:8 instructor:participant</div>
+        </div>
+      </div>
+      <div class="footer__safety-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="18" rx="2"/><path d="M9 2h6v4H9z"/><path d="M9 12l2 2 4-4"/><path d="M9 18h6"/></svg>
+        <div>
+          <div class="footer__safety-title">Written Safety Protocol</div>
+          <div class="footer__safety-sub">Gear checks &amp; briefings on every activity</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Footer Grid -->
+  <div class="footer__grid container--wide">
+
+    <div class="footer__brand">
+      <img class="footer__brand-logo" src="assets/Logo/c-a-white-260.webp" srcset="assets/Logo/c-a-white-180.webp 180w, assets/Logo/c-a-white-260.webp 260w, assets/Logo/c-a-white-360.webp 360w" sizes="112px" alt="Cliff-Inn Adventures" width="112" height="112" decoding="async">
+      <p class="footer__brand-desc">We craft outdoor experiences for schools and corporates — camps, workshops and team-building that build confidence, leadership and lasting bonds.</p>
+      <div class="footer__socials" aria-label="Follow us on social media">
+        <a class="footer__social" href="https://instagram.com/cliffinnadventures" aria-label="Instagram" rel="noopener noreferrer" target="_blank">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a class="footer__social" href="https://wa.me/919573199863" aria-label="WhatsApp" rel="noopener noreferrer" target="_blank">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.533 5.85L.057 23.527a.5.5 0 0 0 .615.606l5.88-1.543A11.942 11.942 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.021-1.378l-.36-.214-3.733.979.998-3.648-.235-.374A9.818 9.818 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        </a>
+      </div>
+    </div>
+
     <nav aria-label="Explore">
       <h3 class="footer__heading">Explore</h3>
       <ul class="footer__list" role="list">
@@ -273,25 +369,49 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
+
     <nav aria-label="Programs">
       <h3 class="footer__heading">Programs</h3>
       <ul class="footer__list" role="list">
         <li><a href="school-programs.html">School Programs</a></li>
         <li><a href="adventure-workshops.html">Adventure Workshops</a></li>
-        <li><a href="corporate-packages.html">Corporate &amp; Group Packages</a></li>
+        <li><a href="corporate-packages.html">Corporate &amp; Groups</a></li>
         <li><a href="corporate-packages.html">Night Camping</a></li>
         <li><a href="school-programs.html">School Boot Camps</a></li>
       </ul>
     </nav>
-    <div>
+
+    <address class="footer__contact">
       <h3 class="footer__heading">Get In Touch</h3>
-      <ul class="footer__list" role="list">
-        <li class="footer__contact-item"><span class="footer__contact-key">Call us</span><a href="tel:+919573199863">+91 95731 99863</a><br><a href="tel:+919010739847">+91 90107 39847</a></li>
-        <li class="footer__contact-item"><span class="footer__contact-key">Mail us</span><a href="mailto:cliffinnadventures@gmail.com">cliffinnadventures@gmail.com</a></li>
-        <li class="footer__contact-item"><span class="footer__contact-key">Find us</span><a href="https://instagram.com/cliffinnadventures" rel="noopener noreferrer" target="_blank">@cliffinnadventures on Instagram</a></li>
+      <ul class="footer__list footer__list--contact" role="list">
+        <li class="footer__contact-item">
+          <span class="footer__contact-key">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.49 12 19.79 19.79 0 0 1 1.42 3.18 2 2 0 0 1 3.42 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.4a16 16 0 0 0 7.74 7.74l.79-.79a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Call us
+          </span>
+          <a href="tel:+919573199863"><span class="footer__contact-tag">Primary</span>+91 95731 99863</a>
+          <a href="tel:+919010739847"><span class="footer__contact-tag">Alt</span>+91 90107 39847</a>
+        </li>
+        <li class="footer__contact-item">
+          <span class="footer__contact-key">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Mail us
+          </span>
+          <a href="mailto:cliffinnadventures@gmail.com">cliffinnadventures@gmail.com</a>
+        </li>
+        <li class="footer__contact-item">
+          <span class="footer__contact-key">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.533 5.85L.057 23.527a.5.5 0 0 0 .615.606l5.88-1.543A11.942 11.942 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.021-1.378l-.36-.214-3.733.979.998-3.648-.235-.374A9.818 9.818 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            WhatsApp
+          </span>
+          <a href="https://wa.me/919573199863" target="_blank" rel="noopener noreferrer">+91 95731 99863</a>
+        </li>
       </ul>
-    </div>
+    </address>
+
   </div>
+
+  <!-- Bottom Bar -->
   <div class="footer__bar">
     <div class="footer__bar-inner container--wide">
       <span>© 2020–2026 Cliff-Inn Adventures. All rights reserved.</span>
@@ -303,8 +423,12 @@
       </div>
     </div>
   </div>
+
 </footer>
+
+</div>
 <!-- END partials/footer.html -->
+
 
 <!-- WHATSAPP FLOAT -->
 <a class="wa-float" href="https://wa.me/919573199863" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">

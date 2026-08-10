@@ -35,6 +35,17 @@
   padding-bottom: clamp(4rem, 8vw, 6.5rem);
 }
 
+/* Dark section — full-width continuation of a dark hero backdrop.
+   The container class constrains content width, so a clipped spread shadow
+   paints the band to the viewport edges without changing the DOM. */
+.section--dark {
+  background: #122219;
+  --color-text: var(--color-ink-on-dark);
+  --color-text-muted: var(--color-body-on-dark);
+  box-shadow: 0 0 0 100vmax #122219;
+  clip-path: inset(0 -100vmax);
+}
+
 /* Cinematic story-flow — a whisper of warm mist bleeds up from the previous
    section so blocks read as chapters of one continuous narrative, not
    stacked slabs. Pointer-transparent so it never gets in the way.
