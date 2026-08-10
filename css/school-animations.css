@@ -4,21 +4,18 @@
 
    What the global stack already provides (no duplication here):
      • [data-animate] batch stagger    — animations/index.js
-     • .card 3-D tilt + specular       — micro.js initCardTilt
      • .btn ripple                     — micro.js initButtonRipple
-     • [data-magnetic] pull            — interactions.js
-     • Hero mouse parallax             — interactions.js (data-hero-parallax)
-     • Custom cursor                   — micro.js (#cursor-dot / #cursor-ring)
-     • Scroll-progress bar             — interactions.js ([data-scroll-progress])
      • Counter up                      — micro.js ([data-count])
      • Nav underline draw              — components.css (.nav__link::after)
      • Eyebrow dot pop                 — animations.css (.eyebrow span)
      • .btn overflow + .btn-ripple     — animations.css
+
+   Scroll/pointer-heavy effects (3-D tilt, custom cursor, hero mouse parallax,
+   magnetic buttons, scroll progress, scroll parallax) have been removed to
+   keep scrolling native and the main thread free.
    ============================================================ */
 
-/* ── Card images: zoom on hover (card 3-D tilt is on the .card
-   element via GSAP inline transform; image uses CSS `scale`
-   property which composes without conflict)                 ─── */
+/* ── Card images: zoom on hover (image uses CSS `scale` property) ─── */
 .card__media { overflow: hidden; }
 
 .card__media img {
@@ -30,9 +27,7 @@
   .card:hover .card__media img { scale: 1.07; }
 }
 
-/* ── Media-frame image: zoom on hover (GSAP yPercent parallax
-   uses `transform`; this uses the CSS `scale` property so they
-   coexist and compose correctly)                            ─── */
+/* ── Media-frame image: zoom on hover (uses CSS `scale` property) ─── */
 .media-frame { overflow: hidden; }
 
 .media-frame img {

@@ -25,8 +25,6 @@
 </head>
 <body class="home">
 
-<div data-scroll-progress aria-hidden="true"></div>
-
 <!-- BEGIN partials/nav.html -->
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="header" id="site-header" data-menu-open="false" data-scrolled="false">
@@ -181,7 +179,7 @@
     </div>
   </section>
 
-  <!-- SECTION SEPARATOR: sticky-pinned parallax scene bridges What We Do → Upcoming Expeditions -->
+  <!-- SECTION SEPARATOR: static image band bridges What We Do → Upcoming Expeditions -->
   <div class="parallax-scene parallax-scene--separator" aria-hidden="true" data-parallax-scene>
     <div class="parallax-scene__sticky">
       <div class="parallax-scene__layer parallax-scene__layer--base">
@@ -477,10 +475,14 @@
 
 </main>
 
-<!-- Closing scene: one unified gradient spans the CTA, illustration, and footer -->
-<div class="closing-scene">
+<!-- ============================================================
+     SECTION: FOOTER SCENE  (CTA band + terrain illustration + footer)
+     Source of truth: partials/footer.html
+     ============================================================ -->
+<!-- BEGIN partials/footer.html -->
+<div class="closing-scene" data-section="footer-scene">
 
-<!-- Pre-footer CTA Band -->
+<!-- 1) Pre-footer CTA Band -->
 <div class="footer__cta-band on-dark" data-nav-invert>
   <div class="footer__cta-band-inner container--wide">
     <div class="footer__cta-copy">
@@ -516,15 +518,15 @@
   </div>
 </div>
 
-<!-- Mountain terrain transition — bridges CTA to footer -->
+<!-- 2) Mountain terrain transition — bridges CTA to footer -->
 <div class="footer-terrain" aria-hidden="true" data-nav-invert>
   <img src="assets/Background/bg-image-cliffin-1600.webp" srcset="assets/Background/bg-image-cliffin-1200.webp 1200w, assets/Background/bg-image-cliffin-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async" width="1600" height="640">
 </div>
 
-<!-- BEGIN partials/footer.html -->
+<!-- 3) Footer -->
 <footer class="footer on-dark" role="contentinfo" data-nav-invert>
 
-  <!-- Zone 3: Trust Strip -->
+  <!-- Trust Strip -->
   <div class="footer__trust">
     <div class="footer__trust-inner container--wide">
       <div class="footer__trust-item">
@@ -549,7 +551,7 @@
     </div>
   </div>
 
-  <!-- Zone 3b: Safety Credentials — TODO: swap copy for actual certifications/insurer name -->
+  <!-- Safety Credentials -->
   <div class="footer__safety" aria-label="Safety credentials">
     <div class="footer__safety-inner container--wide">
       <div class="footer__safety-item">
@@ -583,7 +585,7 @@
     </div>
   </div>
 
-  <!-- Zone 4: Main Footer Grid -->
+  <!-- Main Footer Grid -->
   <div class="footer__grid container--wide">
 
     <div class="footer__brand">
@@ -651,7 +653,7 @@
 
   </div>
 
-  <!-- Zone 5: Bottom Bar -->
+  <!-- Bottom Bar -->
   <div class="footer__bar">
     <div class="footer__bar-inner container--wide">
       <span>© 2020–2026 Cliff-Inn Adventures. All rights reserved.</span>
@@ -665,10 +667,10 @@
   </div>
 
 </footer>
-<!-- END partials/footer.html -->
 
 </div>
-<!-- /closing-scene -->
+<!-- END partials/footer.html -->
+
 
 <!-- TRIP INTEREST MODAL -->
 <div id="trip-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
@@ -766,10 +768,6 @@
   </div>
 </div>
 <!-- END MODAL -->
-
-<!-- Custom cursor — rendered by micro.js on fine-pointer devices -->
-<div id="cursor-dot"  aria-hidden="true"></div>
-<div id="cursor-ring" aria-hidden="true"></div>
 
 <!-- WHATSAPP FLOAT -->
 <a class="wa-float" href="https://wa.me/919573199863" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">

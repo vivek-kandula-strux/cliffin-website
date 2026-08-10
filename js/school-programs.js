@@ -5,20 +5,17 @@
  * The global animations/index.js already wires these on every page:
  *   • Hero entrance timeline      data-hero-* attributes
  *   • [data-animate] batch        staggered scroll reveals
- *   • .card 3-D tilt + specular   micro.js — initCardTilt
  *   • .btn click ripple           micro.js — initButtonRipple
- *   • Hero mouse parallax         interactions.js — data-hero-parallax on img
- *   • [data-magnetic] pull        interactions.js — initMagneticButtons
- *   • Custom cursor               micro.js — #cursor-dot + #cursor-ring in DOM
- *   • Scroll-progress bar         interactions.js — [data-scroll-progress] in DOM
  *   • Counter animations          micro.js — [data-count="N"] on stat elements
+ *
+ * Scroll/pointer-heavy effects (3-D tilt, custom cursor, hero mouse parallax,
+ * magnetic buttons, scroll progress, scroll parallax) have been removed to
+ * keep scrolling native and the main thread free.
  *
  * This module adds:
  *   1. Chip cascade — staggered entrance for .chip-tile elements
  *      (fires just as the parent dark-panel finishes fading in)
- *   2. Media-frame scroll parallax — subtle yPercent scrub on
- *      the split-section image as it moves through the viewport
- *   3. Stat strip counters — .stat-strip__num elements count
+ *   2. Stat strip counters — .stat-strip__num elements count
  *      from 0 to their data-count value on first scroll-in
  */
 
@@ -136,38 +133,7 @@
     });
   }
 
-  /* ── 2. MEDIA-FRAME SCROLL PARALLAX ──────────────────────────
-     The image drifts from -7% to +7% on its Y axis while the
-     split section moves through the viewport. CSS hover uses
-     the `scale` CSS property (separate from `transform`), so
-     the two effects compose without fighting each other.
-
-     Mobile skipped — matches the guard on the shared
-     initScrollParallax / initCardMediaParallax utilities in
-     micro.js. Native touch scroll + scrub reads jerky, and the
-     ±7% translate is barely perceptible at phone widths.
-  ─────────────────────────────────────────────────────────────── */
-  const mediaImg = document.querySelector('.feature-split .media-frame img');
-  const isMobileVP = window.matchMedia('(max-width: 767px)').matches;
-  if (mediaImg && !isMobileVP) {
-    gsap.fromTo(
-      mediaImg,
-      { yPercent: -7 },
-      {
-        yPercent : 7,
-        ease     : 'none',
-        scrollTrigger: {
-          trigger            : '.feature-split .media-frame',
-          start              : 'top bottom',
-          end                : 'bottom top',
-          scrub              : 1.5,
-          invalidateOnRefresh: true,
-        },
-      }
-    );
-  }
-
-  /* ── 3. STAT STRIP COUNTERS ──────────────────────────────────
+  /* ── 2. STAT STRIP COUNTERS ─────────────────────────────────
      Resets each number to 0 immediately (real value stays in
      data-count as the no-JS fallback), then counts up to target
      with a staggered delay and power3.out ease on scroll-in.

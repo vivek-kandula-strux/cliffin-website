@@ -276,26 +276,17 @@
 }
 
 .header[data-scrolled='true'] {
-  background: oklch(0.97 0.012 88 / 0.82);
-  /* Blur reduced 24 -> 12 (source pixels behind sticky header change every
-     scroll frame, so the blur is redone every frame; blur cost is roughly
-     O(radius^2) on integrated GPUs). 12px still reads as a clear glass
-     effect against the near-opaque background layer above. */
-  backdrop-filter: blur(12px) saturate(1.4);
-  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  /* Backdrop-filter removed: blur recomputes every scroll frame when pixels
+     behind the sticky header change, which was a major source of scroll jank.
+     A near-opaque solid background keeps the header readable without GPU cost. */
+  background: oklch(0.97 0.012 88 / 0.95);
   border-bottom-color: var(--color-border);
   box-shadow: 0 1px 0 oklch(0.9 0.012 80 / 0.4), 0 8px 28px oklch(0.22 0.03 158 / 0.05);
 }
 
 /* Adaptive dark-theme: nav flips when a [data-nav-invert] section scrolls behind it */
 .header[data-theme='dark'] {
-  background: oklch(0.18 0.03 158 / 0.82);
-  /* Same reasoning as the light state — 28 -> 14. The dark state runs over
-     hero/parallax images that are being GSAP-scrubbed, so the source pixels
-     under the blur change continuously; keeping the radius small matters
-     more here than in the light state. */
-  backdrop-filter: blur(14px) saturate(1.2);
-  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  background: oklch(0.18 0.03 158 / 0.95);
   border-bottom-color: oklch(1 0 0 / 0.08);
   box-shadow: 0 8px 28px oklch(0 0 0 / 0.18);
 }
@@ -2804,16 +2795,10 @@ a.tile--image-flat:focus-visible img {
   color: oklch(0.86 0.02 88 / 0.88);
 }
 
-/* Hero media — parallax-ready image container with a floating glass
-   "trust" chip that peeks out over the bottom-left corner. Gives the
-   composition depth and a premium editorial signal. */
+/* Hero media — image container with a floating glass "trust" chip that
+   peeks out over the bottom-left corner. */
 .hero-media {
   position: relative;
-}
-
-.hero-media img[data-hero-parallax] {
-  transition: transform var(--duration-slow) var(--ease-emphasized);
-  will-change: transform;
 }
 
 .hero-media__badge {

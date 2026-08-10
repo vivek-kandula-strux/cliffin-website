@@ -1,6 +1,5 @@
 import { qsa, prefersReducedMotion } from '../utils/dom.js';
 import { config } from '../config.js';
-import { initSmoothScroll } from './smooth-scroll.js';
 import { initInteractions } from './interactions.js';
 import { initMicro } from './micro.js';
 
@@ -48,15 +47,10 @@ export async function initAnimations() {
   clearTimeout(heroSafety);
   markHeroReady();
 
-  // Wire Lenis (smooth scroll) into ScrollTrigger BEFORE the timelines start
-  // so trigger positions calculate against the smoothed scroll on first frame.
-  // Fires-and-forgets: any Lenis load failure is non-fatal.
-  initSmoothScroll({ ScrollTrigger });
-
-  // Non-blocking micro-interactions (hero parallax, magnetic buttons, scroll bar).
+  // Non-blocking micro-interactions (button ripple, play pulse).
   initInteractions();
 
-  // Premium micro-interactions — counters, tilt, cursor, scramble, parallax, etc.
+  // Premium micro-interactions — counters, scramble, icon bounce.
   initMicro(gsap, ScrollTrigger);
 
   gsap.defaults({ duration: 0.8, ease: 'power3.out' });
