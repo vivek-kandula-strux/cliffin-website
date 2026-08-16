@@ -63,7 +63,12 @@
     scroll-behavior: auto !important;
   }
 
-  .js [data-animate] {
+  .js [data-animate],
+  .js [data-hero-eyebrow],
+  .js [data-hero-title],
+  .js [data-hero-description],
+  .js [data-hero-actions],
+  .js [data-hero-media] {
     opacity: 1;
     transform: none;
     will-change: auto;
@@ -82,33 +87,34 @@
     outline-color var(--duration-fast) var(--ease-standard);
 }
 
-/* View Transition API — cross-page fade (progressive enhancement) */
+/* View Transition API — branded ember-tinted page shift */
 @view-transition {
   navigation: auto;
 }
 
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+  animation-timing-function: cubic-bezier(0.16, 0.9, 0.3, 1);
 }
 
 ::view-transition-old(root) {
   animation-name: viewfade-out;
-  /* Exit shorter than enter feels responsive (Material motion guidance) */
-  animation-duration: 220ms;
+  animation-duration: 240ms;
 }
 
 ::view-transition-new(root) {
   animation-name: viewfade-in;
-  animation-duration: 340ms;
+  animation-duration: 400ms;
 }
 
 @keyframes viewfade-out {
-  to { opacity: 0; transform: translateY(-6px); }
+  from { opacity: 1; transform: translateY(0) scale(1); filter: brightness(1); }
+  to   { opacity: 0; transform: translateY(-24px) scale(0.98); filter: brightness(0.85); }
 }
 
 @keyframes viewfade-in {
-  from { opacity: 0; transform: translateY(6px); }
+  from { opacity: 0; transform: translateY(24px) scale(1.02); filter: brightness(1.1) sepia(0.12) saturate(1.05); }
+  to   { opacity: 1; transform: translateY(0) scale(1); filter: brightness(1) sepia(0) saturate(1); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -133,53 +139,6 @@
   z-index: calc(var(--z-nav) + 5);
   pointer-events: none;
   will-change: transform;
-}
-
-/* ── Custom cursor ───────────────────────────────────────── */
-/* Hide native cursor when JS has added .custom-cursor */
-.custom-cursor,
-.custom-cursor * {
-  cursor: none !important;
-}
-
-#cursor-dot {
-  position: fixed;
-  /* Offset by half size so transform origin is cursor hotspot */
-  top: -4px;
-  left: -4px;
-  width: 8px;
-  height: 8px;
-  background: var(--color-ember);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  will-change: transform;
-  transition: opacity 0.3s;
-  /* Starts off-screen; JS overrides via inline transform */
-}
-
-#cursor-ring {
-  position: fixed;
-  top: -20px;
-  left: -20px;
-  width: 40px;
-  height: 40px;
-  border: 1.5px solid oklch(0.23 0.03 158 / 0.3);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  will-change: transform;
-  /* Only scale and border-color use transitions;
-     position is driven by JS every frame (no transition needed). */
-  transition:
-    scale 0.28s var(--ease-emphasized),
-    border-color 0.22s var(--ease-standard),
-    opacity 0.3s;
-}
-
-#cursor-ring.is-hover {
-  scale: 1.55;
-  border-color: var(--color-ember);
 }
 
 /* ── Button ripple ───────────────────────────────────────── */
@@ -249,9 +208,3 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Custom cursor removed — hide the placeholder elements so they never
-   sit visible at 0,0 if JS doesn't activate them. */
-#cursor-dot,
-#cursor-ring {
-  display: none;
-}

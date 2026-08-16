@@ -6,8 +6,7 @@ import { qs, qsa, on } from '../utils/dom.js';
  * - Sets aria-current="page" on the link matching the current page
  * - Toggles the mobile panel on burger click with aria-expanded
  * - Closes on Escape, on outside click, and after any nav link click
- * - Traps nothing (menu is a section beneath the header, not a modal),
- *   but restores focus to the trigger after closing
+ * - Traps focus while the menu is open
  * - Locks body scroll while the menu is open to prevent background scrolling
  */
 export function initNavigation() {
@@ -20,6 +19,7 @@ export function initNavigation() {
   markActiveLink();
 
   let previouslyOpen = false;
+  let focusTrapHandler = null;
 
   const setOpen = (open) => {
     // Mirror the open state onto BOTH the header (kept for backwards compat)
@@ -33,8 +33,14 @@ export function initNavigation() {
 
     if (open) {
       document.body.style.overflow = 'hidden';
+      focusTrapHandler = createFocusTrap(panel);
+      document.addEventListener('keydown', focusTrapHandler);
     } else {
       document.body.style.overflow = '';
+      if (focusTrapHandler) {
+        document.removeEventListener('keydown', focusTrapHandler);
+        focusTrapHandler = null;
+      }
       if (previouslyOpen) toggle.focus();
     }
     previouslyOpen = open;
@@ -128,4 +134,39 @@ function pageKeyFromPath(path) {
     'contact.html': 'contact',
   };
   return map[path] || null;
+}
+
+function createFocusTrap(root) {
+  const focusableSelector =
+    'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+  return function trap(event) {
+    if (event.key !== 'Tab') return;
+
+    const focusable = Array.from(root.querySelectorAll(focusableSelector)).filter(
+      (el) => !el.closest('[hidden]') && getComputedStyle(el).display !== 'none'
+    );
+
+    if (focusable.length === 0) {
+      event.preventDefault();
+      return;
+    }
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (focusable.length === 1) {
+      event.preventDefault();
+      first.focus();
+      return;
+    }
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  };
 }

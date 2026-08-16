@@ -2,11 +2,10 @@
  * Premium micro-interactions — vanilla GSAP, scroll-safe subset.
  *
  * Catalogue:
- *   1. initCounters          — hero stats count up on scroll-enter
- *   2. initTextScramble      — "freedom" word resolves from random chars post-hero
- *   3. initButtonRipple      — material-style click ripple on all .btn elements
- *   4. initPlayPulse         — repeating emanation rings on the video play button
- *   5. initIconBounce        — .icon-chip pops in with back.out spring on scroll
+ *   1. initCounters          — stats count up on scroll-enter
+ *   2. initButtonRipple      — material-style click ripple on all .btn elements
+ *   3. initPlayPulse         — repeating emanation rings on the video play button
+ *   4. initIconBounce        — .icon-chip pops in with back.out spring on scroll
  *
  * Removed to keep scrolling native and the main thread free:
  *   • custom cursor, 3-D card tilt, image hover pan
@@ -26,7 +25,6 @@ export function initMicro(gsap, ScrollTrigger) {
 
   initCounters(gsap, ScrollTrigger);
   initIconBounce(gsap, ScrollTrigger);
-  initTextScramble(gsap);
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -68,40 +66,7 @@ function initCounters(gsap, ScrollTrigger) {
 }
 
 /* ─────────────────────────────────────────────────────────────
-   2. TEXT SCRAMBLE
-   [data-scramble] resolves from random chars to its real text.
-   Fires ~1.9 s after load — after hero copy has landed.
-───────────────────────────────────────────────────────────── */
-function initTextScramble(gsap) {
-  const el = qs('[data-scramble]');
-  if (!el) return;
-
-  const original = el.textContent;
-  const POOL     = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjklmnpqrstuvwxyz023456789!#@';
-  const FRAMES   = 22;
-  let   frame    = 0;
-
-  gsap.delayedCall(1.95, () => {
-    const id = setInterval(() => {
-      el.textContent = original
-        .split('')
-        .map((ch, i) =>
-          i < (frame / FRAMES) * original.length
-            ? original[i]
-            : POOL[Math.floor(Math.random() * POOL.length)]
-        )
-        .join('');
-
-      if (++frame > FRAMES) {
-        el.textContent = original;
-        clearInterval(id);
-      }
-    }, 42);
-  });
-}
-
-/* ─────────────────────────────────────────────────────────────
-   3. BUTTON RIPPLE
+   2. BUTTON RIPPLE
    pointerdown on any .btn spawns a span that expands outward
    via CSS animation, then removes itself on animationend.
 ───────────────────────────────────────────────────────────── */
@@ -115,21 +80,19 @@ function initButtonRipple() {
       ripple.style.top  = `${e.clientY - r.top}px`;
       btn.appendChild(ripple);
       ripple.addEventListener('animationend', () => ripple.remove(), { once: true });
+      setTimeout(() => ripple.remove(), 800);
     });
   });
 }
 
 /* ─────────────────────────────────────────────────────────────
-   4. PLAY-BUTTON PULSE
+   3. PLAY-BUTTON PULSE
    Two GSAP loops staggered by 0.9 s create the double-ring
    sonar pulse around the video play button.
 ───────────────────────────────────────────────────────────── */
 function initPlayPulse(gsap) {
   const play = qs('.play-btn');
   if (!play) return;
-
-  // Ensure overflow is visible so rings can expand outside the button
-  play.style.overflow = 'visible';
 
   [0, 0.9].forEach(delay => {
     const ring = document.createElement('span');
@@ -145,7 +108,7 @@ function initPlayPulse(gsap) {
 }
 
 /* ─────────────────────────────────────────────────────────────
-   5. ICON CHIP BOUNCE
+   4. ICON CHIP BOUNCE
    Each .icon-chip pops in with a back.out spring after its
    parent feature enters the viewport. Delay of 0.28 s lets
    the parent fade settle before the chip announces itself.

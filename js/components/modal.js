@@ -1,4 +1,4 @@
-import { config } from '../config.js';
+import { qs, qsa, on } from '../utils/dom.js';
 
 const TRIPS = {
   'Himalayan High Trek': {
@@ -57,27 +57,46 @@ const TRIPS = {
   },
 };
 
+const GENERAL_ENQUIRY = {
+  img: 'assets/images/cliffinnadventures/hero/cliffside-panorama.webp',
+  alt: 'Dramatic coastal cliffs rising above the sea at golden light',
+  date: 'Year-round',
+  spots: 'Small groups',
+  location: 'India',
+  duration: 'Tailored',
+  difficulty: 'All levels',
+  price: 'Custom',
+  desc: "Tell us your group, dates and goals — we'll craft a fully-guided adventure around you. No payment now; our team calls within 24 hours.",
+  includes: [
+    'Dedicated trip designer',
+    'Certified guides',
+    'Safety gear & permits',
+    'Custom itinerary',
+    'Flexible dates',
+  ],
+};
+
 export function initModal() {
   const modal = document.getElementById('trip-modal');
   if (!modal) return;
 
-  const backdrop  = modal.querySelector('.modal__backdrop');
-  const closeBtn  = modal.querySelector('.modal__close');
+  const backdrop = modal.querySelector('.modal__backdrop');
+  const closeBtn = modal.querySelector('.modal__close');
   const container = modal.querySelector('.modal__container');
-  const form      = modal.querySelector('[data-modal-form]');
-  const formStatus = form?.querySelector('[data-modal-form-status]');
-  const successPanel = modal.querySelector('[data-modal-success]');
+  const form = modal.querySelector('[data-form="modal-interest"]');
+  const title = modal.querySelector('#modal-title');
 
   let lastFocused = null;
+  let focusTrapHandler = null;
 
   // ---- Open ----
   function openModal(tripName, triggerEl) {
-    const trip = TRIPS[tripName];
+    const trip = tripName === 'General enquiry' ? GENERAL_ENQUIRY : TRIPS[tripName];
     if (!trip) return;
 
     lastFocused = triggerEl || document.activeElement;
 
-    resetForm(tripName);
+    resetForm();
     populate(trip, tripName);
 
     modal.removeAttribute('hidden');
@@ -88,7 +107,10 @@ export function initModal() {
     void container.offsetWidth;
     container.setAttribute('data-entering', '');
 
-    requestAnimationFrame(() => closeBtn.focus());
+    focusTrapHandler = createFocusTrap(modal);
+    document.addEventListener('keydown', focusTrapHandler);
+
+    requestAnimationFrame(() => title?.focus());
   }
 
   // ---- Close ----
@@ -96,6 +118,12 @@ export function initModal() {
     modal.setAttribute('hidden', '');
     document.body.style.overflow = '';
     container.removeAttribute('data-entering');
+
+    if (focusTrapHandler) {
+      document.removeEventListener('keydown', focusTrapHandler);
+      focusTrapHandler = null;
+    }
+
     lastFocused?.focus();
   }
 
@@ -103,181 +131,99 @@ export function initModal() {
   function populate(trip, name) {
     qs('#modal-img').src = trip.img;
     qs('#modal-img').alt = trip.alt;
-    qs('#modal-date').textContent   = trip.date;
-    qs('#modal-spots').textContent  = trip.spots;
-    qs('#modal-location').textContent   = trip.location;
-    qs('#modal-duration').textContent   = trip.duration;
+    qs('#modal-date').textContent = trip.date;
+    qs('#modal-spots').textContent = trip.spots;
+    qs('#modal-location').textContent = trip.location;
+    qs('#modal-duration').textContent = trip.duration;
     qs('#modal-difficulty').textContent = trip.difficulty;
-    qs('#modal-title').textContent  = name;
-    qs('#modal-desc').textContent   = trip.desc;
-    qs('#modal-price').textContent  = trip.price;
+    qs('#modal-title').textContent = name;
+    qs('#modal-desc').textContent = trip.desc;
+    qs('#modal-price').textContent = trip.price;
 
     const tripInput = form?.querySelector('[name="trip"]');
     if (tripInput) tripInput.value = name;
 
     qs('#modal-includes').innerHTML = trip.includes
-      .map(i => `<li>${i}</li>`)
+      .map((i) => `<li>${i}</li>`)
       .join('');
   }
 
   // ---- Reset form state ----
-  function resetForm(tripName) {
+  function resetForm() {
     if (!form) return;
     form.hidden = false;
     form.reset();
 
-    form.querySelectorAll('.field').forEach(f => {
+    form.querySelectorAll('.field').forEach((f) => {
       f.dataset.invalid = 'false';
     });
 
-    if (formStatus) formStatus.textContent = '';
+    const status = form.querySelector('[data-form-status]');
+    if (status) {
+      status.textContent = '';
+      delete status.dataset.state;
+    }
+
+    const successPanel = modal.querySelector('[data-form-success]');
     if (successPanel) successPanel.hidden = true;
   }
 
-  // ---- Wire up card buttons ----
-  document.querySelectorAll('a[data-trip]').forEach(btn => {
-    btn.addEventListener('click', e => {
+  // ---- Wire up trip-card buttons ----
+  qsa('a[data-trip]').forEach((btn) => {
+    on(btn, 'click', (e) => {
       e.preventDefault();
       openModal(btn.getAttribute('data-trip'), btn);
     });
   });
 
-  // ---- Close triggers ----
-  closeBtn.addEventListener('click', closeModal);
-  backdrop.addEventListener('click', closeModal);
+  // ---- Wire up generic modal-open triggers ----
+  qsa('[data-modal-open]').forEach((trigger) => {
+    on(trigger, 'click', (e) => {
+      e.preventDefault();
+      const tripName = trigger.dataset.modalTrip || 'General enquiry';
+      openModal(tripName, trigger);
+    });
+  });
 
-  document.addEventListener('keydown', e => {
+  // ---- Close triggers ----
+  on(closeBtn, 'click', closeModal);
+  on(backdrop, 'click', closeModal);
+
+  on(document, 'keydown', (e) => {
     if (e.key === 'Escape' && !modal.hasAttribute('hidden')) closeModal();
   });
 
-  // ---- Focus trap ----
-  document.addEventListener('keydown', e => {
-    if (modal.hasAttribute('hidden') || e.key !== 'Tab') return;
+  // ---- Helpers ----
+  function qs(sel) {
+    return modal.querySelector(sel);
+  }
+}
 
-    const focusable = Array.from(
-      modal.querySelectorAll(
-        'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
-      )
-    ).filter(el => !el.closest('[hidden]') && getComputedStyle(el).display !== 'none');
+function createFocusTrap(root) {
+  const focusableSelector =
+    'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-    if (focusable.length < 2) return;
+  return function trap(event) {
+    if (event.key !== 'Tab') return;
+
+    const focusable = Array.from(root.querySelectorAll(focusableSelector)).filter(
+      (el) => !el.closest('[hidden]') && getComputedStyle(el).display !== 'none'
+    );
+
+    if (focusable.length < 2) {
+      event.preventDefault();
+      return;
+    }
 
     const first = focusable[0];
-    const last  = focusable[focusable.length - 1];
+    const last = focusable[focusable.length - 1];
 
-    if (e.shiftKey && document.activeElement === first) {
-      e.preventDefault();
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
       last.focus();
-    } else if (!e.shiftKey && document.activeElement === last) {
-      e.preventDefault();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
       first.focus();
     }
-  });
-
-  // ---- Form submission ----
-  if (form) {
-    form.addEventListener('submit', async e => {
-      e.preventDefault();
-
-      if (!validateForm(form)) {
-        if (formStatus) formStatus.textContent = 'Please fill in the highlighted fields.';
-        const bad = form.querySelector('.field[data-invalid="true"] input, .field[data-invalid="true"] textarea');
-        bad?.focus();
-        return;
-      }
-
-      const submitBtn = form.querySelector('button[type="submit"]');
-      setLoading(submitBtn, true);
-      if (formStatus) formStatus.textContent = '';
-
-      try {
-        await sendToWebhook({
-          form: 'modal-interest',
-          page: window.location.pathname,
-          submittedAt: new Date().toISOString(),
-          ...serializeForm(form),
-        });
-
-        form.hidden = true;
-        if (successPanel) successPanel.hidden = false;
-        form.reset();
-      } catch {
-        if (formStatus) {
-          formStatus.textContent =
-            'Something went wrong — please email cliffinnadventures@gmail.com or try again.';
-        }
-      } finally {
-        setLoading(submitBtn, false);
-      }
-    });
-
-    form.addEventListener('input', e => {
-      const field = e.target.closest('.field');
-      if (field?.dataset.invalid === 'true') field.dataset.invalid = 'false';
-    });
-  }
-
-  // ---- Helpers ----
-  function qs(sel) { return modal.querySelector(sel); }
-}
-
-function validateForm(form) {
-  let valid = true;
-
-  form.querySelectorAll('.field').forEach(f => { f.dataset.invalid = 'false'; });
-
-  form.querySelectorAll('[required]').forEach(input => {
-    const field = input.closest('.field');
-    if (!input.value.trim()) {
-      if (field) field.dataset.invalid = 'true';
-      valid = false;
-    }
-  });
-
-  form.querySelectorAll('input[type="email"]').forEach(input => {
-    if (input.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim())) {
-      const field = input.closest('.field');
-      if (field) field.dataset.invalid = 'true';
-      valid = false;
-    }
-  });
-
-  return valid;
-}
-
-function serializeForm(form) {
-  const data = {};
-  new FormData(form).forEach((value, key) => {
-    data[key] = typeof value === 'string' ? value.trim() : value;
-  });
-  return data;
-}
-
-function setLoading(btn, loading) {
-  if (!btn) return;
-  btn.disabled = loading;
-  if (loading) {
-    btn.dataset.label = btn.textContent;
-    btn.textContent = 'Sending…';
-  } else if (btn.dataset.label) {
-    btn.textContent = btn.dataset.label;
-  }
-}
-
-async function sendToWebhook(payload) {
-  const url = config.WEBHOOK_URL;
-
-  if (!url) {
-    // Dev mode — simulate a round-trip so the UI can be tested.
-    await new Promise(r => setTimeout(r, 700));
-    return;
-  }
-
-  await fetch(url, {
-    method: 'POST',
-    mode: 'no-cors',
-    redirect: 'follow',
-    body: JSON.stringify(payload),
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-  });
+  };
 }

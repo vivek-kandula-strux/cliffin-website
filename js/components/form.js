@@ -4,8 +4,10 @@ import { config } from '../config.js';
 /**
  * Contact / interest form.
  *
- * Any <form> with data-form="contact" or data-form="interest" is wired up:
- *   - Client-side required + email validation, marks fields with data-invalid
+ * Any <form> with data-form="contact", data-form="interest" or
+ * data-form="modal-interest" is wired up:
+ *   - Client-side required + email + phone validation, marks fields with data-invalid
+ *   - Honeypot field check (bots that fill the hidden field are rejected silently)
  *   - Submits as JSON to config.WEBHOOK_URL (Google Apps Script Web App)
  *   - Uses mode: 'no-cors' fallback if the server responds with an opaque
  *     type — Apps Script commonly does, so we treat any completed fetch as success
@@ -19,10 +21,16 @@ export function initForms() {
 function setupForm(form) {
   const status = form.querySelector('[data-form-status]');
   const submit = form.querySelector('button[type="submit"]');
-  const success = form.parentElement.querySelector('[data-form-success]');
+  const success = findSuccessPanel(form);
 
   on(form, 'submit', async (event) => {
     event.preventDefault();
+
+    if (isHoneypotFilled(form)) {
+      // Silently reject bot submissions without revealing the trap.
+      return;
+    }
+
     if (!validate(form)) {
       announce(status, 'Please check the highlighted fields.', 'error');
       focusFirstInvalid(form);
@@ -60,6 +68,16 @@ function setupForm(form) {
   });
 }
 
+function findSuccessPanel(form) {
+  // Success panel is typically a sibling of the form inside the same parent.
+  return form.parentElement?.querySelector('[data-form-success]');
+}
+
+function isHoneypotFilled(form) {
+  const honeypot = form.querySelector('[name="website"]');
+  return honeypot && honeypot.value.trim() !== '';
+}
+
 function focusFirstInvalid(form) {
   const firstInvalid = form.querySelector('.field[data-invalid="true"]');
   if (!firstInvalid) return;
@@ -90,12 +108,23 @@ function validate(form) {
     }
   });
 
+  qsa('input[type="tel"]', form).forEach((el) => {
+    if (!el.value.trim()) return;
+    // Indian mobile: optional +91 or 0 prefix, then 10 digits starting with 6-9.
+    if (!/^(\+91\s?|0\s?)?[6-9]\d{9}$/.test(el.value.trim())) {
+      const field = el.closest('.field');
+      if (field) field.dataset.invalid = 'true';
+      valid = false;
+    }
+  });
+
   return valid;
 }
 
 function serialize(form) {
   const data = {};
   new FormData(form).forEach((value, key) => {
+    if (key === 'website') return; // honeypot — never send
     data[key] = typeof value === 'string' ? value.trim() : value;
   });
   return data;

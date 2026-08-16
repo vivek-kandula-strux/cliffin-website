@@ -39,10 +39,10 @@
    The container class constrains content width, so a clipped spread shadow
    paints the band to the viewport edges without changing the DOM. */
 .section--dark {
-  background: #122219;
+  background: var(--color-forest);
   --color-text: var(--color-ink-on-dark);
   --color-text-muted: var(--color-body-on-dark);
-  box-shadow: 0 0 0 100vmax #122219;
+  box-shadow: 0 0 0 100vmax var(--color-forest);
   clip-path: inset(0 -100vmax);
 }
 
@@ -118,7 +118,7 @@
    wrapper inside handles content constraint). */
 .section--forest {
   padding-top: 0;
-  background-color: #11271D;
+  background-color: var(--color-forest);
 }
 .section--forest > .container--wide { position: relative; z-index: 1; }
 

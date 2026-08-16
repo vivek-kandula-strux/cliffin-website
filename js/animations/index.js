@@ -94,31 +94,22 @@ function playHero(gsap) {
   const description = hero.querySelector('[data-hero-description]');
   const actions = hero.querySelector('[data-hero-actions]');
   const media = hero.querySelector('[data-hero-media]');
-  const badge = hero.querySelector('.hero-media__badge');
-  const metaItems = hero.querySelectorAll('.hero-copy__meta-item');
 
   // Use fromTo() (not .from()) so destinations are explicit — otherwise GSAP
   // reads the CSS-hidden opacity:0 state as the "to" value and animates 0→0,
   // leaving the hero permanently invisible.
   const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
 
-  const reveal = (el, from, extra = {}) =>
-    tl.fromTo(el, from, { autoAlpha: 1, y: 0, scale: 1, ...extra }, extra.at);
+  const reveal = (el, from, extra = {}) => {
+    const { at, ...vars } = extra;
+    tl.fromTo(el, from, { autoAlpha: 1, y: 0, scale: 1, ...vars }, at);
+  };
 
-  if (eyebrow) reveal(eyebrow, { autoAlpha: 0, y: 16 }, { duration: 0.7 });
-  if (title) reveal(title, { autoAlpha: 0, y: 46 }, { duration: 1.1, at: '-=0.35' });
-  if (description) reveal(description, { autoAlpha: 0, y: 22 }, { duration: 0.8, at: '-=0.7' });
-  if (actions) reveal(actions, { autoAlpha: 0, y: 18 }, { duration: 0.7, at: '-=0.55' });
-  if (metaItems.length) {
-    tl.fromTo(
-      metaItems,
-      { autoAlpha: 0, y: 14 },
-      { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.08 },
-      '-=0.55'
-    );
-  }
-  if (media) reveal(media, { autoAlpha: 0, scale: 1.06 }, { duration: 1.4, ease: 'power3.out', at: '<0.05' });
-  if (badge) reveal(badge, { autoAlpha: 0, y: 20, scale: 0.9 }, { duration: 0.8, ease: 'back.out(1.6)', at: '-=0.6' });
+  if (eyebrow) reveal(eyebrow, { autoAlpha: 0, y: 12 }, { duration: 0.5 });
+  if (title) reveal(title, { autoAlpha: 0, y: 28 }, { duration: 0.8, at: '-=0.25' });
+  if (description) reveal(description, { autoAlpha: 0, y: 16 }, { duration: 0.6, at: '-=0.45' });
+  if (actions) reveal(actions, { autoAlpha: 0, y: 12 }, { duration: 0.5, at: '-=0.35' });
+  if (media) reveal(media, { autoAlpha: 0, scale: 1.06 }, { duration: 1.2, ease: 'power3.out', at: '<0.05' });
 }
 
 /* -------------------------------------------------------- */

@@ -31,6 +31,12 @@
     transform var(--duration-instant) var(--ease-standard);
 }
 
+.btn:hover,
+.btn:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-elev-hover);
+}
+
 .btn:active {
   transform: translateY(1px);
 }
@@ -52,7 +58,17 @@
 .btn--primary:focus-visible {
   background: linear-gradient(135deg, oklch(0.74 0.16 52), oklch(0.58 0.17 40));
   box-shadow: var(--shadow-ember-soft);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+}
+
+.btn--primary span[aria-hidden='true'] {
+  display: inline-block;
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.btn--primary:hover span[aria-hidden='true'],
+.btn--primary:focus-visible span[aria-hidden='true'] {
+  transform: translateX(3px);
 }
 
 .btn--dark {
@@ -696,7 +712,7 @@ body[data-menu-open='true'] .header__mobile > * {
 ----------------------------------------------------------- */
 .hero-banner {
   position: relative;
-  background: #FAE6C1;
+  background: var(--color-hero-cream);
   overflow: hidden;
   color: var(--color-ink-on-dark);
 }
@@ -704,7 +720,7 @@ body[data-menu-open='true'] .header__mobile > * {
 .hero-banner__media {
   position: absolute;
   inset: 0;
-  background-color: #FAE6C1;
+  background-color: var(--color-hero-cream);
 }
 
 .hero-banner__media img {
@@ -743,11 +759,11 @@ body[data-menu-open='true'] .header__mobile > * {
    Background matches the PNG's own green so text sits on one continuous
    surface with the artwork. */
 .hero-banner--workshops {
-  background: #122219;
+  background: var(--color-hero-dark);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  color: #ffffff;
+  color: var(--color-ink-on-dark);
 }
 .hero-banner--workshops .hero-banner__inner {
   order: 1;
@@ -794,7 +810,7 @@ body[data-menu-open='true'] .header__mobile > * {
   line-height: 0.95;
   letter-spacing: -0.02em;
   text-transform: uppercase;
-  color: #ffffff;
+  color: var(--color-ink-on-dark);
   text-wrap: balance;
 }
 .hero-banner--workshops .breadcrumb {
@@ -810,6 +826,19 @@ body[data-menu-open='true'] .header__mobile > * {
   overflow: hidden;
   /* subtle placeholder while remote images load — prevents white flash */
   background-color: oklch(0.94 0.008 88);
+  transition:
+    transform var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.tile:hover,
+.tile:focus-within {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-tile-hover);
+}
+
+.tile:active {
+  transform: translateY(-1px);
 }
 
 .tile--image {
@@ -872,6 +901,11 @@ body[data-menu-open='true'] .header__mobile > * {
   justify-content: center;
 }
 
+.tile--ember-stat:hover,
+.tile--ember-stat:focus-within {
+  box-shadow: var(--shadow-ember-soft);
+}
+
 .tile--sky-stat {
   background: var(--grad-sky-tile);
   box-shadow: var(--shadow-sky);
@@ -881,6 +915,11 @@ body[data-menu-open='true'] .header__mobile > * {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.tile--sky-stat:hover,
+.tile--sky-stat:focus-within {
+  box-shadow: var(--shadow-sky);
 }
 
 .stat-number {
@@ -947,7 +986,7 @@ body[data-menu-open='true'] .header__mobile > * {
 .tile--image .tile__eyebrow,
 .tile--image .tile__desc,
 .tile--image .card__foot-text {
-  color: #fff;
+  color: var(--color-ink-on-dark);
 }
 
 .tile--image .tile__title {
@@ -1061,6 +1100,7 @@ a.tile--image-flat:focus-visible img {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: visible;
   z-index: 1;
 }
 
@@ -1119,6 +1159,10 @@ a.tile--image-flat:focus-visible img {
   .card:hover {
     transform: translateY(-2px);
   }
+}
+
+.card:active {
+  transform: translateY(-1px);
 }
 
 .card__media {
@@ -1565,34 +1609,17 @@ a.tile--image-flat:focus-visible img {
 .interest {
   margin-top: clamp(1.75rem, 3vw, 2.5rem);
   scroll-margin-top: 120px;
-  background: var(--grad-panel-base);
   color: var(--color-ink-on-dark);
-  border-radius: var(--radius-tile);
-  overflow: hidden;
-  position: relative;
-}
-
-.interest::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(70% 90% at 100% 0%, oklch(0.52 0.1 232 / 0.42), transparent 60%),
-    radial-gradient(60% 90% at 0% 100%, oklch(0.6 0.16 47 / 0.38), transparent 60%),
-    radial-gradient(50% 50% at 50% 50%, oklch(0.3 0.05 158 / 0.4), transparent 75%);
-  pointer-events: none;
 }
 
 .interest__grid {
   position: relative;
   display: grid;
   /* `min(100%, 320px)` lets the column shrink below 320px on 320-360px
-     viewports where the outer padding leaves < 320px of usable width —
-     without it the form overflows and gets clipped by .interest's own
-     overflow: hidden. */
+     viewports where the outer padding leaves < 320px of usable width. */
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: clamp(2.25rem, 4.8vw, 4.25rem);
-  padding: clamp(2.25rem, 4.8vw, 4rem);
+  padding-block: clamp(2.25rem, 4.8vw, 4rem);
   align-items: center;
 }
 
@@ -2179,7 +2206,7 @@ a.tile--image-flat:focus-visible img {
 ----------------------------------------------------------- */
 .closing-scene {
   position: relative;
-  background: #112119;
+  background: #10281D;
 }
 
 .closing-scene .footer__cta-band {
@@ -2352,9 +2379,9 @@ a.tile--image-flat:focus-visible img {
 
 .footer__wa-btn:hover,
 .footer__wa-btn:focus-visible {
-  background: #25D366;
-  border-color: #25D366;
-  color: #fff;
+  background: var(--color-whatsapp);
+  border-color: var(--color-whatsapp);
+  color: var(--color-ink-on-dark);
   transform: translateY(-1px);
 }
 
@@ -2719,12 +2746,17 @@ a.tile--image-flat:focus-visible img {
 ----------------------------------------------------------- */
 .hero-copy .eyebrow {
   color: var(--color-subheading);
-  gap: 14px;
-  font-size: 26px;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: clamp(12px, 1vw, 14px);
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .hero-copy .eyebrow::before {
-  width: 40px;
+  width: 24px;
   background: var(--color-subheading);
 }
 
@@ -2749,97 +2781,78 @@ a.tile--image-flat:focus-visible img {
 .hero-copy__cta {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px;
-  margin-top: 24px;
-}
-
-/* Quiet inline stats — replaces the loud ember/sky stat tiles.
-   Reads as a supportive footer to the hero copy, not competing accents. */
-.hero-copy__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: clamp(24px, 3.5vw, 44px);
-  margin-top: 24px;
-  padding-top: 18px;
-  border-top: 1px solid oklch(1 0 0 / 0.1);
-}
-
-.hero-copy__meta-item {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  min-width: 0;
-}
-
-.hero-copy__meta-num {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(24px, 2.6vw, 30px);
-  color: var(--color-amber-2);
-  letter-spacing: -0.02em;
-  line-height: 1;
-}
-
-.hero-copy__meta-num span {
-  font-size: 0.55em;
-  font-weight: 500;
-  color: oklch(0.86 0.02 88 / 0.85);
-  margin-left: 2px;
-}
-
-.hero-copy__meta-label {
-  font-family: var(--font-body);
-  font-size: 12px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: oklch(0.86 0.02 88 / 0.88);
-}
-
-/* Hero media — image container with a floating glass "trust" chip that
-   peeks out over the bottom-left corner. */
-.hero-media {
-  position: relative;
-}
-
-.hero-media__badge {
-  position: absolute;
-  left: clamp(1rem, 2vw, 1.75rem);
-  bottom: clamp(1rem, 2vw, 1.75rem);
-  display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 18px 12px 16px;
-  background: oklch(0.15 0.02 158 / 0.62);
-  backdrop-filter: blur(14px) saturate(1.1);
-  -webkit-backdrop-filter: blur(14px) saturate(1.1);
-  border: 1px solid oklch(1 0 0 / 0.15);
-  border-radius: var(--radius-pill);
-  color: var(--color-ink-on-dark);
-  z-index: 2;
-  box-shadow: 0 14px 34px oklch(0.16 0.03 158 / 0.35);
+  gap: 22px;
+  margin-top: 18px;
+}
+
+/* Single-line social proof above the CTA */
+.hero-trust {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--color-body-on-dark);
+  margin-bottom: 18px;
+}
+
+.hero-trust__stars {
+  color: var(--color-amber);
+  letter-spacing: 1.5px;
+}
+
+/* Scroll affordance at the bottom of full-viewport heroes */
+.hero-scroll {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 32px;
+  border: 1.5px solid oklch(1 0 0 / 0.35);
+  border-radius: 12px;
+  z-index: 4;
   pointer-events: none;
 }
 
-.hero-media__badge-star {
-  color: var(--color-amber);
-  font-size: 13px;
-  letter-spacing: 2px;
-  line-height: 1;
+.hero-scroll span {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  width: 3px;
+  height: 6px;
+  background: oklch(1 0 0 / 0.55);
+  border-radius: 2px;
+  transform: translateX(-50%);
+  animation: scroll-dot 1.6s ease-in-out infinite;
 }
 
-.hero-media__badge-text {
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: 12.5px;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
+@keyframes scroll-dot {
+  0%, 100% { opacity: 1; transform: translate(-50%, 0); }
+  50% { opacity: 0.3; transform: translate(-50%, 8px); }
 }
 
-@media (max-width: 640px) {
-  .hero-media__badge-text {
-    white-space: normal;
-    max-width: 22ch;
+@media (prefers-reduced-motion: reduce) {
+  .hero-scroll span {
+    animation: none;
+    opacity: 1;
   }
+}
+
+@media (max-width: 767px) {
+  .hero-scroll {
+    display: none;
+  }
+}
+
+/* Light hero (home) needs a darker scroll indicator for contrast on cream */
+.hero-banner--home .hero-scroll {
+  border-color: oklch(0 0 0 / 0.22);
+}
+
+.hero-banner--home .hero-scroll span {
+  background: oklch(0 0 0 / 0.35);
 }
 
 /* Small "not sure yet" tile CTA */
@@ -2889,12 +2902,12 @@ a.tile--image-flat:focus-visible img {
   width: 58px;
   height: 58px;
   border-radius: 50%;
-  background: #25D366;
-  color: #fff;
+  background: var(--color-whatsapp);
+  color: var(--color-ink-on-dark);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.45);
+  box-shadow: 0 4px 20px oklch(0.72 0.22 145 / 0.45);
   transition:
     transform var(--duration-fast) var(--ease-emphasized),
     box-shadow var(--duration-fast) var(--ease-standard);
@@ -2913,7 +2926,7 @@ a.tile--image-flat:focus-visible img {
   position: absolute;
   inset: -4px;
   border-radius: 50%;
-  border: 2px solid #25D366;
+  border: 2px solid var(--color-whatsapp);
   opacity: 0;
   animation: wa-pulse 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
@@ -2979,7 +2992,7 @@ a.tile--image-flat:focus-visible img {
 .hero-banner--home {
   min-height: 100vh;
   min-height: 100svh;
-  background: #FAE6C1;
+  background: var(--color-hero-cream);
 }
 
 /* Flex-end so image hugs the right edge at full natural height */
@@ -2988,6 +3001,7 @@ a.tile--image-flat:focus-visible img {
   align-items: center;
   justify-content: flex-end;
   background: transparent;
+  z-index: 0;
 }
 
 /* Height-driven sizing: image fills viewport height, width scales
@@ -3002,35 +3016,17 @@ a.tile--image-flat:focus-visible img {
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0%,
-    rgba(0, 0, 0, 0.18) 8%,
-    rgba(0, 0, 0, 0.7) 22%,
-    #000 42%,
+    rgba(0, 0, 0, 0.35) 12%,
+    #000 35%,
     #000 100%
   );
           mask-image: linear-gradient(
     to right,
     transparent 0%,
-    rgba(0, 0, 0, 0.18) 8%,
-    rgba(0, 0, 0, 0.7) 22%,
-    #000 42%,
+    rgba(0, 0, 0, 0.35) 12%,
+    #000 35%,
     #000 100%
   );
-}
-
-/* Paper-grain texture: SVG fractal noise scattered at very low opacity,
-   multiplied over the whole hero to break up the mask gradient and add
-   a hand-printed feel. No new asset added. */
-.hero-banner--home::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.16;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='420' height='420'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='7'/><feColorMatrix values='0 0 0 0 0.35  0 0 0 0 0.28  0 0 0 0 0.18  0 0 0 0.7 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-  background-size: 420px 420px;
-  background-repeat: repeat;
 }
 
 /* Scrim was for dark overlay on dark bg — not needed on cream */
@@ -3048,55 +3044,58 @@ a.tile--image-flat:focus-visible img {
   left: 0;
   bottom: 0;
   right: auto;
-  width: clamp(360px, 46vw, 680px);
+  width: clamp(360px, 60vw, 860px);
   padding-inline: var(--container-pad) clamp(2rem, 4vw, 3.5rem);
   padding-block: clamp(4.5rem, 9vh, 7rem);
   margin-inline: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  z-index: 3;
+  z-index: 1;
+  background: linear-gradient(
+    to right,
+    var(--color-hero-cream) 0%,
+    oklch(0.93 0.05 85 / 0.92) 45%,
+    transparent 100%
+  );
 }
 
 /* Constrain content width inside the canvas so headlines never
    over-run into the illustration. */
-.hero-banner--home .hero-copy > div { max-width: 640px; }
-.hero-banner--home .hero-copy h1    { max-width: 640px; text-wrap: balance; }
-.hero-banner--home .hero-copy p     { max-width: 560px; }
+.hero-banner--home .hero-copy > div { max-width: 760px; }
+.hero-banner--home .hero-copy h1    { max-width: 760px; text-wrap: balance; }
+.hero-banner--home .hero-copy p     { max-width: 660px; }
 
 /* --- copy colours: dark text on cream + illustration --- */
 .hero-banner--home .hero-copy h1         { color: var(--color-ink); }
 .hero-banner--home .hero-copy p          { color: var(--color-ink-muted); }
 .hero-banner--home .hero-copy .eyebrow   { color: var(--color-subheading); }
 .hero-banner--home .hero-copy .eyebrow::before { background: var(--color-subheading); }
-.hero-banner--home .hero-copy__meta      { border-top-color: oklch(0 0 0 / 0.1); }
-.hero-banner--home .hero-copy__meta-num  { color: var(--color-ember-text); }
-.hero-banner--home .hero-copy__meta-label { color: var(--color-ink-soft); }
+.hero-banner--home .hero-trust           { color: var(--color-ink-soft); }
 
-/* Outline btn: remap for light background */
-.hero-banner--home .btn--outline-dark {
-  color: var(--color-ink);
-  border-color: oklch(0 0 0 / 0.25);
+/* Secondary gallery link: keep it quiet on the light hero */
+.hero-banner--home .hero-copy__cta .link-arrow {
+  color: var(--color-ink-muted);
+  border-bottom-color: var(--color-border-strong);
 }
-.hero-banner--home .btn--outline-dark:hover,
-.hero-banner--home .btn--outline-dark:focus-visible {
+.hero-banner--home .hero-copy__cta .link-arrow:hover,
+.hero-banner--home .hero-copy__cta .link-arrow:focus-visible {
   color: var(--color-ember-text);
-  border-color: var(--color-ember-text);
+  border-bottom-color: var(--color-ember-text);
 }
 
 /* Short viewports (laptops with the browser chrome open): tighten
-   the type scale so the CTA + metrics stay above the fold. */
+   the type scale so the CTA + trust line stay above the fold. */
 @media (min-width: 1024px) and (max-height: 780px) {
   .hero-banner--home .hero-copy h1 {
-    font-size: clamp(38px, 4.6vw, 60px);
+    font-size: clamp(46px, 5.6vw, 72px);
   }
   .hero-banner--home .hero-copy p {
     margin-top: 12px;
     line-height: 1.55;
   }
-  .hero-banner--home .hero-copy__meta {
-    margin-top: 18px;
-    padding-top: 14px;
+  .hero-banner--home .hero-trust {
+    margin-bottom: 12px;
   }
 }
 
@@ -3116,15 +3115,15 @@ a.tile--image-flat:focus-visible img {
     -webkit-mask-image: linear-gradient(
       to right,
       transparent 0%,
-      rgba(0, 0, 0, 0.25) 18%,
-      #000 48%,
+      rgba(0, 0, 0, 0.35) 18%,
+      #000 42%,
       #000 100%
     );
             mask-image: linear-gradient(
       to right,
       transparent 0%,
-      rgba(0, 0, 0, 0.25) 18%,
-      #000 48%,
+      rgba(0, 0, 0, 0.35) 18%,
+      #000 42%,
       #000 100%
     );
   }
@@ -3133,55 +3132,211 @@ a.tile--image-flat:focus-visible img {
     padding-block: clamp(5rem, 10vh, 6rem);
     background: linear-gradient(
       to right,
-      rgba(250, 230, 193, 0.92) 0%,
-      rgba(250, 230, 193, 0.75) 55%,
+      var(--color-hero-cream) 0%,
+      oklch(0.93 0.05 85 / 0.9) 55%,
       transparent 100%
     );
   }
 }
 
-/* Mobile: stack copy on top, illustration anchored to the bottom-right
-   corner so the paraglider and peaks read as a horizon behind the CTA
-   instead of interrupting the headline. */
+/* Mobile: true stacked composition. The image becomes a deliberate
+   hero panel above the copy, not a squeezed background. Copy is centered
+   so the layout feels native to portrait viewports. */
 @media (max-width: 767px) {
   .hero-banner--home {
+    display: flex;
+    flex-direction: column;
     min-height: auto;
   }
   .hero-banner--home .hero-banner__media {
-    align-items: flex-end;
-    justify-content: flex-end;
+    position: relative;
+    inset: auto;
+    order: 1;
+    height: 42vh;
+    min-height: 280px;
+    align-items: stretch;
+    justify-content: stretch;
   }
   .hero-banner--home .hero-banner__media img {
-    height: auto;
+    height: 100%;
     width: 100%;
     max-width: 100%;
     margin-right: 0;
-    -webkit-mask-image: radial-gradient(
-      120% 100% at 100% 100%,
-      #000 40%,
-      rgba(0, 0, 0, 0.7) 60%,
-      transparent 88%
+    object-fit: cover;
+    object-position: 65% bottom;
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      #000 12%,
+      #000 88%,
+      transparent 100%
     );
-            mask-image: radial-gradient(
-      120% 100% at 100% 100%,
-      #000 40%,
-      rgba(0, 0, 0, 0.7) 60%,
-      transparent 88%
+            mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      #000 12%,
+      #000 88%,
+      transparent 100%
     );
   }
   .hero-banner--home .hero-banner__inner {
     position: relative;
+    order: 2;
     width: 100%;
     padding-inline: var(--container-pad);
-    padding-block: 6.5rem 18rem;
+    padding-block: 2.5rem 3.5rem;
     justify-content: flex-start;
+    text-align: center;
+    background: var(--color-hero-cream);
   }
   .hero-banner--home .hero-copy > div,
   .hero-banner--home .hero-copy h1,
   .hero-banner--home .hero-copy p {
     max-width: none;
   }
-  .hero-banner--home .hero-copy__meta {
-    gap: 20px;
+  .hero-banner--home .hero-trust {
+    justify-content: center;
   }
+  .hero-banner--home .hero-copy__cta {
+    justify-content: center;
+  }
+}
+
+/* ============================================================
+   CLEANUP UTILITIES — token-driven replacements for inline styles
+   ============================================================ */
+
+.section--pb-0 { padding-bottom: 0; }
+
+.tile--tall   { min-height: 460px; }
+.tile--short  { min-height: 220px; }
+.tile--video  { min-height: 400px; }
+
+.ig-tile--tall  { min-height: 420px; }
+.ig-tile--short { min-height: 200px; }
+
+.tile__title--lg {
+  font-size: clamp(22px, 2.4vw, 28px);
+}
+
+.tile__cta-text {
+  display: inline-block;
+  margin-top: 14px;
+}
+
+.kicker--on-dark {
+  font-size: 22px;
+  line-height: 1;
+  color: var(--color-amber-2);
+}
+
+.section-head__lead {
+  max-width: 40ch;
+  font-size: 14px;
+  color: var(--color-body-on-dark);
+}
+
+.section-title--tight {
+  margin-top: 10px;
+}
+
+.interest-cta__eyebrow {
+  font-size: 26px;
+  color: var(--color-amber-2);
+}
+
+.interest-cta__title {
+  font-size: clamp(26px, 3.2vw, 42px);
+  line-height: 1;
+  margin-top: 10px;
+  color: var(--color-ink-on-dark);
+}
+
+.interest-cta__lead {
+  margin-top: 16px;
+  max-width: 42ch;
+  color: var(--color-body-on-dark);
+}
+
+.why__title {
+  font-size: clamp(28px, 3.2vw, 44px);
+  line-height: 1;
+  margin-top: 14px;
+  color: var(--color-ink-on-dark);
+}
+
+.why__lead {
+  margin-top: 16px;
+  color: var(--color-body-on-dark);
+}
+
+.why__cta {
+  align-self: flex-start;
+  margin-top: 24px;
+}
+
+.video-tile__scrim {
+  background: linear-gradient(
+    0deg,
+    oklch(0.16 0.03 158 / 0.85),
+    oklch(0.4 0.1 40 / 0.12) 45%,
+    transparent 72%
+  );
+}
+
+.video-tile__badge {
+  right: 22px;
+  left: auto;
+}
+
+/* Register-interest CTA panel (replaces inline form) */
+.interest-cta {
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
+  scroll-margin-top: 120px;
+  color: var(--color-ink-on-dark);
+}
+
+.interest-cta__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: clamp(2.25rem, 4.8vw, 4.25rem);
+  padding-block: clamp(2.25rem, 4.8vw, 4rem);
+  align-items: center;
+}
+
+.interest-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+}
+
+.interest-cta__note {
+  font-size: var(--fs-small);
+  color: var(--color-soft-on-dark);
+  max-width: 36ch;
+}
+
+/* Footer CTA button wrapper (replaces quick form) */
+.footer__cta-button-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.footer__cta-note {
+  font-size: var(--fs-small);
+  color: var(--color-soft-on-dark);
+  max-width: 36ch;
+}
+
+/* Inline link on dark surfaces */
+.link--amber {
+  color: var(--color-amber);
+}
+
+.link--amber:hover,
+.link--amber:focus-visible {
+  color: var(--color-ink-on-dark);
 }
