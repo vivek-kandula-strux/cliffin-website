@@ -1,0 +1,200 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "Cliff-Inn Adventures - Home" [ref=e5] [cursor=pointer]:
+        - /url: index.html
+        - img "Cliff-Inn Adventures" [ref=e6]
+      - button "Toggle menu" [ref=e8] [cursor=pointer]
+  - main [ref=e12]:
+    - region [ref=e13]:
+      - generic [ref=e15]:
+        - generic [ref=e16]:
+          - generic [ref=e17]: Where learning meets adventure
+          - heading "Escape the ordinary. Find your freedom." [level=1] [ref=e18]: Escape the ordinary.Find your freedom.
+          - paragraph [ref=e19]: Guided outdoor experiences for schools, corporates and independent explorers - built to challenge, connect and inspire.
+        - generic [ref=e20]:
+          - generic [ref=e21]:
+            - generic [ref=e22]: ★★★★★
+            - generic [ref=e23]: Trusted by 120+ schools & brands
+          - generic [ref=e24]:
+            - link "Plan Your Escape" [ref=e25] [cursor=pointer]:
+              - /url: "#interest"
+              - text: Plan Your Escape
+              - generic [ref=e26]: →
+            - link "View the gallery" [ref=e27] [cursor=pointer]:
+              - /url: gallery.html
+    - region "Experiences built to challenge & inspire" [ref=e28]
+    - region "Reserve your spot in the wild" [ref=e34]:
+      - generic [ref=e38]:
+        - generic [ref=e39]:
+          - text: Block your spot
+          - heading "Register your interest" [level=3] [ref=e40]
+          - paragraph [ref=e41]: No payment now. Tell us which adventure calls to you and how many are coming - our team holds your place and reaches out with dates, pricing and the full plan.
+          - generic [ref=e42]:
+            - generic [ref=e43]:
+              - generic [ref=e44]: 24h
+              - generic [ref=e45]: Response time
+            - generic [ref=e46]:
+              - generic [ref=e47]: Free
+              - generic [ref=e48]: To register
+            - generic [ref=e49]:
+              - generic [ref=e50]: Small
+              - generic [ref=e51]: Group sizes
+        - generic [ref=e52]:
+          - link "Register My Interest →" [ref=e53] [cursor=pointer]:
+            - /url: "#interest"
+          - paragraph [ref=e54]: Takes 30 seconds. We call back within 24 hours with dates and a tailored plan.
+    - region "What makes us different" [ref=e55]
+    - region "See it, feel it, remember it" [ref=e58]
+    - region "Everything you need to know" [ref=e60]:
+      - generic [ref=e62]:
+        - generic [ref=e63]:
+          - heading [level=3] [ref=e64]:
+            - button "What age groups do your programs cater to?" [ref=e65] [cursor=pointer]
+          - region "What age groups do your programs cater to?":
+            - paragraph [ref=e70]: We design experiences for ages 8 and up. School programs are grouped by grade, corporate outings are matched to team fitness levels, and independent trips list a suggested age range so you can pick the right adventure.
+        - generic [ref=e71]:
+          - heading [level=3] [ref=e72]:
+            - button "How safe are the adventure activities?" [ref=e73] [cursor=pointer]
+          - region "How safe are the adventure activities?":
+            - paragraph [ref=e78]: Safety is built into every trip. We use certified gear, brief every participant before an activity, maintain small instructor-to-participant ratios, and carry a written safety protocol plus first-aid support on every outing.
+        - generic [ref=e79]:
+          - heading [level=3] [ref=e80]:
+            - button "What should we pack for a camp or trek?" [ref=e81] [cursor=pointer]
+          - region "What should we pack for a camp or trek?":
+            - paragraph [ref=e86]: "After booking you receive a detailed packing list. Generally: comfortable trekking clothes, a reusable water bottle, sturdy shoes, a light jacket, and personal medication. We provide tents, sleeping gear, safety equipment, and meals."
+        - generic [ref=e87]:
+          - heading [level=3] [ref=e88]:
+            - button "Do you provide food and stay?" [ref=e89] [cursor=pointer]
+          - region "Do you provide food and stay?":
+            - paragraph [ref=e94]: Yes. Overnight camps include tents, sleeping mats, and all meals. Day outings include snacks and refreshments. Dietary preferences can be shared at booking and we accommodate vegetarian, vegan, and common allergies.
+        - generic [ref=e95]:
+          - heading [level=3] [ref=e96]:
+            - button "How do we book a trip?" [ref=e97] [cursor=pointer]
+          - region "How do we book a trip?":
+            - paragraph [ref=e102]: Click “Plan Your Escape” or “Register Interest” on any page, share your group size and preferred dates, and our team will call back within 24 hours with a tailored plan. No payment is required to reserve your interest.
+        - generic [ref=e103]:
+          - heading [level=3] [ref=e104]:
+            - button "What is your cancellation policy?" [ref=e105] [cursor=pointer]
+          - region "What is your cancellation policy?":
+            - paragraph [ref=e110]: Cancellations made 14 days or more before departure receive a full refund. Between 7–14 days, 50% is refunded. Within 7 days, the trip is non-refundable but transferable to another participant or a future date subject to availability.
+  - generic [ref=e112]:
+    - generic [ref=e114]:
+      - generic [ref=e115]:
+        - generic [ref=e116]: Let's plan your escape
+        - heading "Ready for your next adventure?" [level=2] [ref=e117]: Ready for yournext adventure?
+        - paragraph [ref=e118]: Whether you're a school, a company, or a soul craving the wild - we'll build the perfect experience around you.
+      - generic [ref=e120]:
+        - link "Plan My Escape →" [ref=e121] [cursor=pointer]:
+          - /url: "#interest"
+        - paragraph [ref=e122]: Tell us your dates and group size. We reply within 24 hours with a tailored plan.
+    - contentinfo [ref=e124]:
+      - generic [ref=e126]:
+        - generic [ref=e127]:
+          - generic [ref=e128]: 8+
+          - generic [ref=e129]: Years guiding in the wild
+        - generic [ref=e130]:
+          - generic [ref=e131]: 120+
+          - generic [ref=e132]: Schools & corporates
+        - generic [ref=e133]:
+          - generic [ref=e134]: 5k+
+          - generic [ref=e135]: Explorers guided
+        - generic [ref=e136]:
+          - generic "5 out of 5 stars" [ref=e137]: ★★★★★
+          - generic [ref=e138]: Top-rated experiences
+      - generic "Safety credentials" [ref=e139]:
+        - generic [ref=e140]:
+          - generic [ref=e145]:
+            - generic [ref=e146]: Wilderness First Aid
+            - generic [ref=e147]: Certified guides on every trip
+          - generic [ref=e151]:
+            - generic [ref=e152]: Fully Insured
+            - generic [ref=e153]: Comprehensive trip & liability cover
+          - generic [ref=e159]:
+            - generic [ref=e160]: Small Group Ratios
+            - generic [ref=e161]: Up to 1:8 instructor:participant
+          - generic [ref=e167]:
+            - generic [ref=e168]: Written Safety Protocol
+            - generic [ref=e169]: Gear checks & briefings on every activity
+      - generic [ref=e170]:
+        - generic [ref=e171]:
+          - img "Cliff-Inn Adventures" [ref=e172]
+          - paragraph [ref=e173]: We craft outdoor experiences for schools and corporates - camps, workshops and team-building that build confidence, leadership and lasting bonds.
+          - generic "Follow us on social media" [ref=e174]:
+            - link "Instagram" [ref=e175] [cursor=pointer]:
+              - /url: https://instagram.com/cliffinnadventures
+            - link "WhatsApp" [ref=e180] [cursor=pointer]:
+              - /url: https://wa.me/919573199863
+        - navigation "Explore" [ref=e184]:
+          - heading "Explore" [level=3] [ref=e185]
+          - list [ref=e186]:
+            - listitem [ref=e187]:
+              - link "Home" [ref=e188] [cursor=pointer]:
+                - /url: index.html
+            - listitem [ref=e189]:
+              - link "About Us" [ref=e190] [cursor=pointer]:
+                - /url: about.html
+            - listitem [ref=e191]:
+              - link "Gallery" [ref=e192] [cursor=pointer]:
+                - /url: gallery.html
+            - listitem [ref=e193]:
+              - link "Our Camp Sites" [ref=e194] [cursor=pointer]:
+                - /url: camp-sites.html
+            - listitem [ref=e195]:
+              - link "Contact" [ref=e196] [cursor=pointer]:
+                - /url: contact.html
+        - navigation "Programs" [ref=e197]:
+          - heading "Programs" [level=3] [ref=e198]
+          - list [ref=e199]:
+            - listitem [ref=e200]:
+              - link "School Programs" [ref=e201] [cursor=pointer]:
+                - /url: school-programs.html
+            - listitem [ref=e202]:
+              - link "Adventure Workshops" [ref=e203] [cursor=pointer]:
+                - /url: adventure-workshops.html
+            - listitem [ref=e204]:
+              - link "Corporate & Groups" [ref=e205] [cursor=pointer]:
+                - /url: corporate-packages.html
+            - listitem [ref=e206]:
+              - link "Night Camping" [ref=e207] [cursor=pointer]:
+                - /url: corporate-packages.html
+            - listitem [ref=e208]:
+              - link "School Boot Camps" [ref=e209] [cursor=pointer]:
+                - /url: school-programs.html
+        - generic [ref=e210]:
+          - heading "Get In Touch" [level=3] [ref=e211]
+          - list [ref=e212]:
+            - listitem [ref=e213]:
+              - generic [ref=e214]: Call us
+              - link "Primary +91 95731 99863" [ref=e217] [cursor=pointer]:
+                - /url: tel:+919573199863
+                - generic [ref=e218]: Primary
+                - text: +91 95731 99863
+              - link "Alt +91 90107 39847" [ref=e219] [cursor=pointer]:
+                - /url: tel:+919010739847
+                - generic [ref=e220]: Alt
+                - text: +91 90107 39847
+            - listitem [ref=e221]:
+              - generic [ref=e222]: Mail us
+              - link "cliffinnadventures@gmail.com" [ref=e226] [cursor=pointer]:
+                - /url: mailto:cliffinnadventures@gmail.com
+            - listitem [ref=e227]:
+              - generic [ref=e228]: WhatsApp
+              - link "+91 95731 99863" [ref=e232] [cursor=pointer]:
+                - /url: https://wa.me/919573199863
+      - generic [ref=e234]:
+        - generic [ref=e235]: © 2020–2026 Cliff-Inn Adventures. All rights reserved.
+        - generic [ref=e236]:
+          - link "Privacy Policy" [ref=e237] [cursor=pointer]:
+            - /url: "#"
+          - link "Cancellation Policy" [ref=e238] [cursor=pointer]:
+            - /url: "#"
+          - link "Terms & Conditions" [ref=e239] [cursor=pointer]:
+            - /url: "#"
+          - link "Release of Liability" [ref=e240] [cursor=pointer]:
+            - /url: "#"
+  - link "Chat with us on WhatsApp" [ref=e241] [cursor=pointer]:
+    - /url: https://wa.me/919573199863
+    - generic: Chat with us

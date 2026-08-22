@@ -30,7 +30,8 @@
   /* ---- Surface & brand accents ---- */
   --color-hero-cream: oklch(0.93 0.05 85);    /* Warm hero background */
   --color-hero-dark: #122218;                 /* Inner-page hero background */
-  --color-forest: #10281D;                     /* Deep pine forest section bg */
+  --color-forest: #132119;                     /* Deep pine forest section bg */
+  --color-school-intro: #122318;               /* School-program intro section bg */
   --color-whatsapp: #25D366;                  /* WhatsApp brand green */
 
   /* ---- Neutrals ---- */
@@ -62,14 +63,14 @@
   --font-body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-serif: 'Lora', Georgia, 'Times New Roman', serif;
 
-  --fs-eyebrow: clamp(20px, 2.2vw, 26px);
+  --fs-eyebrow: clamp(15px, 1.4vw, 18px);
   --fs-hero: clamp(52px, 6.8vw, 98px);
   --fs-hero-inner: clamp(46px, 7.2vw, 88px);
   --fs-h2: clamp(30px, 4.2vw, 52px);
   --fs-h2-inner: clamp(28px, 4.4vw, 48px);
   --fs-h3: clamp(20px, 2vw, 24px);
-  --fs-body: clamp(15px, 1.2vw, 17px);
-  --fs-body-large: clamp(17px, 1.4vw, 18px);
+  --fs-body: clamp(16px, 1.3vw, 18px);
+  --fs-body-large: clamp(17px, 1.4vw, 19px);
   --fs-small: 13.5px;
   --fs-micro: 11.5px;
 
@@ -91,7 +92,7 @@
      to 96-160px of vertical air, which is the sweet spot for a booking-
      oriented adventure site that still wants editorial feel. */
   --section-y: clamp(3rem, 5.5vw, 5rem);
-  --section-y-large: clamp(4rem, 7vw, 6.5rem);
+  --section-y-large: clamp(4rem, 7vw, 7.5rem);
   --section-y-hero: clamp(3rem, 5.5vw, 5rem);
 
   /* Space between a section's headline row and its content. */
@@ -103,7 +104,7 @@
      — spacious enough for premium travel/adventure editorial without losing
      the intimate rhythm of a curated page. */
   --container-pad: clamp(1.25rem, 5.5vw, 4rem);
-  --container: min(1160px, calc(100% - 2 * var(--container-pad)));
+  --container: min(1240px, calc(100% - 2 * var(--container-pad)));
   --container-wide: min(1320px, calc(100% - 2 * var(--container-pad)));
 
   /* Bento/card grid gaps — bigger inter-tile air reads as "placed" not

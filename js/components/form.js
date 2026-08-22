@@ -15,13 +15,15 @@ import { config } from '../config.js';
  *   - Swaps to a success panel on success (or shows an error message on failure)
  */
 export function initForms() {
-  qsa('form[data-form]').forEach(setupForm);
+  qsa('form[data-form]').forEach((form, index) => setupForm(form, index));
 }
 
-function setupForm(form) {
+function setupForm(form, formIndex) {
   const status = form.querySelector('[data-form-status]');
   const submit = form.querySelector('button[type="submit"]');
   const success = findSuccessPanel(form);
+
+  connectInlineErrors(form, formIndex);
 
   on(form, 'submit', async (event) => {
     event.preventDefault();
@@ -63,9 +65,30 @@ function setupForm(form) {
   on(form, 'input', (event) => {
     const field = event.target.closest('.field');
     if (field?.dataset.invalid === 'true') {
-      field.dataset.invalid = 'false';
+      setFieldInvalid(field, false);
     }
   });
+}
+
+function connectInlineErrors(form, formIndex) {
+  qsa('.field', form).forEach((field, fieldIndex) => {
+    const control = field.querySelector('input, textarea, select');
+    const error = field.querySelector('.field__error');
+    if (!control || !error) return;
+
+    error.id ||= `form-${formIndex}-field-${fieldIndex}-error`;
+    const describedBy = new Set((control.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean));
+    describedBy.add(error.id);
+    control.setAttribute('aria-describedby', [...describedBy].join(' '));
+  });
+}
+
+function setFieldInvalid(field, invalid) {
+  field.dataset.invalid = invalid ? 'true' : 'false';
+  const control = field.querySelector('input, textarea, select');
+  if (!control) return;
+  if (invalid) control.setAttribute('aria-invalid', 'true');
+  else control.removeAttribute('aria-invalid');
 }
 
 function findSuccessPanel(form) {
@@ -89,13 +112,13 @@ function validate(form) {
   let valid = true;
 
   qsa('.field', form).forEach((field) => {
-    field.dataset.invalid = 'false';
+    setFieldInvalid(field, false);
   });
 
   qsa('[required]', form).forEach((el) => {
     const field = el.closest('.field');
     if (!el.value.trim()) {
-      if (field) field.dataset.invalid = 'true';
+      if (field) setFieldInvalid(field, true);
       valid = false;
     }
   });
@@ -103,7 +126,7 @@ function validate(form) {
   qsa('input[type="email"]', form).forEach((el) => {
     if (el.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim())) {
       const field = el.closest('.field');
-      if (field) field.dataset.invalid = 'true';
+      if (field) setFieldInvalid(field, true);
       valid = false;
     }
   });
@@ -113,7 +136,7 @@ function validate(form) {
     // Indian mobile: optional +91 or 0 prefix, then 10 digits starting with 6-9.
     if (!/^(\+91\s?|0\s?)?[6-9]\d{9}$/.test(el.value.trim())) {
       const field = el.closest('.field');
-      if (field) field.dataset.invalid = 'true';
+      if (field) setFieldInvalid(field, true);
       valid = false;
     }
   });

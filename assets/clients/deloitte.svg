@@ -1,0 +1,9 @@
+<!-- Text-based Deloitte wordmark. Simpleicons does not carry Deloitte
+     (brand-guideline restrictions). Renders via native SVG <text> so the
+     font falls back gracefully; swap for a client-supplied SVG when
+     available. Written permission from the brand owner is required to
+     display this in marketing collateral. -->
+<svg role="img" viewBox="0 0 130 24" xmlns="http://www.w3.org/2000/svg" aria-label="Deloitte">
+  <title>Deloitte</title>
+  <text x="0" y="19" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="22" letter-spacing="-0.4" fill="currentColor">Deloitte.</text>
+</svg>

@@ -1,5 +1,5 @@
-<!--
-  Site nav partial — source of truth.
+﻿<!--
+  Site nav partial - source of truth.
   This exact block is inlined into every page (there is no build step).
   To update site-wide, edit this file and use search/replace in the page files
   between the markers  <!-- BEGIN partials/nav.html -->  and  <!-- END partials/nav.html -->.
@@ -10,7 +10,7 @@
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="header" id="site-header" data-menu-open="false" data-scrolled="false">
   <div class="header__inner">
-    <a class="brand" href="index.html" aria-label="Cliff-Inn Adventures — Home" data-key="home">
+    <a class="brand" href="index.html" aria-label="Cliff-Inn Adventures - Home" data-key="home">
       <img class="brand__logo brand__logo--dark" src="assets/Logo/c-a-black-260.webp" srcset="assets/Logo/c-a-black-180.webp 180w, assets/Logo/c-a-black-260.webp 260w, assets/Logo/c-a-black-360.webp 360w" sizes="107px" alt="Cliff-Inn Adventures" width="107" height="107" decoding="async">
       <img class="brand__logo brand__logo--light" src="assets/Logo/c-a-white-260.webp" srcset="assets/Logo/c-a-white-180.webp 180w, assets/Logo/c-a-white-260.webp 260w, assets/Logo/c-a-white-360.webp 360w" sizes="107px" alt="" width="107" height="107" aria-hidden="true" decoding="async">
     </a>
@@ -41,7 +41,7 @@
   </div>
 </header>
 
-<!-- Mobile drawer — sibling of <header> (not descendant) so that .header can
+<!-- Mobile drawer - sibling of <header> (not descendant) so that .header can
      safely use `contain: paint layout` for scroll performance. Paint/layout
      containment establishes a new containing block for fixed descendants,
      which would collapse this full-viewport drawer to the header's rect if

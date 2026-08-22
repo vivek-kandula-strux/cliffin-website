@@ -16,6 +16,7 @@
 .u-mt-6 { margin-top: 1.5rem; }
 .u-mt-8 { margin-top: 2rem; }
 .u-mt-12 { margin-top: 3rem; }
+.u-mb-8 { margin-bottom: 2rem; }
 
 /* Flex helpers */
 .u-flex-wrap { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -26,6 +27,15 @@
 
 /* Show/hide */
 [hidden] { display: none !important; }
+
+.itinerary-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
 
 .u-visually-hidden {
   position: absolute;

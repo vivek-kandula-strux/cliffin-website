@@ -1,17 +1,17 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0f2a1f">
-<title>Corporate &amp; Group Packages — Cliff-Inn Adventures</title>
-<meta name="description" content="Retreats and team-building programs that strengthen bonds and boost morale — day outings, overnight camps and focused leadership workshops.">
+<title>Corporate &amp; Group Packages - Cliff-Inn Adventures</title>
+<meta name="description" content="Retreats and team-building programs that strengthen bonds and boost morale - day outings, overnight camps and focused leadership workshops.">
 <link rel="canonical" href="https://www.cliffinnadventures.com/corporate-packages.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Corporate &amp; Group Packages — Cliff-Inn Adventures">
+<meta property="og:title" content="Corporate &amp; Group Packages - Cliff-Inn Adventures">
 <meta property="og:description" content="Retreats that actually bring teams closer. Outcomes your HR team will love.">
 <meta property="og:url" content="https://www.cliffinnadventures.com/corporate-packages.html">
-<meta property="og:image" content="https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1200&q=80">
+<meta property="og:image" content="https://www.cliffinnadventures.com/assets/og/og-contact.webp">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/favicons/favicon.svg" type="image/svg+xml">
 <link rel="manifest" href="site.webmanifest">
@@ -27,7 +27,7 @@
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="header" id="site-header" data-menu-open="false" data-scrolled="false">
   <div class="header__inner">
-    <a class="brand" href="index.html" aria-label="Cliff-Inn Adventures — Home" data-key="home">
+    <a class="brand" href="index.html" aria-label="Cliff-Inn Adventures - Home" data-key="home">
       <img class="brand__logo" src="assets/Logo/c-a-black-260.webp" srcset="assets/Logo/c-a-black-180.webp 180w, assets/Logo/c-a-black-260.webp 260w, assets/Logo/c-a-black-360.webp 360w" sizes="107px" alt="Cliff-Inn Adventures" width="107" height="107" decoding="async">
     </a>
 
@@ -56,7 +56,7 @@
   </div>
 </header>
 
-<!-- Mobile drawer — sibling of <header> (not descendant) so that .header can
+<!-- Mobile drawer - sibling of <header> (not descendant) so that .header can
      safely use `contain: paint layout` for scroll performance. Paint/layout
      containment establishes a new containing block for fixed descendants,
      which would collapse this full-viewport drawer to the header's rect if
@@ -92,137 +92,464 @@
 
   <section class="hero-banner hero-banner--workshops" data-hero aria-labelledby="hero-title">
     <div class="hero-banner__media" data-hero-media>
-      <img src="assets/Background/adventure-workshops-hero-cliffin.png" alt="Illustration of climbers, hikers, cyclists, campers, ziplining and paragliding across a mountain landscape" loading="eager" fetchpriority="high" width="1920" height="785">
+      <img src="assets/Background/adventure-workshops-hero-cliffin.webp" alt="Illustration of climbers, hikers, cyclists, campers, ziplining and paragliding across a mountain landscape" loading="eager" fetchpriority="high" width="1983" height="793">
     </div>
     <div class="hero-banner__inner">
       <span class="eyebrow" data-hero-eyebrow><span></span>Stronger teams, outdoors</span>
       <h1 class="hero-banner__title" id="hero-title" data-hero-title>Corporate &amp; Group Packages</h1>
+      <div class="hero-banner__actions" data-hero-actions>
+        <a class="btn btn--primary btn--md" href="contact.html">Get A Corporate Quote →</a>
+        <a class="btn btn--outline-dark btn--md" href="#packages">See Packages</a>
+      </div>
     </div>
   </section>
 
-  <section class="section section--large container">
+  <!-- CLIENT TRUST STRIP — real brand SVGs (Microsoft, TATA, Infosys
+       via simpleicons.org, Deloitte as text-based fallback since it's
+       not in the simpleicons library). Brand-owner permission is required
+       before publishing this claim in marketing collateral. -->
+  <section class="section section--tight container" aria-label="Teams we've hosted">
+    <div class="logo-strip" data-animate>
+      <span class="logo-strip__label">Trusted by teams from</span>
+      <img class="logo-strip__mark" src="assets/clients/microsoft.svg" alt="Microsoft" loading="lazy" width="24" height="24">
+      <img class="logo-strip__mark logo-strip__mark--wide" src="assets/clients/deloitte.svg" alt="Deloitte" loading="lazy" width="130" height="24">
+      <img class="logo-strip__mark" src="assets/clients/tata.svg" alt="Tata" loading="lazy" width="24" height="24">
+      <img class="logo-strip__mark logo-strip__mark--wide" src="assets/clients/infosys.svg" alt="Infosys" loading="lazy" width="72" height="24">
+      <span class="logo-strip__more">+ 120 more teams</span>
+    </div>
+  </section>
+
+  <!-- EDITORIAL INTRO — dark backdrop framing before the package grid.
+       Mirrors the 'setting' pattern used on camp-sites.html. -->
+  <section class="section section--large container section--pine-deep">
+    <div class="split">
+      <div class="photo-pair" data-animate>
+        <div class="photo-pair__back">
+          <img src="assets/images/cliffinnadventures/hero/campfire-group-wide.webp" alt="Corporate team celebrating around a bonfire at night" loading="lazy" width="1920" height="1080">
+        </div>
+        <div class="photo-pair__front">
+          <img src="assets/images/cliffinnadventures/corporate/corporate-outing-01.webp" alt="Corporate group on a day-out adventure" loading="lazy" width="1600" height="1067">
+        </div>
+      </div>
+      <div data-animate>
+        <span class="eyebrow"><span></span>Why teams choose us</span>
+        <h2 style="margin-top:10px;">Retreats built like offsites — run like adventures</h2>
+        <p style="margin-top:22px; font-size:15px;">We plan for your team the way an ops lead would — group size, dietary needs, transport, rain-day fallback, safety ratios and an itinerary that ends on time. Then we run it like adventurers, so the day feels nothing like a boardroom.</p>
+        <a class="btn btn--primary btn--md" href="contact.html" style="margin-top:28px;">Talk To Our Team →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PACKAGES — package-forward cards mirroring the location cards on
+       camp-sites.html: eyebrow duration, big name, activity tags, and
+       a price/group-size row buyers scan first. -->
+  <section class="section section--large container" id="packages" aria-labelledby="packages-title">
     <div class="section-head section-head--center" data-animate>
       <span class="eyebrow eyebrow--center"><span></span>Choose your format</span>
-      <h2 style="margin-top:12px; font-size: clamp(28px, 4.4vw, 48px);">Retreats that actually bring teams closer</h2>
-      <p style="margin-top:20px; font-size:15px;">High-energy outings built to strengthen bonds, boost morale and deliver unforgettable adventure experiences. Pick a day out, an overnight camp, or a focused workshop — we handle the rest end to end.</p>
+      <h2 id="packages-title" style="margin-top:12px; font-size: clamp(28px, 4.4vw, 48px);">Four ways to run your retreat</h2>
+      <p style="margin-top:20px; font-size:15px;">A quick reset, an overnight bond-builder, a structured leadership workshop, or a fully organised offsite — pick a shape, we handle the rest end to end.</p>
     </div>
+
     <div class="card-grid" style="margin-top:44px;">
 
-      <article class="card" data-animate>
+      <article class="card card--package" data-animate>
         <div class="card__media card__media--tall">
           <img src="assets/images/cliffinnadventures/hero/adventure-day-out.webp" alt="Team games on grass at an outdoor day out" loading="lazy" width="1344" height="756">
+          <span class="chip chip--glass card__badge">Half Day</span>
         </div>
         <div class="card__body">
-          <span class="tile__eyebrow">Half Day</span>
-          <h3 class="card__title card__title--lg" style="margin-top:6px;">Corporate Day Outing</h3>
-          <p class="card__desc">A high-energy day of adventure games, challenges and bonding — perfect for a quick reset away from the desk.</p>
-          <div class="u-flex-col" style="gap:9px;">
-            <span class="bullet"><span>Adventure &amp; team games</span></span>
-            <span class="bullet"><span>Guided activities</span></span>
-            <span class="bullet"><span>Meals &amp; refreshments</span></span>
+          <p class="card__district">Day outing · Sanjeevni or on-site</p>
+          <h3 class="card__title">Corporate Day Outing</h3>
+          <p class="card__desc">High-energy adventure games, timed challenges and instructor-led bonding — the fastest reset when you can't spare a night.</p>
+          <ul class="card__tags" role="list">
+            <li>Adventure games</li>
+            <li>Rope activities</li>
+            <li>Lunch included</li>
+            <li>Rain fallback</li>
+          </ul>
+          <div class="card__price-row">
+            <span class="card__price">₹1,499</span>
+            <span class="card__price-label">per person · min 20 pax</span>
           </div>
-          <a class="btn btn--dark btn--sm" href="contact.html" style="margin-top:22px; text-align:center;">Request A Quote →</a>
+          <a class="btn btn--primary btn--sm" href="contact.html" style="text-align:center;">Request A Quote →</a>
         </div>
       </article>
 
-      <article class="card" data-animate>
+      <article class="card card--package" data-animate>
         <div class="card__media card__media--tall">
           <img src="assets/images/cliffinnadventures/night-camping/night-camp-3.webp" alt="Tents and bonfire at night" loading="lazy" width="1920" height="1280">
+          <span class="chip chip--glass card__badge">Overnight · Signature</span>
         </div>
         <div class="card__body">
-          <span class="tile__eyebrow">Overnight</span>
-          <h3 class="card__title card__title--lg" style="margin-top:6px;">Group Night Camping</h3>
-          <p class="card__desc">An overnight escape with tents, bonfire, night walks and star-gazing that builds trust and lasting memories.</p>
-          <div class="u-flex-col" style="gap:9px;">
-            <span class="bullet"><span>Tents &amp; camp setup</span></span>
-            <span class="bullet"><span>Bonfire &amp; dinner</span></span>
-            <span class="bullet"><span>Night adventure activities</span></span>
+          <p class="card__district">Ananthagiri · Village Trails · Keesara</p>
+          <h3 class="card__title">Group Night Camping</h3>
+          <p class="card__desc">Tents pitched, bonfire lit, night walks and star-gazing before a morning trek — the classic offsite that turns colleagues into a team.</p>
+          <ul class="card__tags" role="list">
+            <li>Tents &amp; setup</li>
+            <li>Bonfire &amp; dinner</li>
+            <li>Night walk</li>
+            <li>Sunrise trek</li>
+          </ul>
+          <div class="card__price-row">
+            <span class="card__price">₹1,999</span>
+            <span class="card__price-label">per person · min 15 pax</span>
           </div>
-          <a class="btn btn--dark btn--sm" href="contact.html" style="margin-top:22px; text-align:center;">Request A Quote →</a>
+          <a class="btn btn--primary btn--sm" href="contact.html" style="text-align:center;">Request A Quote →</a>
         </div>
       </article>
 
-      <article class="card" data-animate>
+      <article class="card card--package" data-animate>
         <div class="card__media card__media--tall">
-          <img src="assets/images/cliffinnadventures/camp-sites/village-trials/village-trials-01.webp" alt="Team working through a problem-solving task" loading="lazy" width="1920" height="1280">
+          <img src="assets/images/cliffinnadventures/school-programs/school-programs-11.webp" alt="Team working through a cargo-net teamwork obstacle" loading="lazy" width="1920" height="1440">
+          <span class="chip chip--glass card__badge">Workshop · 1–2 days</span>
         </div>
         <div class="card__body">
-          <span class="tile__eyebrow">Focused</span>
-          <h3 class="card__title card__title--lg" style="margin-top:6px;">Corporate Engagements</h3>
-          <p class="card__desc">Structured leadership and problem-solving sessions set outdoors, designed to translate straight back to work.</p>
-          <div class="u-flex-col" style="gap:9px;">
-            <span class="bullet"><span>Team Bonding activities</span></span>
-            <span class="bullet"><span>Fun Game Challenges</span></span>
-            <span class="bullet"><span>Fitness Challenges</span></span>
+          <p class="card__district">Facilitated · Leadership focus</p>
+          <h3 class="card__title">Team-Building Workshop</h3>
+          <p class="card__desc">Structured sessions built around trust, communication and decision-making under pressure — every activity has a debrief that translates back to work.</p>
+          <ul class="card__tags" role="list">
+            <li>Trust challenges</li>
+            <li>Problem-solving</li>
+            <li>Guided debriefs</li>
+            <li>Fitness track</li>
+          </ul>
+          <div class="card__price-row">
+            <span class="card__price">₹2,499</span>
+            <span class="card__price-label">per person · 15–60 pax</span>
           </div>
-          <a class="btn btn--dark btn--sm" href="contact.html" style="margin-top:22px; text-align:center;">Request A Quote →</a>
+          <a class="btn btn--primary btn--sm" href="contact.html" style="text-align:center;">Request A Quote →</a>
         </div>
       </article>
 
-      <article class="card" data-animate>
+      <article class="card card--package" data-animate>
         <div class="card__media card__media--tall">
-          <img src="assets/images/cliffinnadventures/hero/campfire-group-wide.webp" alt="Corporate group on a curated retreat trip" loading="lazy" width="1920" height="1080">
+          <img src="assets/images/cliffinnadventures/hero/campfire-group-wide.webp" alt="Corporate group on a curated multi-day retreat" loading="lazy" width="1920" height="1080">
+          <span class="chip chip--glass card__badge">End-to-end · 2–5 days</span>
         </div>
         <div class="card__body">
-          <span class="tile__eyebrow">End To End</span>
-          <h3 class="card__title card__title--lg" style="margin-top:6px;">Corporate Trips</h3>
-          <p class="card__desc">Fully organised corporate townhalls and executive programs — local tours, stay and premium experiences handled from start to finish.</p>
-          <div class="u-flex-col" style="gap:9px;">
-            <span class="bullet"><span>Townhalls &amp; executive programs</span></span>
-            <span class="bullet"><span>Local tours &amp; curated stay</span></span>
-            <span class="bullet"><span>Premium experiences</span></span>
+          <p class="card__district">Off-site · Full-service travel</p>
+          <h3 class="card__title">Executive Offsites</h3>
+          <p class="card__desc">Fully organised townhalls and leadership offsites — venue, stay, travel, meals, sessions and premium experiences, coordinated end to end.</p>
+          <ul class="card__tags" role="list">
+            <li>Townhall setup</li>
+            <li>Curated stay</li>
+            <li>Local tours</li>
+            <li>Premium meals</li>
+          </ul>
+          <div class="card__price-row">
+            <span class="card__price">On request</span>
+            <span class="card__price-label">tailored quote · any team size</span>
           </div>
-          <a class="btn btn--dark btn--sm" href="contact.html" style="margin-top:22px; text-align:center;">Request A Quote →</a>
+          <a class="btn btn--primary btn--sm" href="contact.html" style="text-align:center;">Request A Quote →</a>
         </div>
       </article>
 
     </div>
   </section>
 
-  <section class="section container" aria-labelledby="outcomes-title">
-    <div class="dark-panel" data-animate>
-      <div style="text-align:center;">
-        <span class="eyebrow eyebrow--center eyebrow--on-dark"><span></span>Why it works</span>
-        <h2 id="outcomes-title" class="dark-panel__title">Outcomes your HR team will love</h2>
-      </div>
-      <div class="chip-list" style="margin-top:38px;">
-        <div class="benefit">
-          <div class="benefit__stat" aria-hidden="true">↑</div>
-          <h3 class="benefit__title">Team Morale</h3>
-          <p class="benefit__body">Shared challenges outdoors reignite energy and connection.</p>
-        </div>
-        <div class="benefit">
-          <div class="benefit__stat" aria-hidden="true">★</div>
-          <h3 class="benefit__title">Real Trust</h3>
-          <p class="benefit__body">Activities that require reliance build genuine, lasting trust.</p>
-        </div>
-        <div class="benefit">
-          <div class="benefit__stat" aria-hidden="true">⤢</div>
-          <h3 class="benefit__title">Leadership</h3>
-          <p class="benefit__body">Natural leaders emerge and grow when the stakes feel real.</p>
-        </div>
-        <div class="benefit">
-          <div class="benefit__stat" aria-hidden="true">☺</div>
-          <h3 class="benefit__title">Fun That Sticks</h3>
-          <p class="benefit__body">Memories your team talks about long after the trip ends.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--large container">
+  <!-- SAMPLE ITINERARY — the concrete 'what happens' timeline buyers
+       want before committing. Same .steps pattern as camp-sites.html. -->
+  <section class="section section--large container" aria-labelledby="itinerary-title">
     <div class="split">
       <div data-animate>
-        <span class="eyebrow"><span></span>Team feedback</span>
-        <div class="rating" aria-hidden="true" style="margin-top:14px;">★★★★★</div>
-        <blockquote class="serif" style="font-size:24px; line-height:1.4; color: var(--color-ink); margin: 14px 0 0;">"Our corporate retreat with Cliff-Inn was nothing short of amazing. The bonfire and adventure games brought our team closer than ever!"</blockquote>
-        <div style="margin-top:20px;">
-          <div style="font-family: var(--font-display); font-weight:600; font-size:18px;">Rohit Sharma</div>
-          <div class="meta-label" style="margin-top:2px; color: var(--color-ember);">Corporate Manager</div>
+        <span class="eyebrow"><span></span>A sample day</span>
+        <h2 id="itinerary-title" style="margin-top:10px; font-size: clamp(26px, 4vw, 42px);">Group Night Camping · hour-by-hour</h2>
+        <p style="margin-top:22px; font-size:15px;">A typical run for a 25-person team at Ananthagiri. Every timing flexes around your travel window — we'll shape a version that fits your group before the quote goes out.</p>
+
+        <div class="steps" style="margin-top:28px;">
+          <div class="step">
+            <span class="step__num">1</span>
+            <div>
+              <h3 class="step__title">4:00 PM · Arrive, settle, ice-break</h3>
+              <p class="step__body">Tent allocation, welcome drink, quick safety brief and a facilitated ice-breaker to get the group talking.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step__num">2</span>
+            <div>
+              <h3 class="step__title">5:30 PM · Adventure block &amp; debrief</h3>
+              <p class="step__body">Rope courses, trust falls and a timed team challenge. 20-minute debrief where the day's leaders emerge.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step__num">3</span>
+            <div>
+              <h3 class="step__title">8:30 PM · Bonfire, dinner, awards</h3>
+              <p class="step__body">Dinner around the fire, music, and a short awards moment for the standout contributors from the challenges.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step__num">4</span>
+            <div>
+              <h3 class="step__title">6:00 AM · Sunrise trek · 11:00 AM · Check-out</h3>
+              <p class="step__body">Optional sunrise trek, buffet breakfast, wrap-up circle and an unhurried check-out.</p>
+            </div>
+          </div>
+        </div>
+
+        <p style="margin-top:26px; font-size:14px; color: var(--color-ink-soft);">
+          <strong>Included:</strong> tents, meals, tea &amp; snacks, activities, guides, first-aid, on-ground coordinator. <strong>Not included:</strong> transport (we can arrange it).
+        </p>
+
+        <a class="btn btn--dark btn--md" href="contact.html" style="margin-top:20px;">Shape My Itinerary →</a>
+      </div>
+      <div class="photo-pair" data-animate>
+        <div class="photo-pair__back">
+          <img src="assets/images/cliffinnadventures/camp-sites/ananthagiri/2023-02-14-1.webp" alt="Thatched dining pavilion at the Ananthagiri camp" loading="lazy" width="1920" height="1440">
+        </div>
+        <div class="photo-pair__front">
+          <img src="assets/images/cliffinnadventures/camp-sites/ananthagiri/ananthagiri-10.webp" alt="Bonfire with tents and red-lit trees at Ananthagiri" loading="lazy" width="1920" height="1280">
         </div>
       </div>
-      <div class="media-frame" data-animate style="min-height:400px;">
-        <img src="assets/images/cliffinnadventures/hero/campfire-group-wide.webp" alt="Team celebrating around a campfire" loading="lazy" width="1920" height="1080">
+    </div>
+  </section>
+
+  <!-- OUTCOMES — replaces the text-glyph benefit chips with an image
+       marquee (same pattern as camp-sites' amenity marquee): teams
+       actually doing the thing, not stat characters. Loops -50% seamlessly
+       and pauses on hover / focus / prefers-reduced-motion. -->
+  <section class="section" aria-labelledby="outcomes-title">
+    <div class="container">
+      <div class="section-head section-head--center" data-animate>
+        <span class="eyebrow eyebrow--center"><span></span>Why it works</span>
+        <h2 id="outcomes-title" style="margin-top:12px; font-size: clamp(28px, 4.4vw, 48px);">Outcomes your HR team will love</h2>
+      </div>
+    </div>
+
+    <div class="amenity-marquee" aria-label="Scrolling team outcomes">
+      <div class="amenity-marquee__track">
+
+        <ul class="amenity-marquee__set" role="list">
+          <li class="amenity-card">
+            <img class="amenity-card__img" src="assets/images/cliffinnadventures/hero/campfire-group-wide.webp" alt="Team celebrating around a bonfire" loading="lazy" width="1920" height="1080">
+            <div class="amenity-card__body">
+              <h3 class="amenity-card__title">Team Morale</h3>
+              <p class="amenity-card__desc">Shared wins outdoors reignite energy back at work.</p>
+            </div>
+          </li>
+          <li class="amenity-card">
+            <img class="amenity-card__img" src="assets/images/cliffinnadventures/school-programs/school-programs-11.webp" alt="Team belaying a climber on a cargo-net obstacle" loading="lazy" width="1920" height="1440">
+            <div class="amenity-card__body">
+              <h3 class="amenity-card__title">Real Trust</h3>
+              <p class="amenity-card__desc">Activities that need reliance build genuine trust.</p>
+            </div>
+          </li>
+          <li class="amenity-card">
+            <img class="amenity-card__img" src="assets/images/cliffinnadventures/camp-sites/village-trials/village-trials-03.webp" alt="Group in a facilitated circle around a firepit" loading="lazy" width="1920" height="1280">
+            <div class="amenity-card__body">
+              <h3 class="amenity-card__title">Leadership</h3>
+              <p class="amenity-card__desc">Natural leaders emerge when the stakes feel real.</p>
+            </div>
+          </li>
+          <li class="amenity-card">
+            <img class="amenity-card__img" src="assets/images/cliffinnadventures/night-camping/night-camp-3.webp" alt="Campsite lit up under the night sky" loading="lazy" width="1920" height="1280">
+            <div class="amenity-card__body">
+              <h3 class="amenity-card__title">Fun That Sticks</h3>
+              <p class="amenity-card__desc">Memories your team talks about every quarter.</p>
+            </div>
+          </li>
+          <li class="amenity-card">
+            <img class="amenity-card__img" src="assets/images/cliffinnadventures/corporate/corporate-outing-01.webp" alt="Corporate group on an outdoor day out" loading="lazy" width="1600" height="1067">
+            <div class="amenity-card__body">
+              <h3 class="amenity-card__title">Faster Onboarding</h3>
+              <p class="amenity-card__desc">New joiners bond in a weekend, not a quarter.</p>
+            </div>
+          </li>
+          <li class="amenity-card">
+            <img class="amenity-card__img" src="assets/images/cliffinnadventures/school-programs/school-programs-15.webp" alt="Climber on a rock-climbing wall" loading="lazy" width="1440" height="1920">
+            <div class="amenity-card__body">
+              <h3 class="amenity-card__title">Confidence</h3>
+              <p class="amenity-card__desc">Nervous first-timers, calm decision-makers by evening.</p>
+            </div>
+          </li>
+        </ul>
+
+        <ul class="amenity-marquee__set" role="list" aria-hidden="true">
+          <li class="amenity-card">
+            <img class="amenity-card__img" src="assets/images/cliffinnadventures/hero/campfire-group-wide.webp" alt="" loading="lazy" width="1920" height="1080">
+            <div class="amenity-card__body">
+              <h3 class="amenity-card__title">Team Morale</h3>
+              <p class="amenity-card__desc">Shared wins outdoors reignite energy back at work.</p>
+            </div>
+          </li>
+          <li class="amenity-card">
+            <img class="amenity-card__img" src="assets/images/cliffinnadventures/school-programs/school-programs-11.webp" alt="" loading="lazy" width="1920" height="1440">
+            <div class="amenity-card__body">
+              <h3 class="amenity-card__title">Real Trust</h3>
+              <p class="amenity-card__desc">Activities that need reliance build genuine trust.</p>
+            </div>
+          </li>
+          <li class="amenity-card">
+            <img class="amenity-card__img" src="assets/images/cliffinnadventures/camp-sites/village-trials/village-trials-03.webp" alt="" loading="lazy" width="1920" height="1280">
+            <div class="amenity-card__body">
+              <h3 class="amenity-card__title">Leadership</h3>
+              <p class="amenity-card__desc">Natural leaders emerge when the stakes feel real.</p>
+            </div>
+          </li>
+          <li class="amenity-card">
+            <img class="amenity-card__img" src="assets/images/cliffinnadventures/night-camping/night-camp-3.webp" alt="" loading="lazy" width="1920" height="1280">
+            <div class="amenity-card__body">
+              <h3 class="amenity-card__title">Fun That Sticks</h3>
+              <p class="amenity-card__desc">Memories your team talks about every quarter.</p>
+            </div>
+          </li>
+          <li class="amenity-card">
+            <img class="amenity-card__img" src="assets/images/cliffinnadventures/corporate/corporate-outing-01.webp" alt="" loading="lazy" width="1600" height="1067">
+            <div class="amenity-card__body">
+              <h3 class="amenity-card__title">Faster Onboarding</h3>
+              <p class="amenity-card__desc">New joiners bond in a weekend, not a quarter.</p>
+            </div>
+          </li>
+          <li class="amenity-card">
+            <img class="amenity-card__img" src="assets/images/cliffinnadventures/school-programs/school-programs-15.webp" alt="" loading="lazy" width="1440" height="1920">
+            <div class="amenity-card__body">
+              <h3 class="amenity-card__title">Confidence</h3>
+              <p class="amenity-card__desc">Nervous first-timers, calm decision-makers by evening.</p>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- VENUE STRIP — deep-links to the three camps that actually host
+       corporate groups, so buyers can pre-answer 'wait, where?'. -->
+  <section class="section container" aria-labelledby="venues-title">
+    <div class="section-head" data-animate>
+      <div>
+        <span class="eyebrow"><span></span>Where it happens</span>
+        <h2 id="venues-title" style="margin-top:10px; font-size: clamp(26px, 3.6vw, 38px);">Three venues that host corporate groups</h2>
+      </div>
+      <a class="link-arrow" href="camp-sites.html">See all camp sites →</a>
+    </div>
+
+    <div class="venue-strip" style="margin-top:24px;">
+      <a class="venue-tile" href="camp-sites.html" data-animate>
+        <img class="venue-tile__img" src="assets/images/cliffinnadventures/camp-sites/village-trials/village-trials-03.webp" alt="Village Trails camp at night with tents and firepit" loading="lazy" width="1920" height="1280">
+        <div class="venue-tile__body">
+          <div>
+            <span class="venue-tile__district">Ghatkesar · Medchal</span>
+            <h3 class="venue-tile__place">Village Trails</h3>
+          </div>
+          <span class="venue-tile__km" aria-label="60 kilometres from Hyderabad">60 km</span>
+        </div>
+      </a>
+      <a class="venue-tile" href="camp-sites.html" data-animate>
+        <img class="venue-tile__img" src="assets/images/cliffinnadventures/camp-sites/keesara/2022-01-24-1.webp" alt="Fairy-lit cabins at Keesara at dusk" loading="lazy" width="1920" height="1441">
+        <div class="venue-tile__body">
+          <div>
+            <span class="venue-tile__district">Keesara · Medchal</span>
+            <h3 class="venue-tile__place">Keesara Hills</h3>
+          </div>
+          <span class="venue-tile__km" aria-label="70 kilometres from Hyderabad">70 km</span>
+        </div>
+      </a>
+      <a class="venue-tile" href="camp-sites.html" data-animate>
+        <img class="venue-tile__img" src="assets/images/cliffinnadventures/camp-sites/ananthagiri/ananthagiri-06.webp" alt="Hilltop tower overlooking the Ananthagiri Hills" loading="lazy" width="1920" height="1280">
+        <div class="venue-tile__body">
+          <div>
+            <span class="venue-tile__district">Vikarabad · Featured</span>
+            <h3 class="venue-tile__place">Ananthagiri Hills</h3>
+          </div>
+          <span class="venue-tile__km" aria-label="90 kilometres from Hyderabad">90 km</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- CORPORATE TESTIMONIAL MARQUEE — reuses the .tmq pattern from
+       index.html, filtered to voices from corporate clients only. -->
+  <section class="section" aria-labelledby="corp-tmq-title">
+    <div class="container--wide">
+      <div class="section-head" data-animate>
+        <div>
+          <span class="eyebrow"><span></span>Team feedback</span>
+          <h2 id="corp-tmq-title" class="section-title--tight">What HR &amp; team leads are saying</h2>
+        </div>
+        <div class="tmq-rating" aria-label="Rated 4.9 on Google Reviews">
+          <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+          </svg>
+          <span class="tmq-rating__stars" aria-hidden="true">★★★★★</span>
+          <strong class="tmq-rating__score">4.9</strong>
+          <span class="tmq-rating__label">on Google</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tmq" aria-label="Scrolling corporate testimonials">
+      <div class="tmq__track">
+
+        <div class="tmq__set">
+          <article class="tmq__card">
+            <div class="tmq__card-head"><span class="tmq__stars" aria-label="5 out of 5 stars">★★★★★</span></div>
+            <p class="tmq__text">"Cliff-Inn turned our Microsoft offsite into a real team reset. The high-rope course forced collaboration, the <strong>safety</strong> checks were constant, and the <strong>team bonding</strong> we built around the bonfire still shows back at work."</p>
+            <footer class="tmq__attrib"><span class="tmq__avatar" aria-hidden="true">L</span><div><div class="tmq__name">Laxmi</div><div class="tmq__role">Microsoft</div></div></footer>
+          </article>
+          <article class="tmq__card">
+            <div class="tmq__card-head"><span class="tmq__stars" aria-label="5 out of 5 stars">★★★★★</span></div>
+            <p class="tmq__text">"Our Deloitte group wanted <strong>adventure</strong>, not another hotel banquet. The day was packed with <strong>energy</strong>, every station had clear instruction, and the <strong>fun</strong> was contagious from start to finish."</p>
+            <footer class="tmq__attrib"><span class="tmq__avatar" aria-hidden="true">P</span><div><div class="tmq__name">Pooja</div><div class="tmq__role">Deloitte</div></div></footer>
+          </article>
+          <article class="tmq__card">
+            <div class="tmq__card-head"><span class="tmq__stars" aria-label="5 out of 5 stars">★★★★★</span></div>
+            <p class="tmq__text">"They <strong>tailored</strong> the entire itinerary around our fitness levels and team size. The <strong>certified guides</strong> kept us informed, on track and safe from transport to the closing ceremony."</p>
+            <footer class="tmq__attrib"><span class="tmq__avatar" aria-hidden="true">S</span><div><div class="tmq__name">Srinivas</div><div class="tmq__role">TATA</div></div></footer>
+          </article>
+          <article class="tmq__card">
+            <div class="tmq__card-head"><span class="tmq__stars" aria-label="5 out of 5 stars">★★★★★</span></div>
+            <p class="tmq__text">"The rappelling workshop was the highlight. Instructors taught real <strong>adventure skills</strong> and built <strong>confidence</strong> so quickly that even nervous first-timers were smiling at the top."</p>
+            <footer class="tmq__attrib"><span class="tmq__avatar" aria-hidden="true">Sr</span><div><div class="tmq__name">Sravan</div><div class="tmq__role">Infosys</div></div></footer>
+          </article>
+          <article class="tmq__card">
+            <div class="tmq__card-head"><span class="tmq__stars" aria-label="5 out of 5 stars">★★★★★</span></div>
+            <p class="tmq__text">"The night camp gave us <strong>nature</strong> at its best. Tents, campfire cooking and the sunrise trek created <strong>memories</strong> our team talks about every quarter."</p>
+            <footer class="tmq__attrib"><span class="tmq__avatar" aria-hidden="true">A</span><div><div class="tmq__name">Anuj</div><div class="tmq__role">Corporate Lead</div></div></footer>
+          </article>
+          <article class="tmq__card">
+            <div class="tmq__card-head"><span class="tmq__stars" aria-label="5 out of 5 stars">★★★★★</span></div>
+            <p class="tmq__text">"Our corporate retreat with Cliff-Inn was nothing short of amazing. The <strong>bonfire</strong> and <strong>adventure games</strong> brought our team closer than ever."</p>
+            <footer class="tmq__attrib"><span class="tmq__avatar" aria-hidden="true">R</span><div><div class="tmq__name">Rohit Sharma</div><div class="tmq__role">Corporate Manager</div></div></footer>
+          </article>
+        </div>
+
+        <div class="tmq__set" aria-hidden="true">
+          <article class="tmq__card">
+            <div class="tmq__card-head"><span class="tmq__stars">★★★★★</span></div>
+            <p class="tmq__text">"Cliff-Inn turned our Microsoft offsite into a real team reset. The high-rope course forced collaboration, the <strong>safety</strong> checks were constant, and the <strong>team bonding</strong> we built around the bonfire still shows back at work."</p>
+            <footer class="tmq__attrib"><span class="tmq__avatar">L</span><div><div class="tmq__name">Laxmi</div><div class="tmq__role">Microsoft</div></div></footer>
+          </article>
+          <article class="tmq__card">
+            <div class="tmq__card-head"><span class="tmq__stars">★★★★★</span></div>
+            <p class="tmq__text">"Our Deloitte group wanted <strong>adventure</strong>, not another hotel banquet. The day was packed with <strong>energy</strong>, every station had clear instruction, and the <strong>fun</strong> was contagious from start to finish."</p>
+            <footer class="tmq__attrib"><span class="tmq__avatar">P</span><div><div class="tmq__name">Pooja</div><div class="tmq__role">Deloitte</div></div></footer>
+          </article>
+          <article class="tmq__card">
+            <div class="tmq__card-head"><span class="tmq__stars">★★★★★</span></div>
+            <p class="tmq__text">"They <strong>tailored</strong> the entire itinerary around our fitness levels and team size. The <strong>certified guides</strong> kept us informed, on track and safe from transport to the closing ceremony."</p>
+            <footer class="tmq__attrib"><span class="tmq__avatar">S</span><div><div class="tmq__name">Srinivas</div><div class="tmq__role">TATA</div></div></footer>
+          </article>
+          <article class="tmq__card">
+            <div class="tmq__card-head"><span class="tmq__stars">★★★★★</span></div>
+            <p class="tmq__text">"The rappelling workshop was the highlight. Instructors taught real <strong>adventure skills</strong> and built <strong>confidence</strong> so quickly that even nervous first-timers were smiling at the top."</p>
+            <footer class="tmq__attrib"><span class="tmq__avatar">Sr</span><div><div class="tmq__name">Sravan</div><div class="tmq__role">Infosys</div></div></footer>
+          </article>
+          <article class="tmq__card">
+            <div class="tmq__card-head"><span class="tmq__stars">★★★★★</span></div>
+            <p class="tmq__text">"The night camp gave us <strong>nature</strong> at its best. Tents, campfire cooking and the sunrise trek created <strong>memories</strong> our team talks about every quarter."</p>
+            <footer class="tmq__attrib"><span class="tmq__avatar">A</span><div><div class="tmq__name">Anuj</div><div class="tmq__role">Corporate Lead</div></div></footer>
+          </article>
+          <article class="tmq__card">
+            <div class="tmq__card-head"><span class="tmq__stars">★★★★★</span></div>
+            <p class="tmq__text">"Our corporate retreat with Cliff-Inn was nothing short of amazing. The <strong>bonfire</strong> and <strong>adventure games</strong> brought our team closer than ever."</p>
+            <footer class="tmq__attrib"><span class="tmq__avatar">R</span><div><div class="tmq__name">Rohit Sharma</div><div class="tmq__role">Corporate Manager</div></div></footer>
+          </article>
+        </div>
+
       </div>
     </div>
   </section>
@@ -242,7 +569,7 @@
     <div class="footer__cta-copy">
       <span class="footer__cta-eyebrow serif">Let's plan your escape</span>
       <h2 class="footer__cta-title">Ready for your<br>next adventure?</h2>
-      <p class="footer__cta-sub">Whether you're a school, a company, or a soul craving the wild — we'll build the perfect experience around you.</p>
+      <p class="footer__cta-sub">Whether you're a school, a company, or a soul craving the wild - we'll build the perfect experience around you.</p>
     </div>
     <div class="footer__cta-actions">
       <form class="footer__cta-form form--on-dark" data-form="cta-quick" novalidate>
@@ -272,7 +599,7 @@
   </div>
 </div>
 
-<!-- 2) Mountain terrain transition — bridges CTA to footer -->
+<!-- 2) Mountain terrain transition - bridges CTA to footer -->
 <div class="footer-terrain" aria-hidden="true" data-nav-invert>
   <img src="assets/Background/bg-image-cliffin-1600.webp" srcset="assets/Background/bg-image-cliffin-1200.webp 1200w, assets/Background/bg-image-cliffin-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async" width="1600" height="640">
 </div>
@@ -344,7 +671,7 @@
 
     <div class="footer__brand">
       <img class="footer__brand-logo" src="assets/Logo/c-a-white-260.webp" srcset="assets/Logo/c-a-white-180.webp 180w, assets/Logo/c-a-white-260.webp 260w, assets/Logo/c-a-white-360.webp 360w" sizes="112px" alt="Cliff-Inn Adventures" width="112" height="112" decoding="async">
-      <p class="footer__brand-desc">We craft outdoor experiences for schools and corporates — camps, workshops and team-building that build confidence, leadership and lasting bonds.</p>
+      <p class="footer__brand-desc">We craft outdoor experiences for schools and corporates - camps, workshops and team-building that build confidence, leadership and lasting bonds.</p>
       <div class="footer__socials" aria-label="Follow us on social media">
         <a class="footer__social" href="https://instagram.com/cliffinnadventures" aria-label="Instagram" rel="noopener noreferrer" target="_blank">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>

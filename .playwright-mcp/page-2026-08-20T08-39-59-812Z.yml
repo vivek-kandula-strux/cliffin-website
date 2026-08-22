@@ -1,0 +1,326 @@
+- generic [active] [ref=f1e1]:
+  - link "Skip to content" [ref=f1e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f1e3]:
+    - generic [ref=f1e4]:
+      - link "Cliff-Inn Adventures — Home" [ref=f1e5] [cursor=pointer]:
+        - /url: index.html
+        - img "Cliff-Inn Adventures" [ref=f1e6]
+      - button "Toggle menu" [ref=f1e8] [cursor=pointer]
+  - main [ref=f1e12]:
+    - region [ref=f1e13]:
+      - generic [ref=f1e15]:
+        - generic [ref=f1e16]:
+          - generic [ref=f1e17]: Where learning meets adventure
+          - heading "Escape the ordinary. Find your freedom." [level=1] [ref=f1e18]: Escape the ordinary.Find your freedom.
+          - paragraph [ref=f1e19]: Guided outdoor experiences for schools, corporates and independent explorers — built to challenge, connect and inspire.
+        - generic [ref=f1e20]:
+          - generic [ref=f1e21]:
+            - generic [ref=f1e22]: ★★★★★
+            - generic [ref=f1e23]: Trusted by 120+ schools & brands
+          - generic [ref=f1e24]:
+            - link "Plan Your Escape" [ref=f1e25] [cursor=pointer]:
+              - /url: "#interest"
+              - text: Plan Your Escape
+              - generic [ref=f1e26]: →
+            - link "View the gallery" [ref=f1e27] [cursor=pointer]:
+              - /url: gallery.html
+    - region [ref=f1e28]:
+      - generic [ref=f1e29]:
+        - generic [ref=f1e30]:
+          - generic [ref=f1e31]:
+            - generic [ref=f1e32]: What we do
+            - heading "Experiences built to challenge & inspire" [level=2] [ref=f1e33]: Experiences built tochallenge & inspire
+          - link "All Programs →" [ref=f1e34] [cursor=pointer]:
+            - /url: school-programs.html
+        - generic [ref=f1e35]:
+          - link "Instructor guiding children in orange safety vests through an outdoor adventure activity Schools School Boot Camps A thrilling boot camp designed to challenge limits, build teamwork and create unforgettable cliffside adventure experiences. Know More →" [ref=f1e36] [cursor=pointer]:
+            - /url: school-programs.html
+            - img "Instructor guiding children in orange safety vests through an outdoor adventure activity" [ref=f1e37]
+            - generic [ref=f1e38]: Schools
+            - generic [ref=f1e39]:
+              - heading "School Boot Camps" [level=3] [ref=f1e40]
+              - paragraph [ref=f1e41]: A thrilling boot camp designed to challenge limits, build teamwork and create unforgettable cliffside adventure experiences.
+              - generic [ref=f1e42]: Know More →
+          - link [ref=f1e43] [cursor=pointer]:
+            - /url: corporate-packages.html
+            - img "Corporate team competing in tug-of-war during an outdoor team-building event" [ref=f1e44]
+            - generic [ref=f1e45]:
+              - text: Corporates
+              - heading "Corporate Outings" [level=3] [ref=f1e46]
+              - paragraph [ref=f1e47]: High-energy retreats that strengthen bonds and boost morale.
+          - link [ref=f1e48] [cursor=pointer]:
+            - /url: camp-sites.html
+            - img "Tents pitched under a starry sky" [ref=f1e49]
+            - generic [ref=f1e50]:
+              - text: Camping
+              - heading "Our Campsites" [level=3] [ref=f1e51]
+              - paragraph [ref=f1e52]: Riverside pitches, forest cover and star-clear skies.
+          - generic [ref=f1e53]:
+            - generic [ref=f1e54]:
+              - text: Not sure yet?
+              - paragraph [ref=f1e55]: Tell us your group & dates — we'll tailor an itinerary around your goals, ages and energy.
+            - link "Plan with us →" [ref=f1e56] [cursor=pointer]:
+              - /url: "#interest"
+    - region [ref=f1e60]:
+      - generic [ref=f1e61]:
+        - generic [ref=f1e62]:
+          - generic [ref=f1e63]:
+            - generic [ref=f1e64]: Upcoming expeditions
+            - heading "Reserve your spot in the wild" [level=2] [ref=f1e65]: Reserve your spotin the wild
+          - paragraph [ref=f1e66]: Limited departures, small groups, fully guided. Block your interest and we'll hold a place while we confirm dates with you.
+        - generic [ref=f1e67]:
+          - article [ref=f1e68]:
+            - generic [ref=f1e69]:
+              - img "Snow-line ridge on a Himalayan trek" [ref=f1e70]
+              - generic [ref=f1e71]: Oct 2026
+              - generic [ref=f1e72]: 8 spots left
+            - generic [ref=f1e73]:
+              - generic [ref=f1e74]:
+                - generic [ref=f1e75]: Himachal
+                - generic [ref=f1e76]: 6 Days
+                - generic [ref=f1e77]: Moderate
+              - heading "Himalayan High Trek" [level=3] [ref=f1e78]
+              - paragraph [ref=f1e79]: Snow-line trails, alpine meadows and summit views on a fully-supported Himalayan crossing.
+              - generic [ref=f1e80]:
+                - generic [ref=f1e81]:
+                  - generic [ref=f1e82]: From
+                  - generic [ref=f1e83]: ₹18,500
+                - link "Register Interest →" [ref=f1e84] [cursor=pointer]:
+                  - /url: "#interest"
+          - article [ref=f1e85]:
+            - generic [ref=f1e86]:
+              - img "Camping tents beneath tall trees at dusk" [ref=f1e87]
+              - generic [ref=f1e88]: Aug 2026
+              - generic [ref=f1e89]: 12 spots left
+            - generic [ref=f1e90]:
+              - generic [ref=f1e91]:
+                - generic [ref=f1e92]: Srisailam Forest
+                - generic [ref=f1e93]: 2 Days
+                - generic [ref=f1e94]: Easy
+              - heading "Nallamalla Night Camp" [level=3] [ref=f1e95]
+              - paragraph [ref=f1e96]: Two days of forest camping, bonfires, night walks and star-gazing deep in the wild.
+              - generic [ref=f1e97]:
+                - generic [ref=f1e98]:
+                  - generic [ref=f1e99]: From
+                  - generic [ref=f1e100]: ₹3,900
+                - link "Register Interest →" [ref=f1e101] [cursor=pointer]:
+                  - /url: "#interest"
+          - article [ref=f1e102]:
+            - generic [ref=f1e103]:
+              - img "Dramatic coastal cliffs rising above the sea at golden light" [ref=f1e104]
+              - generic [ref=f1e105]: Sep 2026
+              - generic [ref=f1e106]: 6 spots left
+            - generic [ref=f1e107]:
+              - generic [ref=f1e108]:
+                - generic [ref=f1e109]: Vizag Coast
+                - generic [ref=f1e110]: 3 Days
+                - generic [ref=f1e111]: Challenging
+              - heading "Coastal Rappelling Expedition" [level=3] [ref=f1e112]
+              - paragraph [ref=f1e113]: Descend dramatic sea cliffs, then trek hidden coves — our most adrenaline-packed weekend.
+              - generic [ref=f1e114]:
+                - generic [ref=f1e115]:
+                  - generic [ref=f1e116]: From
+                  - generic [ref=f1e117]: ₹7,500
+                - link "Register Interest →" [ref=f1e118] [cursor=pointer]:
+                  - /url: "#interest"
+        - generic [ref=f1e120]:
+          - generic [ref=f1e121]:
+            - text: Block your spot
+            - heading "Register your interest" [level=3] [ref=f1e122]
+            - paragraph [ref=f1e123]: No payment now. Tell us which adventure calls to you and how many are coming — our team holds your place and reaches out with dates, pricing and the full plan.
+            - generic [ref=f1e124]:
+              - generic [ref=f1e125]:
+                - generic [ref=f1e126]: 24h
+                - generic [ref=f1e127]: Response time
+              - generic [ref=f1e128]:
+                - generic [ref=f1e129]: Free
+                - generic [ref=f1e130]: To register
+              - generic [ref=f1e131]:
+                - generic [ref=f1e132]: Small
+                - generic [ref=f1e133]: Group sizes
+          - generic [ref=f1e134]:
+            - link "Register My Interest →" [ref=f1e135] [cursor=pointer]:
+              - /url: "#interest"
+            - paragraph [ref=f1e136]: Takes 30 seconds. We call back within 24 hours with dates and a tailored plan.
+    - region [ref=f1e137]:
+      - generic [ref=f1e139]:
+        - generic [ref=f1e140]:
+          - generic [ref=f1e141]:
+            - generic [ref=f1e142]: Why Cliff-Inn
+            - heading "What makes us different" [level=2] [ref=f1e143]
+            - paragraph [ref=f1e144]: A team of energetic explorers who believe learning happens best when it's lived — not just taught. Safe, certified, unforgettable.
+          - link "More About Us →" [ref=f1e145] [cursor=pointer]:
+            - /url: about.html
+        - generic [ref=f1e146]:
+          - generic [ref=f1e147]: "01"
+          - heading "Guided Expeditions" [level=3] [ref=f1e148]
+          - paragraph [ref=f1e149]: Seasoned guides who know the terrain inside out.
+        - generic [ref=f1e150]:
+          - generic [ref=f1e151]: "02"
+          - heading "Tailored Adventures" [level=3] [ref=f1e152]
+          - paragraph [ref=f1e153]: Shaped around your group — age, goals and thrill.
+        - generic [ref=f1e154]:
+          - generic [ref=f1e155]: "03"
+          - heading "Eco-Conscious" [level=3] [ref=f1e156]
+          - paragraph [ref=f1e157]: Leave-no-trace camps that respect the wild.
+        - generic [ref=f1e158]:
+          - generic [ref=f1e159]: "04"
+          - heading "Experienced Guides" [level=3] [ref=f1e160]
+          - paragraph [ref=f1e161]: Passion-driven leaders trained in first response.
+        - generic [ref=f1e162]:
+          - generic [ref=f1e163]: "05"
+          - heading "Expert Gear" [level=3] [ref=f1e164]
+          - paragraph [ref=f1e165]: Inspected, certified equipment for climbing, rappelling and camping.
+        - generic [ref=f1e166]:
+          - generic [ref=f1e167]: "06"
+          - heading "24/7 Assistance" [level=3] [ref=f1e168]
+          - paragraph [ref=f1e169]: On-ground support before, during and after every single trip.
+    - region [ref=f1e170]:
+      - generic [ref=f1e172]:
+        - generic [ref=f1e173]: Stories from the wild
+        - heading "See it, feel it, remember it" [level=2] [ref=f1e174]
+      - generic [ref=f1e175]:
+        - link "Coastal cliff at sunset — the setting of our feature film Adventure Film Beach-View Rappelling Rope, rock, and the Vizag coast at golden hour — moments from our last expedition." [ref=f1e176] [cursor=pointer]:
+          - /url: gallery.html
+          - img "Coastal cliff at sunset — the setting of our feature film" [ref=f1e177]
+          - generic [ref=f1e178]:
+            - generic [ref=f1e179]: Adventure Film
+            - generic [ref=f1e180]: Beach-View Rappelling
+            - paragraph [ref=f1e181]: Rope, rock, and the Vizag coast at golden hour — moments from our last expedition.
+        - generic [ref=f1e182]:
+          - generic [ref=f1e183]: ★★★★★
+          - generic [ref=f1e184]: Rated 5 out of 5 stars
+          - paragraph [ref=f1e185]: “The bonfire and adventure games brought our team closer than ever. Perfectly organized from start to finish.”
+          - generic [ref=f1e186]:
+            - img "Portrait of Rohit Sharma" [ref=f1e188]
+            - generic [ref=f1e189]:
+              - generic [ref=f1e190]: Rohit Sharma
+              - generic [ref=f1e191]: Corporate Manager
+        - generic [ref=f1e192]:
+          - generic [ref=f1e193]: ★★★★★
+          - generic [ref=f1e194]: Rated 5 out of 5 stars
+          - paragraph [ref=f1e195]: “A fantastic escape from city life — scenic trails, culture and a well-planned itinerary. Highly recommend!”
+          - generic [ref=f1e196]:
+            - img "Portrait of Priya Mehta" [ref=f1e198]
+            - generic [ref=f1e199]:
+              - generic [ref=f1e200]: Priya Mehta
+              - generic [ref=f1e201]: Travel Enthusiast
+  - generic [ref=f1e203]:
+    - generic [ref=f1e205]:
+      - generic [ref=f1e206]:
+        - generic [ref=f1e207]: Let's plan your escape
+        - heading "Ready for your next adventure?" [level=2] [ref=f1e208]: Ready for yournext adventure?
+        - paragraph [ref=f1e209]: Whether you're a school, a company, or a soul craving the wild — we'll build the perfect experience around you.
+      - generic [ref=f1e211]:
+        - link "Plan My Escape →" [ref=f1e212] [cursor=pointer]:
+          - /url: "#interest"
+        - paragraph [ref=f1e213]: Tell us your dates and group size. We reply within 24 hours with a tailored plan.
+    - contentinfo [ref=f1e215]:
+      - generic [ref=f1e217]:
+        - generic [ref=f1e218]:
+          - generic [ref=f1e219]: 8+
+          - generic [ref=f1e220]: Years guiding in the wild
+        - generic [ref=f1e221]:
+          - generic [ref=f1e222]: 120+
+          - generic [ref=f1e223]: Schools & corporates
+        - generic [ref=f1e224]:
+          - generic [ref=f1e225]: 5k+
+          - generic [ref=f1e226]: Explorers guided
+        - generic [ref=f1e227]:
+          - generic "5 out of 5 stars" [ref=f1e228]: ★★★★★
+          - generic [ref=f1e229]: Top-rated experiences
+      - generic "Safety credentials" [ref=f1e230]:
+        - generic [ref=f1e231]:
+          - generic [ref=f1e236]:
+            - generic [ref=f1e237]: Wilderness First Aid
+            - generic [ref=f1e238]: Certified guides on every trip
+          - generic [ref=f1e242]:
+            - generic [ref=f1e243]: Fully Insured
+            - generic [ref=f1e244]: Comprehensive trip & liability cover
+          - generic [ref=f1e250]:
+            - generic [ref=f1e251]: Small Group Ratios
+            - generic [ref=f1e252]: Up to 1:8 instructor:participant
+          - generic [ref=f1e258]:
+            - generic [ref=f1e259]: Written Safety Protocol
+            - generic [ref=f1e260]: Gear checks & briefings on every activity
+      - generic [ref=f1e261]:
+        - generic [ref=f1e262]:
+          - img "Cliff-Inn Adventures" [ref=f1e263]
+          - paragraph [ref=f1e264]: We craft outdoor experiences for schools and corporates — camps, workshops and team-building that build confidence, leadership and lasting bonds.
+          - generic "Follow us on social media" [ref=f1e265]:
+            - link "Instagram" [ref=f1e266] [cursor=pointer]:
+              - /url: https://instagram.com/cliffinnadventures
+            - link "WhatsApp" [ref=f1e271] [cursor=pointer]:
+              - /url: https://wa.me/919573199863
+        - navigation "Explore" [ref=f1e275]:
+          - heading "Explore" [level=3] [ref=f1e276]
+          - list [ref=f1e277]:
+            - listitem [ref=f1e278]:
+              - link "Home" [ref=f1e279] [cursor=pointer]:
+                - /url: index.html
+            - listitem [ref=f1e280]:
+              - link "About Us" [ref=f1e281] [cursor=pointer]:
+                - /url: about.html
+            - listitem [ref=f1e282]:
+              - link "Gallery" [ref=f1e283] [cursor=pointer]:
+                - /url: gallery.html
+            - listitem [ref=f1e284]:
+              - link "Our Camp Sites" [ref=f1e285] [cursor=pointer]:
+                - /url: camp-sites.html
+            - listitem [ref=f1e286]:
+              - link "Contact" [ref=f1e287] [cursor=pointer]:
+                - /url: contact.html
+        - navigation "Programs" [ref=f1e288]:
+          - heading "Programs" [level=3] [ref=f1e289]
+          - list [ref=f1e290]:
+            - listitem [ref=f1e291]:
+              - link "School Programs" [ref=f1e292] [cursor=pointer]:
+                - /url: school-programs.html
+            - listitem [ref=f1e293]:
+              - link "Adventure Workshops" [ref=f1e294] [cursor=pointer]:
+                - /url: adventure-workshops.html
+            - listitem [ref=f1e295]:
+              - link "Corporate & Groups" [ref=f1e296] [cursor=pointer]:
+                - /url: corporate-packages.html
+            - listitem [ref=f1e297]:
+              - link "Night Camping" [ref=f1e298] [cursor=pointer]:
+                - /url: corporate-packages.html
+            - listitem [ref=f1e299]:
+              - link "School Boot Camps" [ref=f1e300] [cursor=pointer]:
+                - /url: school-programs.html
+        - generic [ref=f1e301]:
+          - heading "Get In Touch" [level=3] [ref=f1e302]
+          - list [ref=f1e303]:
+            - listitem [ref=f1e304]:
+              - generic [ref=f1e305]: Call us
+              - link "Primary +91 95731 99863" [ref=f1e308] [cursor=pointer]:
+                - /url: tel:+919573199863
+                - generic [ref=f1e309]: Primary
+                - text: +91 95731 99863
+              - link "Alt +91 90107 39847" [ref=f1e310] [cursor=pointer]:
+                - /url: tel:+919010739847
+                - generic [ref=f1e311]: Alt
+                - text: +91 90107 39847
+            - listitem [ref=f1e312]:
+              - generic [ref=f1e313]: Mail us
+              - link "cliffinnadventures@gmail.com" [ref=f1e317] [cursor=pointer]:
+                - /url: mailto:cliffinnadventures@gmail.com
+            - listitem [ref=f1e318]:
+              - generic [ref=f1e319]: WhatsApp
+              - link "+91 95731 99863" [ref=f1e323] [cursor=pointer]:
+                - /url: https://wa.me/919573199863
+      - generic [ref=f1e325]:
+        - generic [ref=f1e326]: © 2020–2026 Cliff-Inn Adventures. All rights reserved.
+        - generic [ref=f1e327]:
+          - link "Privacy Policy" [ref=f1e328] [cursor=pointer]:
+            - /url: "#"
+          - link "Cancellation Policy" [ref=f1e329] [cursor=pointer]:
+            - /url: "#"
+          - link "Terms & Conditions" [ref=f1e330] [cursor=pointer]:
+            - /url: "#"
+          - link "Release of Liability" [ref=f1e331] [cursor=pointer]:
+            - /url: "#"
+  - link "Chat with us on WhatsApp" [ref=f1e332] [cursor=pointer]:
+    - /url: https://wa.me/919573199863
+    - generic: Chat with us

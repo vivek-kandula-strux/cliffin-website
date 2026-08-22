@@ -1,0 +1,63 @@
+- generic [ref=e5] [cursor=pointer]:
+  - generic [ref=e9]:
+    - generic [ref=e10]:
+      - link [ref=e12]:
+        - img "cliffinnadventures's profile picture" [ref=e13]
+      - generic [ref=e14]:
+        - link "cliffinnadventures" [ref=e16]:
+          - /url: "#"
+        - link "Cliff Inn Adventures | Hyderabad" [ref=e19]:
+          - /url: "#"
+        - generic [ref=e22]:
+          - generic [ref=e24]:
+            - generic "5,044" [ref=e25]
+            - text: followers
+          - text: •
+          - generic [ref=e27]:
+            - generic [ref=e28]: "357"
+            - text: posts
+    - generic [ref=e29]:
+      - separator [ref=e30]
+      - generic [ref=e32]:
+        - generic [ref=e33]:
+          - link "Video" [ref=e35]:
+            - /url: "#"
+            - generic:
+              - generic:
+                - generic:
+                  - img "Video"
+          - link "Video" [ref=e40]:
+            - /url: "#"
+            - generic:
+              - generic:
+                - generic:
+                  - img "Video"
+          - link "Video" [ref=e45]:
+            - /url: "#"
+            - generic:
+              - generic:
+                - generic:
+                  - img "Video"
+        - generic [ref=e49]:
+          - link "Video" [ref=e51]:
+            - /url: "#"
+            - generic:
+              - generic:
+                - generic:
+                  - img "Video"
+          - link "Video" [ref=e56]:
+            - /url: "#"
+            - generic:
+              - generic:
+                - generic:
+                  - img "Video"
+          - link "Video" [ref=e61]:
+            - /url: "#"
+            - generic:
+              - generic:
+                - generic:
+                  - img "Video"
+      - separator [ref=e65]
+    - button "View full profile on Instagram" [ref=e67]
+  - link "Instagram" [ref=e68]:
+    - /url: https://www.instagram.com/cliffinnadventures/?utm_source=ig_embed&ig_rid=A20Q5cNMjEjql6zWXn4Wlpj

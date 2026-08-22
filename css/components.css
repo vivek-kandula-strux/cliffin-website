@@ -387,7 +387,7 @@
 .nav__link {
   position: relative;
   text-decoration: none;
-  font-size: 13.5px;
+  font-size: 14.5px;
   font-weight: 500;
   letter-spacing: -0.01em;
   padding: 8px 10px;
@@ -817,6 +817,27 @@ body[data-menu-open='true'] .header__mobile > * {
   display: none;
 }
 
+.hero-banner__description {
+  font-family: var(--font-body);
+  font-size: clamp(16px, 1.6vw, 19px);
+  line-height: 1.65;
+  color: var(--color-body-on-dark);
+  max-width: 52ch;
+  margin: clamp(16px, 2vw, 24px) auto 0;
+}
+
+.hero-banner__actions {
+  margin-top: clamp(20px, 2.6vw, 32px);
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.hero-banner--workshops .hero-banner__inner {
+  padding-bottom: clamp(1.5rem, 3vw, 3rem);
+}
+
 /* -----------------------------------------------------------
    TILES — dark mesh panel, ember accent, sky accent, image tile
 ----------------------------------------------------------- */
@@ -1012,7 +1033,7 @@ body[data-menu-open='true'] .header__mobile > * {
 }
 
 .tile__desc {
-  font-size: 13.5px;
+  font-size: 14.5px;
   line-height: 1.65;
   color: oklch(0.9 0.01 88);
   margin-top: 8px;
@@ -1186,7 +1207,11 @@ a.tile--image-flat:focus-visible img {
 }
 
 .card__media--tall {
-  height: 220px;
+  height: 260px;
+}
+
+.card__media--xl {
+  height: 320px;
 }
 
 .card__scrim {
@@ -1238,7 +1263,7 @@ a.tile--image-flat:focus-visible img {
 
 .card__desc {
   font-family: var(--font-body);
-  font-size: 13.5px;
+  font-size: 14.5px;
   line-height: 1.7;
   color: var(--color-ink-muted);
   margin: 8px 0 16px;
@@ -1283,6 +1308,291 @@ a.tile--image-flat:focus-visible img {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--color-ember);
+}
+
+/* -----------------------------------------------------------
+   EDITORIAL CARD  (extends .card)
+   Shared treatment for camp-site locations (.card--location) and
+   corporate packages (.card--package): a small caps kicker above
+   a large title, description, and a row of small activity tags.
+   Top-left media chip carries the glance value (distance / duration).
+----------------------------------------------------------- */
+.card--location .card__district,
+.card--package .card__district {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ember);
+  margin: 0 0 6px;
+}
+
+.card--location .card__title,
+.card--package .card__title {
+  font-size: clamp(22px, 2vw, 26px);
+  color: var(--color-ink);
+  letter-spacing: -0.025em;
+}
+
+.card--location .card__desc,
+.card--package .card__desc {
+  margin-bottom: 12px;
+}
+
+/* Package price / group-size row — sits above the .card__foot-text
+   to give B2B buyers the two numbers they scan for. */
+.card__price-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  margin: 4px 0 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border-soft);
+}
+.card__price-row .card__price { font-size: 20px; }
+.card__price-row .card__price-label {
+  color: var(--color-ink-soft);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 13px;
+}
+
+.card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 14px;
+  padding: 0;
+  list-style: none;
+}
+
+.card__tags li {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+  padding: 5px 10px;
+  color: var(--color-ink-muted);
+  background: var(--color-card-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-chip);
+  line-height: 1.2;
+}
+
+/* -----------------------------------------------------------
+   GROUP LABEL — small caps subhead that sits above a sub-grid
+   inside a larger section (e.g., "Day escapes" and "Camps by
+   location" inside the Under-the-moon section).
+----------------------------------------------------------- */
+.group-label {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin: 0 0 18px;
+}
+
+.group-label__kicker {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-ember);
+  flex: none;
+}
+
+.group-label__note {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--color-ink-muted);
+}
+
+.group-label__rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-border-strong), transparent 90%);
+  align-self: center;
+}
+
+/* Two-up grid for day programs — reads as a distinct row above the
+   larger location grid. Collapses to 1-col on narrow viewports. */
+.day-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--grid-gap);
+}
+
+@media (max-width: 720px) {
+  .day-grid { grid-template-columns: 1fr; }
+}
+
+/* -----------------------------------------------------------
+   LOGO STRIP — client trust row
+   Text-based marks (uppercase, letter-spaced) that stand in for
+   real client SVG logos. Muted greyscale so they read as trust
+   signals, not distractions. Swap in real SVGs when available.
+----------------------------------------------------------- */
+.logo-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  padding-block: clamp(1.25rem, 2vw, 2rem);
+}
+
+.logo-strip__label {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+  flex: none;
+}
+
+/* Brand SVG marks render black (fill="currentColor" with no color
+   cascade into an <img>). Muted opacity + zero saturation give a soft
+   monochrome that sits calmly on the warm off-white page; the row
+   dims and the hovered mark lights up so it feels alive. */
+.logo-strip__mark {
+  display: inline-block;
+  height: clamp(22px, 2.2vw, 30px);
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+  opacity: 0.55;
+  filter: saturate(0);
+  transition: opacity var(--duration-fast) var(--ease-standard),
+              filter var(--duration-fast) var(--ease-standard),
+              transform var(--duration-medium) var(--ease-emphasized);
+}
+
+/* Wide wordmarks (Deloitte, Infosys) need more room than the square
+   icon marks (Microsoft, TATA). */
+.logo-strip__mark--wide { max-width: 180px; }
+
+/* When the row is hovered, unfocused marks dim slightly so the
+   focused mark reads as the point of attention. */
+.logo-strip:hover .logo-strip__mark { opacity: 0.4; }
+
+.logo-strip__mark:hover,
+.logo-strip:hover .logo-strip__mark:hover {
+  opacity: 0.95;
+  filter: saturate(1);
+  transform: translateY(-1px);
+}
+
+.logo-strip__more {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--color-ink-muted);
+}
+
+/* -----------------------------------------------------------
+   VENUE STRIP — three compact tiles that link a corporate
+   package section to the actual camp locations that host it.
+----------------------------------------------------------- */
+.venue-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--grid-gap);
+}
+
+@media (max-width: 720px) {
+  .venue-strip { grid-template-columns: 1fr; }
+}
+
+.venue-tile {
+  position: relative;
+  display: block;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  isolation: isolate;
+  aspect-ratio: 4 / 3;
+  color: var(--color-ink-on-dark);
+  text-decoration: none;
+  box-shadow: var(--shadow-elev);
+  transition: transform var(--duration-medium) var(--ease-emphasized),
+              box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.venue-tile:hover,
+.venue-tile:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-elev-hover);
+  color: var(--color-ink-on-dark);
+}
+
+.venue-tile__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  transition: transform var(--duration-slow) var(--ease-standard);
+}
+
+.venue-tile:hover .venue-tile__img { transform: scale(1.05); }
+
+.venue-tile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--grad-image-scrim-tall);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.venue-tile__body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: clamp(1rem, 1.6vw, 1.375rem);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.venue-tile__place {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(17px, 1.5vw, 20px);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0;
+  color: var(--color-ink-on-dark);
+}
+
+.venue-tile__district {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-amber);
+  margin-bottom: 4px;
+}
+
+.venue-tile__km {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--color-ink-on-dark);
+  background: oklch(1 0 0 / 0.14);
+  padding: 6px 10px;
+  border-radius: var(--radius-chip);
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
+  flex: none;
 }
 
 /* Program feature card used on Home / About / Workshops flow */
@@ -1346,7 +1656,7 @@ a.tile--image-flat:focus-visible img {
 }
 
 .feature__desc {
-  font-size: 13.5px;
+  font-size: 14.5px;
   line-height: 1.65;
   color: var(--color-ink-muted);
   margin: 10px 0 0;
@@ -1729,6 +2039,10 @@ a.tile--image-flat:focus-visible img {
 
 .quote--light .quote__role { color: var(--color-ember); }
 
+/* Quote text inside light cards (Google Reviews) */
+.quote-card .quote__text { color: var(--color-ink); }
+.quote-card .quote__role { color: var(--color-ember); }
+
 /* -----------------------------------------------------------
    TIMELINE / STEPS (Workshops "how a workshop runs")
 ----------------------------------------------------------- */
@@ -1773,6 +2087,136 @@ a.tile--image-flat:focus-visible img {
   line-height: 1.6;
   color: var(--color-ink-muted);
   margin: 5px 0 0;
+}
+
+/* -----------------------------------------------------------
+   HORIZONTAL TIMELINE
+----------------------------------------------------------- */
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: clamp(2.5rem, 4vw, 3.5rem) 0 0;
+  display: flex;
+  gap: 16px;
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 24px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--color-border-on-dark-strong);
+}
+
+.timeline__item {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  position: relative;
+}
+
+.timeline__item::before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-amber);
+  box-shadow: 0 0 0 4px var(--color-panel);
+  z-index: 1;
+}
+
+.timeline__time {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(22px, 2.6vw, 30px);
+  color: var(--color-amber-2);
+  line-height: 1;
+}
+
+.timeline__label {
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.2vw, 16px);
+  color: var(--color-body-on-dark);
+  line-height: 1.4;
+}
+
+@media (max-width: 720px) {
+  .timeline {
+    flex-direction: column;
+    gap: 28px;
+  }
+  .timeline::before {
+    top: 0;
+    bottom: 0;
+    left: 24px;
+    right: auto;
+    width: 1px;
+    height: auto;
+  }
+  .timeline__item {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    gap: 20px;
+  }
+  .timeline__item::before {
+    box-shadow: 0 0 0 4px var(--color-panel);
+  }
+  .timeline__time {
+    min-width: 64px;
+    text-align: right;
+  }
+}
+
+/* -----------------------------------------------------------
+   PROGRAM META BLOCKS
+----------------------------------------------------------- */
+.program-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.program-meta__item {
+  background: var(--grad-card-sheen);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-elev), var(--shadow-edge-inset);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.program-meta__label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+}
+
+.program-meta__value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+  line-height: 1.1;
+}
+
+@media (max-width: 640px) {
+  .program-meta {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* -----------------------------------------------------------
@@ -1890,6 +2334,33 @@ a.tile--image-flat:focus-visible img {
   margin-top: 38px;
 }
 
+.chip-list--compact {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.chip-list--compact .chip-tile {
+  padding: 14px 16px;
+  border-radius: 14px;
+}
+
+.chip-list--compact .bullet {
+  color: var(--color-ink-on-dark);
+}
+
+@media (max-width: 900px) {
+  .chip-list--compact {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .chip-list--compact {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .chip-tile {
   border: 1px solid var(--color-border-on-dark-strong);
   border-radius: 16px;
@@ -1964,7 +2435,7 @@ a.tile--image-flat:focus-visible img {
 }
 
 .contact-card__body {
-  font-size: 13.5px;
+  font-size: 14.5px;
   line-height: 1.7;
   color: var(--color-ink-muted);
   margin-top: 8px;
@@ -2206,7 +2677,7 @@ a.tile--image-flat:focus-visible img {
 ----------------------------------------------------------- */
 .closing-scene {
   position: relative;
-  background: #10281D;
+  background: var(--color-forest);
 }
 
 .closing-scene .footer__cta-band {
@@ -2294,9 +2765,9 @@ a.tile--image-flat:focus-visible img {
 
 .footer__cta-eyebrow {
   display: block;
-  font-size: 22px;
+  font-size: 17px;
   color: var(--color-amber-2);
-  line-height: 1;
+  line-height: 1.2;
   margin-bottom: 14px;
   font-style: italic;
 }
@@ -2313,9 +2784,9 @@ a.tile--image-flat:focus-visible img {
 
 .footer__cta-sub {
   font-family: var(--font-body);
-  font-size: clamp(14px, 1.2vw, 16px);
+  font-size: clamp(15px, 1.2vw, 16px);
   color: var(--color-body-on-dark);
-  max-width: 46ch;
+  max-width: 52ch;
   line-height: 1.7;
   margin: 0;
 }
@@ -2340,14 +2811,17 @@ a.tile--image-flat:focus-visible img {
 }
 
 .footer__cta-form .input {
-  padding: 11px 14px;
-  min-height: 44px;
-  font-size: 15px;
+  padding: 14px 16px;
+  min-height: 52px;
+  font-size: 16px;
 }
 
 .footer__cta-submit {
   align-self: stretch;
   margin-top: 6px;
+  min-height: 56px;
+  padding: 16px 32px;
+  font-size: 16px;
 }
 
 .footer__cta-success {
@@ -2755,10 +3229,7 @@ a.tile--image-flat:focus-visible img {
   text-transform: uppercase;
 }
 
-.hero-copy .eyebrow::before {
-  width: 24px;
-  background: var(--color-subheading);
-}
+
 
 .hero-copy h1 {
   font-family: var(--font-display);
@@ -3070,7 +3541,7 @@ a.tile--image-flat:focus-visible img {
 .hero-banner--home .hero-copy h1         { color: var(--color-ink); }
 .hero-banner--home .hero-copy p          { color: var(--color-ink-muted); }
 .hero-banner--home .hero-copy .eyebrow   { color: var(--color-subheading); }
-.hero-banner--home .hero-copy .eyebrow::before { background: var(--color-subheading); }
+
 .hero-banner--home .hero-trust           { color: var(--color-ink-soft); }
 
 /* Secondary gallery link: keep it quiet on the light hero */
@@ -3203,6 +3674,128 @@ a.tile--image-flat:focus-visible img {
 }
 
 /* ============================================================
+   ACCORDION — clean, collapsible FAQ-style panel
+   ============================================================ */
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 860px;
+  margin-inline: auto;
+}
+
+/* Accordion used inside the Why Cliff-Inn bento — full-width, no centering */
+.accordion--why {
+  max-width: none;
+  margin-inline: 0;
+  justify-content: center;
+}
+
+.accordion__item {
+  background: linear-gradient(160deg, oklch(1 0 0), oklch(0.97 0.012 85));
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-elev);
+  overflow: hidden;
+  transition:
+    border-color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.accordion__item:hover {
+  border-color: var(--color-border-strong);
+}
+
+.accordion__item.is-open {
+  border-color: var(--color-ember);
+  box-shadow: 0 14px 34px oklch(0.6 0.16 45 / 0.12);
+}
+
+.accordion__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  padding: 22px 26px;
+  background: transparent;
+  border: 0;
+  font-family: var(--font-display);
+  font-size: clamp(17px, 1.5vw, 20px);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--color-ink);
+  text-align: left;
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.accordion__trigger:hover,
+.accordion__trigger:focus-visible {
+  color: var(--color-ember-text);
+}
+
+.accordion__trigger:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: -2px;
+  border-radius: var(--radius-card);
+}
+
+.accordion__icon {
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  color: var(--color-ember);
+  transition: transform var(--duration-medium) var(--ease-emphasized);
+}
+
+.accordion__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.accordion__item.is-open .accordion__icon {
+  transform: rotate(45deg);
+}
+
+.accordion__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--duration-medium) var(--ease-emphasized);
+}
+
+.accordion__item.is-open .accordion__panel {
+  grid-template-rows: 1fr;
+}
+
+.accordion__panel-inner {
+  overflow: hidden;
+}
+
+.accordion__panel-content {
+  padding: 0 26px 26px;
+  color: var(--color-ink-muted);
+  font-size: var(--fs-body);
+  line-height: 1.65;
+}
+
+.accordion__panel-content p + p {
+  margin-top: 1em;
+}
+
+@media (max-width: 640px) {
+  .accordion__trigger {
+    padding: 18px 20px;
+  }
+  .accordion__panel-content {
+    padding: 0 20px 22px;
+  }
+}
+
+/* ============================================================
    CLEANUP UTILITIES — token-driven replacements for inline styles
    ============================================================ */
 
@@ -3225,14 +3818,15 @@ a.tile--image-flat:focus-visible img {
 }
 
 .kicker--on-dark {
-  font-size: 22px;
-  line-height: 1;
+  font-size: 17px;
+  line-height: 1.2;
   color: var(--color-amber-2);
 }
 
 .section-head__lead {
-  max-width: 40ch;
-  font-size: 14px;
+  max-width: 52ch;
+  font-size: clamp(15px, 1.3vw, 17px);
+  line-height: 1.65;
   color: var(--color-body-on-dark);
 }
 
@@ -3241,7 +3835,7 @@ a.tile--image-flat:focus-visible img {
 }
 
 .interest-cta__eyebrow {
-  font-size: 26px;
+  font-size: 17px;
   color: var(--color-amber-2);
 }
 
@@ -3339,4 +3933,555 @@ a.tile--image-flat:focus-visible img {
 .link--amber:hover,
 .link--amber:focus-visible {
   color: var(--color-ink-on-dark);
+}
+
+/* -----------------------------------------------------------
+   TESTIMONIAL MARQUEE
+   Infinite left-scrolling ribbon of quote cards.
+   Two identical .tmq__set siblings; animation moves -50% of the
+   combined track width, which equals exactly one set width
+   (sets use padding-right to include the trailing inter-card gap
+   so the loop is pixel-perfect with no jump).
+----------------------------------------------------------- */
+@keyframes tmq-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Viewport: clips overflow + soft edge fade via mask */
+.tmq {
+  overflow: hidden;
+  padding-block: clamp(1.5rem, 2.5vw, 2.25rem);
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 9%,
+    black 91%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 9%,
+    black 91%,
+    transparent 100%
+  );
+}
+
+/* Scrolling track — width driven by content, not viewport */
+.tmq__track {
+  display: flex;
+  width: max-content;
+  animation: tmq-scroll 44s linear infinite;
+  will-change: transform;
+}
+
+/* Pause on hover/focus so users can read cards comfortably */
+.tmq:hover .tmq__track,
+.tmq:focus-within .tmq__track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tmq__track { animation-play-state: paused; }
+}
+
+/* Each set: gap between cards + trailing padding-right = gap between sets */
+.tmq__set {
+  display: flex;
+  gap: var(--grid-gap);
+  flex: none;
+  padding-right: var(--grid-gap);
+}
+
+/* Individual card */
+.tmq__card {
+  width: clamp(272px, 26.5vw, 340px);
+  flex: none;
+  background: var(--grad-card-sheen);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-elev), var(--shadow-edge-inset);
+  padding: clamp(1.25rem, 1.9vw, 1.625rem);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+  overflow: hidden;
+  transition:
+    box-shadow var(--duration-fast) var(--ease-standard),
+    transform var(--duration-medium) var(--ease-emphasized);
+}
+
+/* Ember gradient top stripe */
+.tmq__card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--grad-ember);
+}
+
+/* Subtle lift when marquee is paused and user hovers a card */
+@media (hover: hover) and (pointer: fine) {
+  .tmq:hover .tmq__card:hover {
+    box-shadow: var(--shadow-elev-hover), var(--shadow-edge-inset);
+    transform: translateY(-3px);
+  }
+}
+
+.tmq__card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tmq__stars {
+  color: var(--color-amber);
+  font-size: 13px;
+  letter-spacing: 2.5px;
+  line-height: 1;
+}
+
+.tmq__text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(12px, 1vw, 13.5px);
+  line-height: 1.55;
+  color: var(--color-ink-muted);
+  flex: 1;
+  margin: 0;
+}
+
+.tmq__text strong {
+  color: var(--color-ember-text);
+  font-weight: 600;
+  font-style: normal;
+}
+
+.tmq__attrib {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border-soft);
+  margin-top: auto;
+}
+
+/* Initials avatar — ember by default, rotates through 3 palette stops */
+.tmq__avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0;
+  color: var(--color-ink-on-dark);
+  background: var(--grad-ember);
+  text-transform: uppercase;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.tmq__card:nth-child(3n+2) .tmq__avatar { background: var(--grad-sky-tile); }
+.tmq__card:nth-child(3n)   .tmq__avatar { background: var(--grad-panel-base); }
+
+.tmq__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14.5px;
+  color: var(--color-ink);
+  line-height: 1.2;
+}
+
+.tmq__role {
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-ember-text);
+  margin-top: 2px;
+}
+
+/* ── Google Reviews badge shown in the section-head ── */
+.tmq-rating {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-body);
+  flex: none;
+}
+
+.tmq-rating svg {
+  flex: none;
+  display: block;
+}
+
+.tmq-rating__stars {
+  color: var(--color-amber);
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.tmq-rating__score {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--color-ink);
+  letter-spacing: -0.02em;
+}
+
+.tmq-rating__label {
+  font-size: 12.5px;
+  color: var(--color-ink-muted);
+}
+
+@media (max-width: 480px) {
+  .tmq-rating { display: none; }
+}
+
+
+/* -----------------------------------------------------------
+   AMENITY MARQUEE
+   Infinite left-scrolling ribbon of image cards (camp amenities).
+   Same two-set / -50% technique as the testimonial marquee (.tmq)
+   so the loop is pixel-perfect. Pauses on hover / focus.
+----------------------------------------------------------- */
+@keyframes amenity-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.amenity-marquee {
+  overflow: hidden;
+  padding-block: clamp(1.25rem, 2.2vw, 2rem);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
+}
+
+.amenity-marquee__track {
+  display: flex;
+  width: max-content;
+  animation: amenity-scroll 48s linear infinite;
+  will-change: transform;
+}
+
+.amenity-marquee:hover .amenity-marquee__track,
+.amenity-marquee:focus-within .amenity-marquee__track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .amenity-marquee__track { animation-play-state: paused; }
+}
+
+.amenity-marquee__set {
+  display: flex;
+  gap: var(--grid-gap);
+  flex: none;
+  padding-right: var(--grid-gap);
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.amenity-card {
+  width: clamp(240px, 22vw, 300px);
+  flex: none;
+  position: relative;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-elev);
+  aspect-ratio: 4 / 5;
+  isolation: isolate;
+  transition:
+    box-shadow var(--duration-fast) var(--ease-standard),
+    transform var(--duration-medium) var(--ease-emphasized);
+}
+
+.amenity-card__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  transition: transform var(--duration-slow) var(--ease-standard);
+}
+
+.amenity-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--grad-image-scrim-tall);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.amenity-card__body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: clamp(1.125rem, 1.6vw, 1.5rem);
+  z-index: 2;
+  color: var(--color-ink-on-dark);
+}
+
+.amenity-card__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(17px, 1.4vw, 20px);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0;
+  color: var(--color-ink-on-dark);
+}
+
+.amenity-card__desc {
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--color-body-on-dark);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .amenity-marquee:hover .amenity-card:hover {
+    box-shadow: var(--shadow-elev-hover);
+    transform: translateY(-3px);
+  }
+  .amenity-marquee:hover .amenity-card:hover .amenity-card__img {
+    transform: scale(1.05);
+  }
+}
+
+
+/* -----------------------------------------------------------
+   HOW IT WORKS — minimal 3-step band
+----------------------------------------------------------- */
+.how-it-works {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  margin-top: var(--section-head-gap);
+}
+
+.how-it-works__step {
+  padding: clamp(2rem, 3vw, 2.75rem);
+  background: var(--grad-card-sheen);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-elev), var(--shadow-edge-inset);
+}
+
+.how-it-works__num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: var(--color-ember);
+  line-height: 1;
+}
+
+.how-it-works__title {
+  margin: 16px 0 0;
+  font-size: 24px;
+  color: var(--color-ink);
+}
+
+.how-it-works__body {
+  margin: 10px 0 0;
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  color: var(--color-ink-muted);
+}
+
+@media (max-width: 720px) {
+  .how-it-works {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* -----------------------------------------------------------
+   COOKIE CONSENT
+----------------------------------------------------------- */
+.consent-banner {
+  position: fixed;
+  inset: auto 16px 16px;
+  z-index: 220;
+  color: var(--color-ink-on-dark);
+}
+
+.consent-banner__content {
+  width: min(100%, 920px);
+  margin-inline: auto;
+  padding: clamp(18px, 2.5vw, 24px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: var(--color-panel);
+  border: 1px solid oklch(1 0 0 / 0.16);
+  border-radius: var(--radius-card);
+  box-shadow: 0 18px 60px oklch(0.08 0.02 158 / 0.45);
+}
+
+.consent-banner__copy {
+  max-width: 58ch;
+}
+
+.consent-banner__title {
+  margin: 0;
+  color: var(--color-ink-on-dark);
+  font-size: clamp(18px, 2vw, 22px);
+}
+
+.consent-banner__description {
+  margin: 6px 0 0;
+  color: var(--color-body-on-dark);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.consent-banner__actions {
+  display: flex;
+  flex: none;
+  gap: 10px;
+}
+
+.consent-banner__actions .btn {
+  min-height: 44px;
+  white-space: nowrap;
+}
+
+.consent-settings {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 140;
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-card);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-elev);
+  font: 600 13px/1 var(--font-display);
+  cursor: pointer;
+}
+
+.consent-settings:hover {
+  border-color: var(--color-ember);
+  color: var(--color-ember);
+}
+
+@media (max-width: 680px) {
+  .consent-banner {
+    inset: auto 10px 10px;
+  }
+
+  .consent-banner__content {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 16px;
+    border-radius: var(--radius-input);
+  }
+
+  .consent-banner__actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .consent-banner__actions .btn {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .consent-banner *,
+  .consent-settings {
+    transition: none !important;
+  }
+}
+
+/* -----------------------------------------------------------
+   404 PAGE
+----------------------------------------------------------- */
+.error-page {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: clamp(24px, 5vw, 64px);
+  background:
+    radial-gradient(circle at 80% 15%, oklch(0.52 0.1 232 / 0.2), transparent 34%),
+    radial-gradient(circle at 12% 88%, oklch(0.67 0.15 47 / 0.16), transparent 34%),
+    var(--color-panel);
+}
+
+.error-card {
+  width: min(100%, 760px);
+  padding: clamp(32px, 7vw, 72px);
+  text-align: center;
+  color: var(--color-ink-on-dark);
+  border: 1px solid oklch(1 0 0 / 0.14);
+  border-radius: var(--radius-tile);
+  background: oklch(0.18 0.03 158 / 0.8);
+  box-shadow: 0 28px 80px oklch(0.06 0.02 158 / 0.45);
+}
+
+.error-card__brand {
+  display: inline-flex;
+  color: var(--color-amber);
+  font: 700 16px/1 var(--font-display);
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.error-card__code {
+  display: block;
+  margin-top: clamp(30px, 6vw, 56px);
+  color: var(--color-amber);
+  font: 500 clamp(14px, 2vw, 17px)/1 var(--font-accent);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.error-card__title {
+  margin: 12px 0 0;
+  color: var(--color-ink-on-dark);
+  font-size: clamp(42px, 8vw, 78px);
+  line-height: 0.98;
+}
+
+.error-card__body {
+  max-width: 48ch;
+  margin: 20px auto 0;
+  color: var(--color-body-on-dark);
+  font-size: clamp(16px, 2vw, 19px);
+  line-height: 1.65;
+}
+
+.error-card__actions {
+  margin-top: clamp(26px, 4vw, 38px);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+@media (max-width: 480px) {
+  .error-card__actions {
+    display: grid;
+  }
+
+  .error-card__actions .btn {
+    width: 100%;
+  }
 }

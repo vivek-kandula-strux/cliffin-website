@@ -105,42 +105,24 @@ a:focus-visible {
   font-weight: 500;
 }
 
-/* Eyebrow / kicker — small italic serif label with a rule
-   variant --center adds a rule on both sides */
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: 500;
   font-size: var(--fs-eyebrow);
+  letter-spacing: 0.01em;
   color: var(--color-subheading);
-  line-height: 1;
+  line-height: 1.2;
 }
 
-.eyebrow::before {
-  content: '';
-  width: 34px;
-  height: 1px;
-  background: currentColor;
-}
-
-/* Legacy inline rule marker — some markup includes an empty <span> for the
-   horizontal rule. We render the rule with ::before, so hide the placeholder. */
 .eyebrow > span:empty {
   display: none;
 }
 
 .eyebrow--center {
   justify-content: center;
-}
-
-.eyebrow--center::after {
-  content: '';
-  width: 30px;
-  height: 1px;
-  background: currentColor;
 }
 
 .eyebrow--on-dark {

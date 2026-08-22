@@ -46,6 +46,22 @@
   clip-path: inset(0 -100vmax);
 }
 
+/* Deeper pine — same trick, one step darker for editorial sections
+   that want a heavier, moon-lit atmosphere. */
+.section--pine-deep {
+  background: #112118;
+  --color-text: var(--color-ink-on-dark);
+  --color-text-muted: var(--color-body-on-dark);
+  box-shadow: 0 0 0 100vmax #112118;
+  clip-path: inset(0 -100vmax);
+}
+
+/* Photo-pair front frame reads as a light bezel by default. On dark
+   contexts, match the surrounding surface so the frame disappears
+   into the section instead of ringing it in cream. */
+.section--dark .photo-pair__front { border-color: var(--color-forest); }
+.section--pine-deep .photo-pair__front { border-color: #112118; }
+
 /* Cinematic story-flow — a whisper of warm mist bleeds up from the previous
    section so blocks read as chapters of one continuous narrative, not
    stacked slabs. Pointer-transparent so it never gets in the way.
@@ -117,9 +133,15 @@
    because the section itself spans the body, and the .container--wide
    wrapper inside handles content constraint). */
 .section--forest {
-  padding-top: 0;
   background-color: var(--color-forest);
 }
+/* When a parallax-scene separator sits directly above, the section flows
+   seamlessly beneath it — kill the top padding. Otherwise keep the normal
+   .section rhythm so the section-head isn't shoved under the sticky nav. */
+.parallax-scene + .section--forest {
+  padding-top: 0;
+}
+#expeditions { background-color: #10281D; }
 .section--forest > .container--wide { position: relative; z-index: 1; }
 
 .section--forest .section-head h2 {
@@ -199,6 +221,22 @@
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   gap: clamp(1.875rem, 5vw, 3.75rem);
   align-items: center;
+}
+
+.card-grid--testimonials {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+  .card-grid--testimonials {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .card-grid--testimonials {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Split — two-column with fluid centering (for intro sections). */

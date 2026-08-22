@@ -2,7 +2,7 @@ import { qs, qsa, on } from '../utils/dom.js';
 
 const TRIPS = {
   'Himalayan High Trek': {
-    img: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=80',
+    img: 'assets/images/cliffinnadventures/expeditions/modal-himalayan-high-trek.webp',
     alt: 'Snow-line ridge on a Himalayan trek',
     date: 'Oct 2026',
     spots: '8 spots left',
@@ -20,7 +20,7 @@ const TRIPS = {
     ],
   },
   'Nallamalla Night Camp': {
-    img: 'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=900&q=80',
+    img: 'assets/images/cliffinnadventures/expeditions/modal-nallamalla-night-camp.webp',
     alt: 'Camping tents beneath tall trees at dusk',
     date: 'Aug 2026',
     spots: '12 spots left',
@@ -38,7 +38,7 @@ const TRIPS = {
     ],
   },
   'Coastal Rappelling Expedition': {
-    img: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=900&q=80',
+    img: 'assets/images/cliffinnadventures/expeditions/modal-coastal-rappelling.webp',
     alt: 'Dramatic sea cliff on the eastern coast',
     date: 'Sep 2026',
     spots: '6 spots left',

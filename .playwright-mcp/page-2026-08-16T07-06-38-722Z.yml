@@ -1,0 +1,179 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "Cliff-Inn Adventures — Home" [ref=e5] [cursor=pointer]:
+        - /url: index.html
+        - img "Cliff-Inn Adventures" [ref=e6]
+      - button "Toggle menu" [ref=e8] [cursor=pointer]
+  - main [ref=e12]:
+    - region [ref=e13]:
+      - generic [ref=e15]:
+        - generic [ref=e16]:
+          - generic [ref=e17]: Where learning meets adventure
+          - heading "Escape the ordinary. Find your freedom." [level=1] [ref=e18]: Escape the ordinary.Find your freedom.
+          - paragraph [ref=e19]: Guided outdoor experiences for schools, corporates and independent explorers — built to challenge, connect and inspire.
+        - generic [ref=e20]:
+          - generic [ref=e21]:
+            - generic [ref=e22]: ★★★★★
+            - generic [ref=e23]: Trusted by 120+ schools & brands
+          - generic [ref=e24]:
+            - link "Plan Your Escape" [ref=e25] [cursor=pointer]:
+              - /url: "#interest"
+              - text: Plan Your Escape
+              - generic [ref=e26]: →
+            - link "View the gallery" [ref=e27] [cursor=pointer]:
+              - /url: gallery.html
+    - region "Experiences built to challenge & inspire" [ref=e28]
+    - region "Reserve your spot in the wild" [ref=e34]:
+      - generic [ref=e38]:
+        - generic [ref=e39]:
+          - text: Block your spot
+          - heading "Register your interest" [level=3] [ref=e40]
+          - paragraph [ref=e41]: No payment now. Tell us which adventure calls to you and how many are coming — our team holds your place and reaches out with dates, pricing and the full plan.
+          - generic [ref=e42]:
+            - generic [ref=e43]:
+              - generic [ref=e44]: 24h
+              - generic [ref=e45]: Response time
+            - generic [ref=e46]:
+              - generic [ref=e47]: Free
+              - generic [ref=e48]: To register
+            - generic [ref=e49]:
+              - generic [ref=e50]: Small
+              - generic [ref=e51]: Group sizes
+        - generic [ref=e52]:
+          - link "Register My Interest →" [ref=e53] [cursor=pointer]:
+            - /url: "#interest"
+          - paragraph [ref=e54]: Takes 30 seconds. We call back within 24 hours with dates and a tailored plan.
+    - region "What makes us different" [ref=e55]
+    - region "See it, feel it, remember it" [ref=e58]
+    - region "@cliffinnadventures" [ref=e60]:
+      - generic [ref=e62]:
+        - link "Rappelling photo on Instagram" [ref=e63] [cursor=pointer]:
+          - /url: https://instagram.com/cliffinnadventures
+          - img "Climber rappelling down a rock face" [ref=e64]
+        - link "Campfire photo on Instagram" [ref=e65] [cursor=pointer]:
+          - /url: https://instagram.com/cliffinnadventures
+          - img "Warm campfire under the stars" [ref=e66]
+        - link "Trekkers on a forest trail on Instagram" [ref=e67] [cursor=pointer]:
+          - /url: https://instagram.com/cliffinnadventures
+          - img "Trekkers on a forest trail" [ref=e68]
+  - generic [ref=e69]:
+    - generic [ref=e71]:
+      - generic [ref=e72]:
+        - generic [ref=e73]: Let's plan your escape
+        - heading "Ready for your next adventure?" [level=2] [ref=e74]: Ready for yournext adventure?
+        - paragraph [ref=e75]: Whether you're a school, a company, or a soul craving the wild — we'll build the perfect experience around you.
+      - generic [ref=e77]:
+        - link "Plan My Escape →" [ref=e78] [cursor=pointer]:
+          - /url: "#interest"
+        - paragraph [ref=e79]: Tell us your dates and group size. We reply within 24 hours with a tailored plan.
+    - contentinfo [ref=e81]:
+      - generic [ref=e83]:
+        - generic [ref=e84]:
+          - generic [ref=e85]: 8+
+          - generic [ref=e86]: Years guiding in the wild
+        - generic [ref=e87]:
+          - generic [ref=e88]: 120+
+          - generic [ref=e89]: Schools & corporates
+        - generic [ref=e90]:
+          - generic [ref=e91]: 5k+
+          - generic [ref=e92]: Explorers guided
+        - generic [ref=e93]:
+          - generic "5 out of 5 stars" [ref=e94]: ★★★★★
+          - generic [ref=e95]: Top-rated experiences
+      - generic "Safety credentials" [ref=e96]:
+        - generic [ref=e97]:
+          - generic [ref=e102]:
+            - generic [ref=e103]: Wilderness First Aid
+            - generic [ref=e104]: Certified guides on every trip
+          - generic [ref=e108]:
+            - generic [ref=e109]: Fully Insured
+            - generic [ref=e110]: Comprehensive trip & liability cover
+          - generic [ref=e116]:
+            - generic [ref=e117]: Small Group Ratios
+            - generic [ref=e118]: Up to 1:8 instructor:participant
+          - generic [ref=e124]:
+            - generic [ref=e125]: Written Safety Protocol
+            - generic [ref=e126]: Gear checks & briefings on every activity
+      - generic [ref=e127]:
+        - generic [ref=e128]:
+          - img "Cliff-Inn Adventures" [ref=e129]
+          - paragraph [ref=e130]: We craft outdoor experiences for schools and corporates — camps, workshops and team-building that build confidence, leadership and lasting bonds.
+          - generic "Follow us on social media" [ref=e131]:
+            - link "Instagram" [ref=e132] [cursor=pointer]:
+              - /url: https://instagram.com/cliffinnadventures
+            - link "WhatsApp" [ref=e137] [cursor=pointer]:
+              - /url: https://wa.me/919573199863
+        - navigation "Explore" [ref=e141]:
+          - heading "Explore" [level=3] [ref=e142]
+          - list [ref=e143]:
+            - listitem [ref=e144]:
+              - link "Home" [ref=e145] [cursor=pointer]:
+                - /url: index.html
+            - listitem [ref=e146]:
+              - link "About Us" [ref=e147] [cursor=pointer]:
+                - /url: about.html
+            - listitem [ref=e148]:
+              - link "Gallery" [ref=e149] [cursor=pointer]:
+                - /url: gallery.html
+            - listitem [ref=e150]:
+              - link "Our Camp Sites" [ref=e151] [cursor=pointer]:
+                - /url: camp-sites.html
+            - listitem [ref=e152]:
+              - link "Contact" [ref=e153] [cursor=pointer]:
+                - /url: contact.html
+        - navigation "Programs" [ref=e154]:
+          - heading "Programs" [level=3] [ref=e155]
+          - list [ref=e156]:
+            - listitem [ref=e157]:
+              - link "School Programs" [ref=e158] [cursor=pointer]:
+                - /url: school-programs.html
+            - listitem [ref=e159]:
+              - link "Adventure Workshops" [ref=e160] [cursor=pointer]:
+                - /url: adventure-workshops.html
+            - listitem [ref=e161]:
+              - link "Corporate & Groups" [ref=e162] [cursor=pointer]:
+                - /url: corporate-packages.html
+            - listitem [ref=e163]:
+              - link "Night Camping" [ref=e164] [cursor=pointer]:
+                - /url: corporate-packages.html
+            - listitem [ref=e165]:
+              - link "School Boot Camps" [ref=e166] [cursor=pointer]:
+                - /url: school-programs.html
+        - generic [ref=e167]:
+          - heading "Get In Touch" [level=3] [ref=e168]
+          - list [ref=e169]:
+            - listitem [ref=e170]:
+              - generic [ref=e171]: Call us
+              - link "Primary +91 95731 99863" [ref=e174] [cursor=pointer]:
+                - /url: tel:+919573199863
+                - generic [ref=e175]: Primary
+                - text: +91 95731 99863
+              - link "Alt +91 90107 39847" [ref=e176] [cursor=pointer]:
+                - /url: tel:+919010739847
+                - generic [ref=e177]: Alt
+                - text: +91 90107 39847
+            - listitem [ref=e178]:
+              - generic [ref=e179]: Mail us
+              - link "cliffinnadventures@gmail.com" [ref=e183] [cursor=pointer]:
+                - /url: mailto:cliffinnadventures@gmail.com
+            - listitem [ref=e184]:
+              - generic [ref=e185]: WhatsApp
+              - link "+91 95731 99863" [ref=e189] [cursor=pointer]:
+                - /url: https://wa.me/919573199863
+      - generic [ref=e191]:
+        - generic [ref=e192]: © 2020–2026 Cliff-Inn Adventures. All rights reserved.
+        - generic [ref=e193]:
+          - link "Privacy Policy" [ref=e194] [cursor=pointer]:
+            - /url: "#"
+          - link "Cancellation Policy" [ref=e195] [cursor=pointer]:
+            - /url: "#"
+          - link "Terms & Conditions" [ref=e196] [cursor=pointer]:
+            - /url: "#"
+          - link "Release of Liability" [ref=e197] [cursor=pointer]:
+            - /url: "#"
+  - link "Chat with us on WhatsApp" [ref=e198] [cursor=pointer]:
+    - /url: https://wa.me/919573199863
+    - generic: Chat with us

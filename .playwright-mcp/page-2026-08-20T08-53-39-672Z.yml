@@ -1,0 +1,237 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "Cliff-Inn Adventures — Home" [ref=e5] [cursor=pointer]:
+        - /url: index.html
+        - img "Cliff-Inn Adventures" [ref=e6]
+      - button "Toggle menu" [ref=e8] [cursor=pointer]
+  - main [ref=e12]:
+    - region [ref=e13]:
+      - img "Illustration of climbers, hikers, cyclists, campers, ziplining and paragliding across a mountain landscape" [ref=e15]
+      - generic [ref=e16]:
+        - generic [ref=e17]: Who we are
+        - heading "About Cliff-Inn" [level=1] [ref=e18]
+    - region [ref=e19]:
+      - generic [ref=e20]:
+        - generic [ref=e21]:
+          - generic [ref=e22]: Our story
+          - heading "The beginning of Cliff-Inn Adventures" [level=2] [ref=e23]
+          - paragraph [ref=e24]: It all started with four adventure enthusiasts, gathered around a cafe, sharing a common dream — to make adventure accessible to everyone. With a passion for exploration and a vision to create meaningful outdoor experiences, they set out to build something extraordinary. This dream gave birth to Cliff-Inn Adventures — a dedicated team of skilled professionals and nature enthusiasts, united by a love for adventure and a commitment to sharing it with the world.
+          - paragraph [ref=e25]: At the heart of our journey lies a deep focus on safety, personal growth, and the power of outdoor experiences. We go beyond just activities; we foster connections, self-discovery, and the excitement of pushing boundaries. At Cliff-Inn Adventures, we believe that adventure is a universal language — one that transcends age, background, and experience. Our mission is to create unforgettable moments that inspire, challenge, and leave lasting memories.
+        - img "Team gathered around a campfire" [ref=e27]
+    - region [ref=e28]:
+      - generic [ref=e29]:
+        - generic [ref=e30]:
+          - generic [ref=e31]: The people behind the adventure
+          - heading "Meet The Team" [level=2] [ref=e32]
+          - paragraph [ref=e33]: Skilled professionals and nature enthusiasts, united by a passion for the outdoors and a commitment to every explorer's growth.
+        - generic [ref=e34]:
+          - generic [ref=e35]:
+            - img "Ravi Teja" [ref=e37]
+            - generic [ref=e38]: Ravi Teja
+          - generic [ref=e40]:
+            - img "Sai Teja" [ref=e42]
+            - generic [ref=e43]: Sai Teja
+          - generic [ref=e45]:
+            - img "Rajender" [ref=e47]
+            - generic [ref=e48]: Rajender
+          - generic [ref=e50]:
+            - img "Kiran Kumar" [ref=e52]
+            - generic [ref=e53]: Kiran Kumar
+    - region "Our mission, vision and promise" [ref=e55]:
+      - generic [ref=e56]:
+        - article [ref=e57]:
+          - generic [ref=e58]: Our Mission
+          - heading "Learning Through Experience" [level=3] [ref=e59]
+          - paragraph [ref=e60]: To create memorable outdoor experiences that build confidence, leadership and real-life skills — for students and teams alike.
+        - article [ref=e61]:
+          - generic [ref=e62]: Our Vision
+          - heading "A Generation Of Explorers" [level=3] [ref=e63]
+          - paragraph [ref=e64]: To grow a community that finds courage, teamwork and joy in nature, one adventure at a time.
+        - article [ref=e65]:
+          - generic [ref=e66]: Our Promise
+          - heading "Safe, Fun, Unforgettable" [level=3] [ref=e67]
+          - paragraph [ref=e68]: Every program is run with certified guides, inspected gear and 24/7 support so you can focus on the experience.
+    - region "Impact numbers" [ref=e69]:
+      - generic [ref=e70]:
+        - generic [ref=e71]:
+          - generic [ref=e72]: 8+
+          - generic [ref=e73]: Years In The Wild
+        - generic [ref=e74]:
+          - generic [ref=e75]: 5000+
+          - generic [ref=e76]: Explorers Guided
+        - generic [ref=e77]:
+          - generic [ref=e78]: 120+
+          - generic [ref=e79]: Schools & Corporates
+        - generic [ref=e80]:
+          - generic [ref=e81]: 100%
+          - generic [ref=e82]: Safety-First Setups
+    - region [ref=e83]:
+      - generic [ref=e84]:
+        - generic [ref=e85]: Why adventure with us
+        - heading "Why Adventure With Cliff-Inn?" [level=2] [ref=e86]
+      - generic [ref=e87]:
+        - article [ref=e88]:
+          - generic [ref=e89]: Experiences
+          - heading "Unmatched Outdoor & Adventure Experiences" [level=3] [ref=e90]
+          - paragraph [ref=e91]: Immersive school camps & excursions, corporate retreats & team-building, jungle camps and night safaris — all led by expert guides for thrilling nature encounters.
+        - article [ref=e92]:
+          - generic [ref=e93]: Safety
+          - heading "Commitment To Safety & Security" [level=3] [ref=e94]
+          - paragraph [ref=e95]: Certified instructors, strict protocols, helmets, harnesses, first aid, and medical support on-site. 24/7 supervision and emergency assistance — your safety is our top priority.
+        - article [ref=e96]:
+          - generic [ref=e97]: Sustainability
+          - heading "Sustainability & Eco-Friendly Tourism" [level=3] [ref=e98]
+          - paragraph [ref=e99]: Eco-conscious practices, Leave No Trace policy, and educational nature walks that teach students and teams to respect and conserve the natural world.
+        - article [ref=e100]:
+          - generic [ref=e101]: Hospitality
+          - heading "Premium Hospitality & Seamless Experience" [level=3] [ref=e102]
+          - paragraph [ref=e103]: Hygienic, well-maintained tents, dorms and eco-lodges, delicious meals catered to all dietary preferences, and friendly professional staff ensuring an enjoyable adventure.
+        - article [ref=e104]:
+          - generic [ref=e105]: Tailored
+          - heading "Tailored Programs For Schools & Corporates" [level=3] [ref=e106]
+          - paragraph [ref=e107]: Customized learning & adventure modules, flexible packages, and engaging workshops covering leadership, survival training, and problem-solving for all age groups.
+        - article [ref=e108]:
+          - generic [ref=e109]: Support
+          - heading "Hassle-Free Booking & Customer Support" [level=3] [ref=e110]
+          - paragraph [ref=e111]: Dedicated CRM team, easy booking with transparent pricing and no hidden costs, plus pre-trip orientation and post-trip engagement for a well-rounded experience.
+    - region [ref=e112]:
+      - generic [ref=e113]:
+        - img "Group on a mountain trek" [ref=e115]
+        - generic [ref=e116]:
+          - generic [ref=e117]: How we operate
+          - heading "Every experience is by design" [level=2] [ref=e118]
+          - paragraph [ref=e119]: At Cliff-Inn Adventures, every experience is designed to inspire, challenge, and create lasting memories. We believe that adventure is more than just an activity — it's a journey of discovery, learning, and growth.
+          - paragraph [ref=e120]: With a passion for outdoor exploration and experiential learning, we craft unique and immersive experiences for schools and corporations. Whether it's a thrilling camping expedition, an action-packed adventure workshop, or an educational excursion, we ensure every moment is engaging, meaningful, and unforgettable.
+          - paragraph [ref=e121]: Our commitment to safety, excellence, and innovation sets us apart, making us the perfect choice for those looking to go beyond the ordinary and embrace the extraordinary.
+  - generic [ref=e122]:
+    - generic [ref=e124]:
+      - generic [ref=e125]:
+        - generic [ref=e126]: Let's plan your escape
+        - heading "Ready for your next adventure?" [level=2] [ref=e127]: Ready for yournext adventure?
+        - paragraph [ref=e128]: Whether you're a school, a company, or a soul craving the wild — we'll build the perfect experience around you.
+      - generic [ref=e130]:
+        - generic [ref=e131]:
+          - generic [ref=e132]: Full name
+          - textbox "Full name" [ref=e133]:
+            - /placeholder: Your name
+        - generic [ref=e134]:
+          - generic [ref=e135]: Phone
+          - textbox "Phone" [ref=e136]:
+            - /placeholder: "+91 "
+        - generic [ref=e137]:
+          - generic [ref=e138]: Email
+          - textbox "Email" [ref=e139]:
+            - /placeholder: you@email.com
+        - button "Plan My Escape →" [ref=e140] [cursor=pointer]
+        - paragraph [ref=e141]
+    - contentinfo [ref=e143]:
+      - generic [ref=e145]:
+        - generic [ref=e146]:
+          - generic [ref=e147]: 8+
+          - generic [ref=e148]: Years guiding in the wild
+        - generic [ref=e149]:
+          - generic [ref=e150]: 120+
+          - generic [ref=e151]: Schools & corporates
+        - generic [ref=e152]:
+          - generic [ref=e153]: 5k+
+          - generic [ref=e154]: Explorers guided
+        - generic [ref=e155]:
+          - generic "5 out of 5 stars" [ref=e156]: ★★★★★
+          - generic [ref=e157]: Top-rated experiences
+      - generic "Safety credentials" [ref=e158]:
+        - generic [ref=e159]:
+          - generic [ref=e164]:
+            - generic [ref=e165]: Wilderness First Aid
+            - generic [ref=e166]: Certified guides on every trip
+          - generic [ref=e170]:
+            - generic [ref=e171]: Fully Insured
+            - generic [ref=e172]: Comprehensive trip & liability cover
+          - generic [ref=e178]:
+            - generic [ref=e179]: Small Group Ratios
+            - generic [ref=e180]: Up to 1:8 instructor:participant
+          - generic [ref=e186]:
+            - generic [ref=e187]: Written Safety Protocol
+            - generic [ref=e188]: Gear checks & briefings on every activity
+      - generic [ref=e189]:
+        - generic [ref=e190]:
+          - img "Cliff-Inn Adventures" [ref=e191]
+          - paragraph [ref=e192]: We craft outdoor experiences for schools and corporates — camps, workshops and team-building that build confidence, leadership and lasting bonds.
+          - generic "Follow us on social media" [ref=e193]:
+            - link "Instagram" [ref=e194] [cursor=pointer]:
+              - /url: https://instagram.com/cliffinnadventures
+            - link "WhatsApp" [ref=e199] [cursor=pointer]:
+              - /url: https://wa.me/919573199863
+        - navigation "Explore" [ref=e203]:
+          - heading "Explore" [level=3] [ref=e204]
+          - list [ref=e205]:
+            - listitem [ref=e206]:
+              - link "Home" [ref=e207] [cursor=pointer]:
+                - /url: index.html
+            - listitem [ref=e208]:
+              - link "About Us" [ref=e209] [cursor=pointer]:
+                - /url: about.html
+            - listitem [ref=e210]:
+              - link "Gallery" [ref=e211] [cursor=pointer]:
+                - /url: gallery.html
+            - listitem [ref=e212]:
+              - link "Our Camp Sites" [ref=e213] [cursor=pointer]:
+                - /url: camp-sites.html
+            - listitem [ref=e214]:
+              - link "Contact" [ref=e215] [cursor=pointer]:
+                - /url: contact.html
+        - navigation "Programs" [ref=e216]:
+          - heading "Programs" [level=3] [ref=e217]
+          - list [ref=e218]:
+            - listitem [ref=e219]:
+              - link "School Programs" [ref=e220] [cursor=pointer]:
+                - /url: school-programs.html
+            - listitem [ref=e221]:
+              - link "Adventure Workshops" [ref=e222] [cursor=pointer]:
+                - /url: adventure-workshops.html
+            - listitem [ref=e223]:
+              - link "Corporate & Groups" [ref=e224] [cursor=pointer]:
+                - /url: corporate-packages.html
+            - listitem [ref=e225]:
+              - link "Night Camping" [ref=e226] [cursor=pointer]:
+                - /url: corporate-packages.html
+            - listitem [ref=e227]:
+              - link "School Boot Camps" [ref=e228] [cursor=pointer]:
+                - /url: school-programs.html
+        - generic [ref=e229]:
+          - heading "Get In Touch" [level=3] [ref=e230]
+          - list [ref=e231]:
+            - listitem [ref=e232]:
+              - generic [ref=e233]: Call us
+              - link "Primary +91 95731 99863" [ref=e236] [cursor=pointer]:
+                - /url: tel:+919573199863
+                - generic [ref=e237]: Primary
+                - text: +91 95731 99863
+              - link "Alt +91 90107 39847" [ref=e238] [cursor=pointer]:
+                - /url: tel:+919010739847
+                - generic [ref=e239]: Alt
+                - text: +91 90107 39847
+            - listitem [ref=e240]:
+              - generic [ref=e241]: Mail us
+              - link "cliffinnadventures@gmail.com" [ref=e245] [cursor=pointer]:
+                - /url: mailto:cliffinnadventures@gmail.com
+            - listitem [ref=e246]:
+              - generic [ref=e247]: WhatsApp
+              - link "+91 95731 99863" [ref=e251] [cursor=pointer]:
+                - /url: https://wa.me/919573199863
+      - generic [ref=e253]:
+        - generic [ref=e254]: © 2020–2026 Cliff-Inn Adventures. All rights reserved.
+        - generic [ref=e255]:
+          - link "Privacy Policy" [ref=e256] [cursor=pointer]:
+            - /url: "#"
+          - link "Cancellation Policy" [ref=e257] [cursor=pointer]:
+            - /url: "#"
+          - link "Terms & Conditions" [ref=e258] [cursor=pointer]:
+            - /url: "#"
+          - link "Release of Liability" [ref=e259] [cursor=pointer]:
+            - /url: "#"
+  - link "Chat with us on WhatsApp" [ref=e260] [cursor=pointer]:
+    - /url: https://wa.me/919573199863
+    - generic: Chat with us
