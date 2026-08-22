@@ -1,12 +1,20 @@
-import { qs, qsa, on } from '../utils/dom.js';
+import { qsa, on } from '../utils/dom.js';
 import { config } from '../config.js';
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const AUDIENCE_CATEGORIES = {
+  'School group': 'school programs',
+  'Corporate / Group': 'corporate packages',
+  'Independent / Family': 'camp sites',
+};
+const NOT_SURE_VALUE = 'Not sure — help me choose';
 
 /**
  * Contact / interest form.
  *
  * Any <form> with data-form="contact", data-form="interest" or
  * data-form="modal-interest" is wired up:
- *   - Client-side required + email + phone validation, marks fields with data-invalid
+ *   - Client-side required, contact-choice, email and phone validation
  *   - Honeypot field check (bots that fill the hidden field are rejected silently)
  *   - Submits as JSON to config.WEBHOOK_URL (Google Apps Script Web App)
  *   - Uses mode: 'no-cors' fallback if the server responds with an opaque
@@ -23,6 +31,9 @@ function setupForm(form, formIndex) {
   const submit = form.querySelector('button[type="submit"]');
   const success = findSuccessPanel(form);
 
+  enhanceContactChoice(form);
+  enhanceInterestChoices(form, formIndex);
+  enhanceContactFormCopy(form);
   connectInlineErrors(form, formIndex);
 
   on(form, 'submit', async (event) => {
@@ -46,6 +57,7 @@ function setupForm(form, formIndex) {
       ...serialize(form),
     };
 
+    form.setAttribute('aria-busy', 'true');
     setSubmitting(submit, status, true);
 
     try {
@@ -57,38 +69,231 @@ function setupForm(form, formIndex) {
       // eslint-disable-next-line no-console
       console.error('[form] submit failed:', error);
     } finally {
+      form.removeAttribute('aria-busy');
       setSubmitting(submit, status, false);
     }
   });
 
-  // Clear invalid state as the user fixes fields
+  // Once an error has been shown, clear it only when the value is valid.
   on(form, 'input', (event) => {
     const field = event.target.closest('.field');
-    if (field?.dataset.invalid === 'true') {
-      setFieldInvalid(field, false);
+    if (!field) return;
+
+    if (event.target.matches('[data-contact-choice]')) {
+      updateContactChoiceErrors(form);
+      return;
     }
+
+    if (field.dataset.invalid === 'true' && isFieldValid(field)) setFieldInvalid(field, false);
   });
+
+  // Validate completed fields on blur, not while the user is still typing.
+  on(form, 'focusout', (event) => {
+    const control = event.target;
+    if (!control.matches('input, textarea, select') || control.type === 'checkbox' || control.type === 'radio') return;
+    validateControlOnBlur(control, form);
+  });
+
+  on(form, 'reset', () => {
+    requestAnimationFrame(() => {
+      qsa('.field', form).forEach((field) => {
+        restoreFieldMessage(field);
+        setFieldInvalid(field, false);
+      });
+      form.dispatchEvent(new CustomEvent('form:reset-ui'));
+    });
+  });
+}
+
+function enhanceContactChoice(form) {
+  const email = form.querySelector('input[type="email"]');
+  const phone = form.querySelector('input[type="tel"]');
+  if (!email || !phone) return;
+
+  const emailField = email.closest('.field');
+  const phoneField = phone.closest('.field');
+  if (!emailField || !phoneField) return;
+
+  email.required = false;
+  phone.required = false;
+  email.dataset.contactChoice = 'true';
+  phone.dataset.contactChoice = 'true';
+
+  stripRequiredMarker(emailField.querySelector('.field__label'));
+  stripRequiredMarker(phoneField.querySelector('.field__label'));
+}
+
+function enhanceInterestChoices(form, formIndex) {
+  const audience = form.querySelector('select[name="audience"]');
+  const field = form.querySelector('.field[data-required-group]');
+  const group = field?.querySelector('.checkbox-group');
+  if (!audience || !field || !group) return;
+
+  const categories = qsa('.checkbox-group__category', group);
+  if (!categories.length) return;
+
+  const label = field.querySelector('.field__label');
+  const hint = document.createElement('p');
+  hint.className = 'field__hint';
+  hint.id = `form-${formIndex}-interest-hint`;
+  hint.setAttribute('aria-live', 'polite');
+  label?.after(hint);
+
+  const fallback = document.createElement('div');
+  fallback.className = 'checkbox-group__fallback';
+  fallback.innerHTML = `
+    <label class="checkbox-chip checkbox-chip--fallback">
+      <input type="checkbox" name="experiences" value="${NOT_SURE_VALUE}">
+      <span>${NOT_SURE_VALUE}</span>
+    </label>`;
+  group.prepend(fallback);
+  const notSure = fallback.querySelector('input');
+
+  const toggle = document.createElement('button');
+  toggle.className = 'form__reveal-all';
+  toggle.type = 'button';
+  toggle.textContent = 'See all experiences';
+  group.id ||= `form-${formIndex}-experience-options`;
+  toggle.setAttribute('aria-controls', group.id);
+  toggle.setAttribute('aria-expanded', 'false');
+  group.after(toggle);
+
+  let showAll = false;
+
+  const update = ({ resetChoices = false } = {}) => {
+    const preferredCategory = AUDIENCE_CATEGORIES[audience.value];
+
+    if (resetChoices) {
+      qsa('input[type="checkbox"]', group).forEach((input) => {
+        input.checked = false;
+      });
+    }
+
+    field.hidden = !preferredCategory;
+    if (!preferredCategory) return;
+
+    categories.forEach((category) => {
+      const title = category.querySelector('.checkbox-group__title')?.textContent.trim().toLowerCase();
+      category.hidden = !showAll && title !== preferredCategory;
+    });
+
+    hint.textContent = showAll
+      ? 'Showing every experience. Choose one or more.'
+      : 'Showing recommended options. Not sure? Choose “Not sure — help me choose”.';
+    toggle.textContent = showAll ? 'Show recommended only' : 'See all experiences';
+    toggle.setAttribute('aria-expanded', String(showAll));
+    setFieldInvalid(field, false);
+  };
+
+  on(audience, 'change', () => {
+    showAll = false;
+    update({ resetChoices: true });
+  });
+
+  on(toggle, 'click', () => {
+    showAll = !showAll;
+    update();
+  });
+
+  on(group, 'change', (event) => {
+    if (!event.target.matches('input[type="checkbox"]')) return;
+
+    if (event.target === notSure && notSure.checked) {
+      qsa('input[type="checkbox"]', group).forEach((input) => {
+        if (input !== notSure) input.checked = false;
+      });
+    } else if (event.target.checked) {
+      notSure.checked = false;
+    }
+
+    if (group.querySelector('input[type="checkbox"]:checked')) setFieldInvalid(field, false);
+  });
+
+  on(form, 'form:reset-ui', () => {
+    showAll = false;
+    update();
+  });
+
+  update();
+}
+
+function enhanceContactFormCopy(form) {
+  if (form.dataset.form !== 'contact') return;
+
+  form.classList.add('form--lead');
+
+  const message = form.querySelector('textarea[name="message"]');
+  const messageField = message?.closest('.field');
+  const messageLabel = messageField?.querySelector('.field__label');
+  if (message && messageField) {
+    if (messageLabel) messageLabel.textContent = 'Anything else? (optional)';
+    message.placeholder = 'Optional details';
+    const hint = document.createElement('p');
+    hint.className = 'field__hint';
+    hint.id = 'contact-message-hint';
+    hint.textContent = 'Group size, preferred dates, and anything else we should know.';
+    message.after(hint);
+    addDescribedBy(message, hint.id);
+  }
+
+  const submit = form.querySelector('button[type="submit"]');
+  if (!submit) return;
+
+  submit.innerHTML = 'Get My Tailored Plan <span aria-hidden="true">→</span>';
+  const note = document.createElement('p');
+  note.className = 'form__submit-note form__row-full';
+  note.textContent = 'No payment. We’ll reply within 24 hours.';
+  submit.before(note);
 }
 
 function connectInlineErrors(form, formIndex) {
   qsa('.field', form).forEach((field, fieldIndex) => {
-    const control = field.querySelector('input, textarea, select');
     const error = field.querySelector('.field__error');
-    if (!control || !error) return;
+    if (!error) return;
 
+    error.dataset.defaultText ||= error.textContent;
     error.id ||= `form-${formIndex}-field-${fieldIndex}-error`;
-    const describedBy = new Set((control.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean));
-    describedBy.add(error.id);
-    control.setAttribute('aria-describedby', [...describedBy].join(' '));
+    const controls = field.dataset.requiredGroup
+      ? field.querySelectorAll('input')
+      : field.querySelectorAll('input, textarea, select');
+    if (!controls.length) return;
+
+    controls.forEach((control) => {
+      addDescribedBy(control, error.id);
+    });
   });
+}
+
+function addDescribedBy(control, id) {
+  const describedBy = new Set((control.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean));
+  describedBy.add(id);
+  control.setAttribute('aria-describedby', [...describedBy].join(' '));
+}
+
+function stripRequiredMarker(label) {
+  if (!label) return;
+  label.textContent = label.textContent.replace(/\s*\*\s*$/, '');
 }
 
 function setFieldInvalid(field, invalid) {
   field.dataset.invalid = invalid ? 'true' : 'false';
-  const control = field.querySelector('input, textarea, select');
-  if (!control) return;
-  if (invalid) control.setAttribute('aria-invalid', 'true');
-  else control.removeAttribute('aria-invalid');
+  const controls = field.querySelectorAll('input, textarea, select');
+  controls.forEach((control) => {
+    if (invalid) control.setAttribute('aria-invalid', 'true');
+    else control.removeAttribute('aria-invalid');
+  });
+}
+
+function setFieldMessage(field, message) {
+  const error = field?.querySelector('.field__error');
+  if (!error) return;
+  error.dataset.defaultText ||= error.textContent;
+  error.textContent = message;
+}
+
+function restoreFieldMessage(field) {
+  const error = field?.querySelector('.field__error');
+  if (error?.dataset.defaultText) error.textContent = error.dataset.defaultText;
 }
 
 function findSuccessPanel(form) {
@@ -112,31 +317,50 @@ function validate(form) {
   let valid = true;
 
   qsa('.field', form).forEach((field) => {
+    restoreFieldMessage(field);
     setFieldInvalid(field, false);
   });
 
   qsa('[required]', form).forEach((el) => {
     const field = el.closest('.field');
+    // Checkboxes / radios are validated as a group below.
+    if (el.type === 'checkbox' || el.type === 'radio') return;
     if (!el.value.trim()) {
       if (field) setFieldInvalid(field, true);
       valid = false;
     }
   });
 
+  qsa('.field[data-required-group]', form).forEach((field) => {
+    if (field.hidden) return;
+    const checked = field.querySelector('input[type="checkbox"]:checked, input[type="radio"]:checked');
+    if (!checked) {
+      setFieldInvalid(field, true);
+      valid = false;
+    }
+  });
+
+  if (!validateContactChoice(form)) valid = false;
+
   qsa('input[type="email"]', form).forEach((el) => {
-    if (el.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim())) {
+    if (el.value && !isValidEmail(el.value)) {
       const field = el.closest('.field');
-      if (field) setFieldInvalid(field, true);
+      if (field) {
+        setFieldMessage(field, 'Enter a valid email address.');
+        setFieldInvalid(field, true);
+      }
       valid = false;
     }
   });
 
   qsa('input[type="tel"]', form).forEach((el) => {
     if (!el.value.trim()) return;
-    // Indian mobile: optional +91 or 0 prefix, then 10 digits starting with 6-9.
-    if (!/^(\+91\s?|0\s?)?[6-9]\d{9}$/.test(el.value.trim())) {
+    if (!isValidPhone(el.value)) {
       const field = el.closest('.field');
-      if (field) setFieldInvalid(field, true);
+      if (field) {
+        setFieldMessage(field, 'Enter a valid 10-digit mobile number.');
+        setFieldInvalid(field, true);
+      }
       valid = false;
     }
   });
@@ -144,11 +368,106 @@ function validate(form) {
   return valid;
 }
 
+function validateContactChoice(form) {
+  const email = form.querySelector('input[data-contact-choice][type="email"]');
+  const phone = form.querySelector('input[data-contact-choice][type="tel"]');
+  if (!email || !phone || email.value.trim() || phone.value.trim()) return true;
+
+  const emailField = email.closest('.field');
+  const phoneField = phone.closest('.field');
+  setFieldMessage(emailField, 'Enter an email or phone number.');
+  setFieldMessage(phoneField, 'Enter an email or phone number.');
+  setFieldInvalid(emailField, true);
+  setFieldInvalid(phoneField, true);
+  return false;
+}
+
+function updateContactChoiceErrors(form) {
+  const email = form.querySelector('input[data-contact-choice][type="email"]');
+  const phone = form.querySelector('input[data-contact-choice][type="tel"]');
+  if (!email || !phone) return;
+
+  const emailField = email.closest('.field');
+  const phoneField = phone.closest('.field');
+  const hasContact = email.value.trim() || phone.value.trim();
+
+  if (!hasContact) return;
+
+  restoreFieldMessage(emailField);
+  restoreFieldMessage(phoneField);
+  setFieldInvalid(emailField, Boolean(email.value.trim()) && !isValidEmail(email.value));
+  setFieldInvalid(phoneField, Boolean(phone.value.trim()) && !isValidPhone(phone.value));
+}
+
+function validateControlOnBlur(control, form) {
+  const field = control.closest('.field');
+  if (!field) return;
+
+  restoreFieldMessage(field);
+
+  if (control.matches('[data-contact-choice]')) {
+    if (control.value.trim()) {
+      const valid = control.type === 'email' ? isValidEmail(control.value) : isValidPhone(control.value);
+      if (!valid) {
+        setFieldMessage(
+          field,
+          control.type === 'email' ? 'Enter a valid email address.' : 'Enter a valid 10-digit mobile number.'
+        );
+      }
+      setFieldInvalid(field, !valid);
+      return;
+    }
+
+    const phone = form.querySelector('input[data-contact-choice][type="tel"]');
+    if (control === phone) validateContactChoice(form);
+    return;
+  }
+
+  setFieldInvalid(field, !isControlValid(control));
+}
+
+function isFieldValid(field) {
+  if (field.dataset.requiredGroup !== undefined) {
+    return Boolean(field.querySelector('input[type="checkbox"]:checked, input[type="radio"]:checked'));
+  }
+
+  const control = field.querySelector('input, textarea, select');
+  return control ? isControlValid(control) : true;
+}
+
+function isControlValid(control) {
+  const value = control.value.trim();
+  if (control.required && !value) return false;
+  if (control.type === 'email' && value) return isValidEmail(value);
+  if (control.type === 'tel' && value) return isValidPhone(value);
+  return true;
+}
+
+function isValidEmail(value) {
+  return EMAIL_PATTERN.test(value.trim());
+}
+
+function isValidPhone(value) {
+  const digits = value.replace(/\D/g, '');
+  const mobile = digits.length === 12 && digits.startsWith('91')
+    ? digits.slice(2)
+    : digits.length === 11 && digits.startsWith('0')
+      ? digits.slice(1)
+      : digits;
+  return /^[6-9]\d{9}$/.test(mobile);
+}
+
 function serialize(form) {
   const data = {};
   new FormData(form).forEach((value, key) => {
     if (key === 'website') return; // honeypot — never send
-    data[key] = typeof value === 'string' ? value.trim() : value;
+    const clean = typeof value === 'string' ? value.trim() : value;
+    if (Object.prototype.hasOwnProperty.call(data, key)) {
+      // Collect multiple values (e.g. multi-select or same-name checkboxes)
+      data[key] = [].concat(data[key], clean);
+    } else {
+      data[key] = clean;
+    }
   });
   return data;
 }

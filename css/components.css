@@ -1756,14 +1756,35 @@ a.tile--image-flat:focus-visible img {
   flex-direction: column;
   gap: 6px;
   min-width: 0;
+  scroll-margin-top: 96px;
 }
 
 .field__label {
   font-family: var(--font-body);
-  font-size: 11.5px;
+  font-size: 12.5px;
+  font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--color-ink-soft);
+}
+
+.field__hint,
+.form__submit-note {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--color-ink-muted);
+  margin: 0;
+}
+
+.form__submit-note {
+  text-align: center;
+  margin-top: 4px;
+}
+
+.form--on-dark .field__hint,
+.form--on-dark .form__submit-note {
+  color: var(--color-body-on-dark);
 }
 
 .input,
@@ -1775,6 +1796,7 @@ a.tile--image-flat:focus-visible img {
   box-sizing: border-box;
   width: 100%;
   min-width: 0;
+  scroll-margin-top: 96px;
   padding: 13px 15px;
   min-height: 48px;
   border: 1px solid var(--color-border-strong);
@@ -1872,6 +1894,167 @@ a.tile--image-flat:focus-visible img {
 .form-status[data-state='error'] {
   color: oklch(0.55 0.19 30);
   font-size: 13px;
+}
+
+/* Checkbox chip group — modern multi-select alternative */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.checkbox-group__fallback {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.checkbox-group__category {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.checkbox-group__title {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+}
+
+.checkbox-group__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.checkbox-chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.3;
+  color: var(--color-ink);
+  min-height: 44px;
+  padding: 9px 14px;
+  box-sizing: border-box;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--color-card);
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.checkbox-chip::before {
+  content: '';
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  flex: none;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  opacity: 0.55;
+}
+
+.checkbox-chip:hover,
+.checkbox-chip:has(input:focus-visible) {
+  border-color: var(--color-ember);
+}
+
+.checkbox-chip input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkbox-chip:has(input:checked) {
+  background: var(--color-ember);
+  border-color: var(--color-ember);
+  color: var(--color-ink-on-dark);
+  box-shadow: var(--shadow-ember-soft);
+}
+
+.checkbox-chip:has(input:checked)::before {
+  content: '✓';
+  opacity: 1;
+}
+
+.checkbox-chip--fallback {
+  background: var(--color-ember-soft);
+  border-color: oklch(0.67 0.15 47 / 0.35);
+}
+
+.form__reveal-all {
+  align-self: flex-start;
+  min-height: 44px;
+  padding: 8px 2px;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  background: transparent;
+  color: var(--color-ember-text);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.form__reveal-all:hover,
+.form__reveal-all:focus-visible {
+  color: var(--color-ember);
+}
+
+/* Dark-form variant */
+.form--on-dark .checkbox-group__title {
+  color: oklch(0.8 0.02 88);
+}
+
+.form--on-dark .checkbox-chip {
+  background: oklch(1 0 0 / 0.06);
+  border-color: var(--color-border-on-dark-strong);
+  color: var(--color-ink-on-dark);
+}
+
+.form--on-dark .checkbox-chip:hover,
+.form--on-dark .checkbox-chip:has(input:focus-visible) {
+  border-color: var(--color-amber);
+}
+
+.form--on-dark .checkbox-chip:has(input:checked) {
+  background: var(--color-amber);
+  border-color: var(--color-amber);
+  color: var(--color-ink);
+}
+
+.form--on-dark .checkbox-chip--fallback {
+  background: oklch(1 0 0 / 0.08);
+  border-color: var(--color-border-on-dark-strong);
+}
+
+.form--on-dark .form__reveal-all {
+  color: var(--color-amber);
+}
+
+.field[data-invalid='true'] .checkbox-group {
+  padding: 10px;
+  margin: -10px;
+  border-radius: var(--radius-input);
+  outline: 2px solid oklch(0.55 0.19 30 / 0.6);
+}
+
+.form--on-dark .field[data-invalid='true'] .checkbox-group {
+  outline-color: oklch(0.78 0.17 30 / 0.8);
 }
 
 /* Success panel */
@@ -3610,9 +3793,9 @@ a.tile--image-flat:focus-visible img {
   }
 }
 
-/* Mobile: true stacked composition. The image becomes a deliberate
-   hero panel above the copy, not a squeezed background. Copy is centered
-   so the layout feels native to portrait viewports. */
+/* Mobile: true stacked composition. Copy leads, then the illustration
+   sits beneath it as a deliberate hero panel, not a squeezed background.
+   Copy is centered so the layout feels native to portrait viewports. */
 @media (max-width: 767px) {
   .hero-banner--home {
     display: flex;
@@ -3622,7 +3805,7 @@ a.tile--image-flat:focus-visible img {
   .hero-banner--home .hero-banner__media {
     position: relative;
     inset: auto;
-    order: 1;
+    order: 2;
     height: 42vh;
     min-height: 280px;
     align-items: stretch;
@@ -3638,24 +3821,24 @@ a.tile--image-flat:focus-visible img {
     -webkit-mask-image: linear-gradient(
       to bottom,
       transparent 0%,
-      #000 12%,
-      #000 88%,
+      #000 6%,
+      #000 92%,
       transparent 100%
     );
             mask-image: linear-gradient(
       to bottom,
       transparent 0%,
-      #000 12%,
-      #000 88%,
+      #000 6%,
+      #000 92%,
       transparent 100%
     );
   }
   .hero-banner--home .hero-banner__inner {
     position: relative;
-    order: 2;
+    order: 1;
     width: 100%;
     padding-inline: var(--container-pad);
-    padding-block: 2.5rem 3.5rem;
+    padding-block: 2.5rem 1.5rem;
     justify-content: flex-start;
     text-align: center;
     background: var(--color-hero-cream);
@@ -4687,4 +4870,15 @@ a.tile--image-flat:focus-visible img {
   .carousel__track { scroll-behavior: auto; }
   .carousel__dot,
   .carousel__arrow { transition: none; }
+}
+
+/* Mobile header — force logo left and hamburger right without the empty
+   1fr column that used to create a wide dead zone between them. */
+@media (max-width: 1080px) {
+  .header__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
 }

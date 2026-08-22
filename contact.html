@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -141,35 +141,85 @@
         <p style="margin: 14px 0 26px;">Share your group size, preferred dates and the kind of experience you're after - we'll craft a program and get back to you shortly.</p>
 
         <form class="form form--grid-2" data-form="contact" novalidate aria-labelledby="ct-form-title">
-          <div class="field">
-            <label class="field__label" for="c-first">First name *</label>
-            <input class="input" id="c-first" name="firstName" type="text" placeholder="Your first name" required autocomplete="given-name">
-            <p class="field__error" role="alert">Please enter your first name.</p>
+          <input type="hidden" name="website" value="" tabindex="-1" autocomplete="off" class="u-visually-hidden" aria-hidden="true">
+          <div class="field form__row-full">
+            <label class="field__label" for="c-fullName">Full name *</label>
+            <input class="input" id="c-fullName" name="fullName" type="text" placeholder="Your name" required autocomplete="name">
+            <p class="field__error" role="alert">Please enter your name.</p>
           </div>
-
-          <div class="field">
-            <label class="field__label" for="c-last">Last name</label>
-            <input class="input" id="c-last" name="lastName" type="text" placeholder="Your last name" autocomplete="family-name">
-          </div>
-
           <div class="field">
             <label class="field__label" for="c-email">Email *</label>
             <input class="input" id="c-email" name="email" type="email" placeholder="you@email.com" required autocomplete="email">
             <p class="field__error" role="alert">Please enter a valid email.</p>
           </div>
-
           <div class="field">
-            <label class="field__label" for="c-phone">Phone</label>
-            <input class="input" id="c-phone" name="phone" type="tel" placeholder="+91" autocomplete="tel">
-            <p class="field__error" role="alert">Please enter a valid phone number.</p>
+            <label class="field__label" for="c-phone">Phone *</label>
+            <input class="input" id="c-phone" name="phone" type="tel" placeholder="+91" required autocomplete="tel" inputmode="tel">
+            <p class="field__error" role="alert">Please enter your phone number.</p>
           </div>
-
           <div class="field form__row-full">
-            <label class="field__label" for="c-msg">Write a message</label>
-            <textarea class="textarea" id="c-msg" name="message" rows="5" placeholder="Group size, dates, what you have in mind…"></textarea>
+            <label class="field__label" for="c-audience">Who is this for? *</label>
+            <select class="select" id="c-audience" name="audience" required>
+              <option value="">Select one</option>
+              <option value="School group">School group</option>
+              <option value="Corporate / Group">Corporate / Group</option>
+              <option value="Independent / Family">Independent / Family</option>
+            </select>
+            <p class="field__error" role="alert">Please select an audience.</p>
           </div>
-
-          <button class="btn btn--primary form__row-full" type="submit" style="justify-self: start; width: auto;">Submit →</button>
+          <div class="field form__row-full" data-required-group>
+            <span class="field__label" id="c-experiences-label">What are you interested in? *</span>
+            <div class="checkbox-group" role="group" aria-labelledby="c-experiences-label">
+              <div class="checkbox-group__category">
+                <span class="checkbox-group__title">School Programs</span>
+                <div class="checkbox-group__options">
+                  <label class="checkbox-chip"><input type="checkbox" name="experiences" value="In-School Adventure Camp"><span>In-School Adventure Camp</span></label>
+                  <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Outdoor School Bootcamp"><span>Outdoor School Bootcamp</span></label>
+                  <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Adventure Skill Learning"><span>Adventure Skill Learning</span></label>
+                  <label class="checkbox-chip"><input type="checkbox" name="experiences" value="School Trip"><span>School Trip</span></label>
+                  <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Alpha 360° Day Out"><span>Alpha 360&deg; Day Out</span></label>
+                  <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Night Camp"><span>Night Camp</span></label>
+                </div>
+              </div>
+              <div class="checkbox-group__category">
+                <span class="checkbox-group__title">Corporate Packages</span>
+                <div class="checkbox-group__options">
+                  <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Corporate Day Outing"><span>Corporate Day Outing</span></label>
+                  <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Group Night Camping"><span>Group Night Camping</span></label>
+                  <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Team-Building Workshop"><span>Team-Building Workshop</span></label>
+                  <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Executive Offsite"><span>Executive Offsite</span></label>
+                </div>
+              </div>
+              <div class="checkbox-group__category">
+                <span class="checkbox-group__title">Camp Sites</span>
+                <div class="checkbox-group__options">
+                  <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Village Trails"><span>Village Trails</span></label>
+                  <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Keesara Hills"><span>Keesara Hills</span></label>
+                  <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Ananthagiri Hills"><span>Ananthagiri Hills</span></label>
+                  <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Mayuri Forest"><span>Mayuri Forest</span></label>
+                  <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Pandavulla Gutta"><span>Pandavulla Gutta</span></label>
+                  <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Tipeswar"><span>Tipeswar</span></label>
+                </div>
+              </div>
+              <div class="checkbox-group__category">
+                <span class="checkbox-group__title">Adventure Workshops</span>
+                <div class="checkbox-group__options">
+                  <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Rock Climbing & Rappelling Workshop"><span>Rock Climbing & Rappelling Workshop</span></label>
+                  <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Survival Skills Workshop"><span>Survival Skills Workshop</span></label>
+                  <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Hiking Workshop"><span>Hiking Workshop</span></label>
+                  <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Zipline & Rope Course Workshop"><span>Zipline & Rope Course Workshop</span></label>
+                  <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Adventure Gear Discovery Workshop"><span>Adventure Gear Discovery Workshop</span></label>
+                  <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Star Gazing Workshop"><span>Star Gazing Workshop</span></label>
+                </div>
+              </div>
+            </div>
+            <p class="field__error" role="alert">Please select at least one experience.</p>
+          </div>
+          <div class="field form__row-full">
+            <label class="field__label" for="c-message">Tell us more</label>
+            <textarea class="textarea" id="c-message" name="message" rows="4" placeholder="Group size, dates, special needs…"></textarea>
+          </div>
+          <button class="btn btn--primary form__row-full" type="submit">Send Enquiry <span aria-hidden="true">→</span></button>
           <p class="form-status form__row-full" data-form-status aria-live="polite"></p>
         </form>
 
@@ -221,22 +271,85 @@
     </div>
     <div class="footer__cta-actions">
       <form class="footer__cta-form form--on-dark" data-form="cta-quick" novalidate>
+        <input type="hidden" name="website" value="" tabindex="-1" autocomplete="off" class="u-visually-hidden" aria-hidden="true">
         <div class="field">
-          <label class="field__label" for="cta-name">Full name</label>
-          <input class="input" id="cta-name" name="fullName" type="text" placeholder="Your name" required autocomplete="name">
+          <label class="field__label" for="f-fullName">Full name *</label>
+          <input class="input" id="f-fullName" name="fullName" type="text" placeholder="Your name" required autocomplete="name">
           <p class="field__error" role="alert">Please enter your name.</p>
         </div>
         <div class="field">
-          <label class="field__label" for="cta-phone">Phone</label>
-          <input class="input" id="cta-phone" name="phone" type="tel" placeholder="+91 " required autocomplete="tel" inputmode="tel">
+          <label class="field__label" for="f-email">Email *</label>
+          <input class="input" id="f-email" name="email" type="email" placeholder="you@email.com" required autocomplete="email">
+          <p class="field__error" role="alert">Please enter a valid email.</p>
+        </div>
+        <div class="field">
+          <label class="field__label" for="f-phone">Phone *</label>
+          <input class="input" id="f-phone" name="phone" type="tel" placeholder="+91" required autocomplete="tel" inputmode="tel">
           <p class="field__error" role="alert">Please enter your phone number.</p>
         </div>
         <div class="field">
-          <label class="field__label" for="cta-email">Email</label>
-          <input class="input" id="cta-email" name="email" type="email" placeholder="you@email.com" required autocomplete="email">
-          <p class="field__error" role="alert">Please enter a valid email.</p>
+          <label class="field__label" for="f-audience">Who is this for? *</label>
+          <select class="select" id="f-audience" name="audience" required>
+            <option value="">Select one</option>
+            <option value="School group">School group</option>
+            <option value="Corporate / Group">Corporate / Group</option>
+            <option value="Independent / Family">Independent / Family</option>
+          </select>
+          <p class="field__error" role="alert">Please select an audience.</p>
         </div>
-        <button class="btn btn--primary footer__cta-submit" type="submit">Plan My Escape →</button>
+        <div class="field" data-required-group>
+          <span class="field__label" id="f-experiences-label">What are you interested in? *</span>
+          <div class="checkbox-group" role="group" aria-labelledby="f-experiences-label">
+            <div class="checkbox-group__category">
+              <span class="checkbox-group__title">School Programs</span>
+              <div class="checkbox-group__options">
+                <label class="checkbox-chip"><input type="checkbox" name="experiences" value="In-School Adventure Camp"><span>In-School Adventure Camp</span></label>
+                <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Outdoor School Bootcamp"><span>Outdoor School Bootcamp</span></label>
+                <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Adventure Skill Learning"><span>Adventure Skill Learning</span></label>
+                <label class="checkbox-chip"><input type="checkbox" name="experiences" value="School Trip"><span>School Trip</span></label>
+                <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Alpha 360° Day Out"><span>Alpha 360&deg; Day Out</span></label>
+                <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Night Camp"><span>Night Camp</span></label>
+              </div>
+            </div>
+            <div class="checkbox-group__category">
+              <span class="checkbox-group__title">Corporate Packages</span>
+              <div class="checkbox-group__options">
+                <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Corporate Day Outing"><span>Corporate Day Outing</span></label>
+                <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Group Night Camping"><span>Group Night Camping</span></label>
+                <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Team-Building Workshop"><span>Team-Building Workshop</span></label>
+                <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Executive Offsite"><span>Executive Offsite</span></label>
+              </div>
+            </div>
+            <div class="checkbox-group__category">
+              <span class="checkbox-group__title">Camp Sites</span>
+              <div class="checkbox-group__options">
+                <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Village Trails"><span>Village Trails</span></label>
+                <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Keesara Hills"><span>Keesara Hills</span></label>
+                <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Ananthagiri Hills"><span>Ananthagiri Hills</span></label>
+                <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Mayuri Forest"><span>Mayuri Forest</span></label>
+                <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Pandavulla Gutta"><span>Pandavulla Gutta</span></label>
+                <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Tipeswar"><span>Tipeswar</span></label>
+              </div>
+            </div>
+            <div class="checkbox-group__category">
+              <span class="checkbox-group__title">Adventure Workshops</span>
+              <div class="checkbox-group__options">
+                <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Rock Climbing & Rappelling Workshop"><span>Rock Climbing & Rappelling Workshop</span></label>
+                <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Survival Skills Workshop"><span>Survival Skills Workshop</span></label>
+                <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Hiking Workshop"><span>Hiking Workshop</span></label>
+                <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Zipline & Rope Course Workshop"><span>Zipline & Rope Course Workshop</span></label>
+                <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Adventure Gear Discovery Workshop"><span>Adventure Gear Discovery Workshop</span></label>
+                <label class="checkbox-chip"><input type="checkbox" name="experiences" value="Star Gazing Workshop"><span>Star Gazing Workshop</span></label>
+              </div>
+            </div>
+          </div>
+          <p class="field__error" role="alert">Please select at least one experience.</p>
+        </div>
+        <div class="field">
+          <label class="field__label" for="f-message">Tell us more</label>
+          <textarea class="textarea" id="f-message" name="message" rows="4" placeholder="Group size, dates, special needs…"></textarea>
+        </div>
+        <button class="btn btn--primary footer__cta-submit" type="submit">Send Enquiry <span aria-hidden="true">→</span></button>
         <p class="form-status" data-form-status aria-live="polite"></p>
       </form>
       <div class="footer__cta-success success-panel" data-form-success hidden role="status">
