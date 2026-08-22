@@ -9,6 +9,11 @@ MAX_BYTES = 195 * 1024
 
 TARGETS = (
     (
+        ROOT / "assets/Expeditions/Dog Kayaking Website YT.png",
+        ROOT / "assets/Expeditions/Dog Kayaking Website YT.webp",
+        "WEBP",
+    ),
+    (
         ROOT / "assets/Background/adventure-workshops-hero-cliffin.png",
         ROOT / "assets/Background/adventure-workshops-hero-cliffin.webp",
         "WEBP",

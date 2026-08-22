@@ -12,6 +12,7 @@ import { initNavigation } from './components/navigation.js';
 import { initForms } from './components/form.js';
 import { initGalleryFilter } from './components/gallery.js';
 import { initAccordion } from './components/accordion.js';
+import { initCarousel } from './components/carousel.js';
 import { initAnimations } from './animations/index.js';
 import { initPageTransitions } from './animations/page-transitions.js';
 import { initModal } from './components/modal.js';
@@ -25,6 +26,7 @@ function boot() {
   initForms();
   initGalleryFilter();
   initAccordion();
+  initCarousel();
   initAnimations();
   initPageTransitions();
   initModal();

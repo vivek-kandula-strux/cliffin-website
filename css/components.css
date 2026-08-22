@@ -4485,3 +4485,206 @@ a.tile--image-flat:focus-visible img {
     width: 100%;
   }
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Carousel — horizontal scroll-snap with arrows + dots.
+   Cards are the same .card component; slides are just flex items.
+   ───────────────────────────────────────────────────────────── */
+/* -----------------------------------------------------------
+   EXPEDITION CARDS — clean image, one facts line, one action.
+----------------------------------------------------------- */
+.card--expedition {
+  box-shadow: 0 12px 30px oklch(0.08 0.02 158 / 0.16);
+}
+
+.card--expedition .card__media {
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+.card--expedition .card__body {
+  padding: clamp(18px, 1.7vw, 24px);
+  gap: 0;
+}
+
+.expedition-card__facts {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  margin: 0 0 14px;
+  overflow: visible;
+  color: var(--color-ink-muted);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.035em;
+  line-height: 1.25;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.expedition-card__facts > * {
+  flex: none;
+}
+
+.expedition-card__facts > * + *::before {
+  content: '•';
+  margin-inline: 8px;
+  color: var(--color-ember);
+}
+
+.card--expedition .card__title {
+  font-size: clamp(20px, 1.7vw, 23px);
+  line-height: 1.16;
+}
+
+.card--expedition .card__desc {
+  margin: 10px 0 20px;
+  font-size: 14px;
+  line-height: 1.62;
+}
+
+.card--expedition .card__footer {
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.card--expedition .card__footer > .btn {
+  flex: 0 0 auto;
+  min-height: 44px;
+}
+
+@media (max-width: 640px) {
+  .card--expedition .card__body {
+    padding: 18px;
+  }
+
+  .expedition-card__facts {
+    margin-bottom: 12px;
+    font-size: 10px;
+    letter-spacing: 0.02em;
+  }
+
+  .expedition-card__facts > * + *::before {
+    margin-inline: 6px;
+  }
+
+  .card--expedition .card__footer {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .card--expedition .card__footer > .btn {
+    width: 100%;
+    padding-inline: 16px;
+  }
+}
+
+.carousel {
+  position: relative;
+}
+
+.carousel__track {
+  display: flex;
+  gap: var(--grid-gap);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  list-style: none;
+  margin: 0;
+  padding: 4px 4px 12px;
+  overscroll-behavior-x: contain;
+}
+.carousel__track::-webkit-scrollbar { display: none; }
+
+.carousel__slide {
+  flex: 0 0 calc((100% - var(--grid-gap) * 2) / 3);
+  scroll-snap-align: start;
+  min-width: 0;
+  display: flex;
+}
+.carousel__slide > .card {
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .carousel__slide { flex-basis: calc((100% - var(--grid-gap)) / 2); }
+}
+@media (max-width: 640px) {
+  .carousel__slide { flex-basis: 86%; }
+}
+
+.carousel__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.carousel__arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    opacity var(--duration-fast) var(--ease-standard);
+}
+.carousel__arrow:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.7);
+}
+.carousel__arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.carousel__arrow:focus-visible {
+  outline: 2px solid var(--color-ember);
+  outline-offset: 2px;
+}
+
+.carousel__dots {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.carousel__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 0;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard),
+    width var(--duration-fast) var(--ease-standard);
+}
+.carousel__dot:hover { background: rgba(255, 255, 255, 0.55); }
+.carousel__dot[aria-current="true"] {
+  background: var(--color-ember);
+  width: 22px;
+  border-radius: 999px;
+}
+.carousel__dot:focus-visible {
+  outline: 2px solid var(--color-ember);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel__track { scroll-behavior: auto; }
+  .carousel__dot,
+  .carousel__arrow { transition: none; }
+}
