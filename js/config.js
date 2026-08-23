@@ -1,12 +1,11 @@
 /**
  * Site-wide configuration.
- * Replace the WEBHOOK_URL with your Google Apps Script Web App URL —
- * see README.md → "Contact form: Google Sheet webhook" for the setup script.
+ * Replace the WEBHOOK_URL with your webhook endpoint —
+ * see README.md → "Contact form: Google Sheet webhook" for the Apps Script setup.
  */
 export const config = {
-  // TODO(vivek): Replace with the deployed Apps Script Web App URL.
-  // Should look like: https://script.google.com/macros/s/{deployment-id}/exec
-  WEBHOOK_URL: '',
+  // Pabbly Connect webhook endpoint for form submissions.
+  WEBHOOK_URL: 'https://connect.pabbly.com/webhook-listener/webhook/IjU3NjAwNTY5MDYzNzA0M2Qi_pc/IjU3NjcwNTY4MDYzNDA0MzQ1MjY4NTUzNzUxM2Ei_pc',
 
   // Reveal fallback threshold — when GSAP isn't loaded we use IntersectionObserver
   REVEAL_ROOT_MARGIN: '0px 0px -10% 0px',
