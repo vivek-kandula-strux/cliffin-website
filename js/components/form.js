@@ -50,18 +50,27 @@ function setupForm(form, formIndex) {
       return;
     }
 
+    const signatureCanvas = form.querySelector('[data-signature-pad]');
+    if (signatureCanvas?.signaturePad?.isEmpty()) {
+      const field = signatureCanvas.closest('.field');
+      if (field) setFieldInvalid(field, true);
+      announce(status, 'Please check the highlighted fields.', 'error');
+      return;
+    }
+
     const payload = {
       form: form.dataset.form,
       page: window.location.pathname,
       submittedAt: new Date().toISOString(),
       ...serialize(form),
+      ...(signatureCanvas?.signaturePad ? { signature: signatureCanvas.signaturePad.getDataUrl() } : {}),
     };
 
     form.setAttribute('aria-busy', 'true');
     setSubmitting(submit, status, true);
 
     try {
-      await sendToWebhook(payload);
+      await sendToWebhook(payload, webhookUrlFor(form));
       showSuccess(form, success);
       form.reset();
     } catch (error) {
@@ -87,6 +96,12 @@ function setupForm(form, formIndex) {
     if (field.dataset.invalid === 'true' && isFieldValid(field)) setFieldInvalid(field, false);
   });
 
+  // A drawn signature clears the pad's error state (canvas input isn't covered above).
+  on(form, 'signature:drawn', (event) => {
+    const field = event.target.closest('.field');
+    if (field?.dataset.invalid === 'true') setFieldInvalid(field, false);
+  });
+
   // Validate completed fields on blur, not while the user is still typing.
   on(form, 'focusout', (event) => {
     const control = event.target;
@@ -100,12 +115,17 @@ function setupForm(form, formIndex) {
         restoreFieldMessage(field);
         setFieldInvalid(field, false);
       });
+      qsa('[data-signature-pad]', form).forEach((canvas) => canvas.signaturePad?.clear());
       form.dispatchEvent(new CustomEvent('form:reset-ui'));
     });
   });
 }
 
 function enhanceContactChoice(form) {
+  // The waiver requires both email (PDF is emailed) and phone, so it keeps
+  // plain [required] validation instead of the either/or contact choice.
+  if (form.dataset.form === 'waiver') return;
+
   const email = form.querySelector('input[type="email"]');
   const phone = form.querySelector('input[type="tel"]');
   if (!email || !phone) return;
@@ -501,9 +521,11 @@ function showSuccess(form, panel) {
   if (panel) panel.hidden = false;
 }
 
-async function sendToWebhook(payload) {
-  const url = config.WEBHOOK_URL;
+function webhookUrlFor(form) {
+  return form.dataset.form === 'waiver' ? config.WAIVER_WEBHOOK_URL : config.WEBHOOK_URL;
+}
 
+async function sendToWebhook(payload, url) {
   if (!url) {
     // Development mode — the deploy hasn't been configured yet.
     // Simulate a successful send so the UI can be exercised.

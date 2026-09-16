@@ -28,7 +28,8 @@ The user has the `caveman` skill active by default at **full** intensity.
 
 ```text
 index.html, about.html, adventure-workshops.html, camp-sites.html,
-contact.html, corporate-packages.html, gallery.html, school-programs.html
+contact.html, corporate-packages.html, gallery.html, school-programs.html,
+waiver.html
 
 css/
   main.css          @imports variables → reset → base → layout → components → animations → utilities → print → modal

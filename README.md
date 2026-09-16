@@ -185,6 +185,7 @@ The bulk of the site is done, but the following need real-world information and 
 - [ ] **Legal pages.** The footer links to Privacy Policy / Cancellation / T&Cs / Release of Liability — currently `#`. Provide real URLs or pages.
 - [ ] **Business address.** [contact.html](contact.html) uses an OpenStreetMap tile centred on Hyderabad. Replace with the real campsite coordinates (`&marker=17.408%2C78.478`).
 - [ ] **Webhook.** Set `WEBHOOK_URL` in [js/config.js](js/config.js). Until then the form is a no-op that shows the success state.
+- [ ] **Waiver endpoint.** The waiver form ([waiver.html](waiver.html)) needs the Apps Script web app in [apps-script/](apps-script/) deployed — follow [apps-script/README.md](apps-script/README.md), then set `WAIVER_WEBHOOK_URL` in [js/config.js](js/config.js). The declaration wording in the form is a placeholder — confirm the final legal text before launch.
 - [ ] **Favicons.** Only [assets/favicons/favicon.svg](assets/favicons/favicon.svg) is included. Generate a PNG set (192, 512, apple-touch-icon) once you have final artwork.
 - [ ] **Analytics / consent.** No tracking is wired up — add whatever your policy needs.
 - [ ] **Trip prices, dates, spot counts.** Currently placeholders (`8 spots left`, `₹18,500`, `Oct 2026`). Update on [index.html](index.html) as bookings change.

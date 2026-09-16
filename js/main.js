@@ -10,6 +10,7 @@ document.documentElement.classList.add('js');
 
 import { initNavigation } from './components/navigation.js';
 import { initForms } from './components/form.js';
+import { initSignaturePads } from './components/signature-pad.js';
 import { initGalleryFilter } from './components/gallery.js';
 import { initAccordion } from './components/accordion.js';
 import { initCarousel } from './components/carousel.js';
@@ -24,6 +25,7 @@ function boot() {
 
   initNavigation();
   initForms();
+  initSignaturePads();
   initGalleryFilter();
   initAccordion();
   initCarousel();

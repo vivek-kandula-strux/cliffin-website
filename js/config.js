@@ -7,6 +7,11 @@ export const config = {
   // Pabbly Connect webhook endpoint for form submissions.
   WEBHOOK_URL: 'https://connect.pabbly.com/webhook-listener/webhook/IjU3NjAwNTY5MDYzNzA0M2Qi_pc/IjU3NjcwNTY4MDYzNDA0MzQ1MjY4NTUzNzUxM2Ei_pc',
 
+  // Google Apps Script web app for the waiver form (signature → PDF → Drive).
+  // See apps-script/README.md for the deployment steps. Empty = dev mode
+  // (payload logged to console, success UI shown).
+  WAIVER_WEBHOOK_URL: 'https://script.google.com/macros/s/AKfycbxMaVUjQcLZJrqMpGNwmqkhvLh2u38OHDEOIjvlSftnP0XDOGsWmBWbpkVGfnZFj932/exec',
+
   // Reveal fallback threshold — when GSAP isn't loaded we use IntersectionObserver
   REVEAL_ROOT_MARGIN: '0px 0px -10% 0px',
 

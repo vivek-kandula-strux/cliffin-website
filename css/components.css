@@ -4882,3 +4882,54 @@ a.tile--image-flat:focus-visible img {
     gap: 16px;
   }
 }
+
+/* Signature pad (waiver form) */
+.signature-pad {
+  position: relative;
+}
+
+.signature-pad__canvas {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 160px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-input);
+  background: var(--color-card);
+  color: var(--color-ink);
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.signature-pad__canvas:hover {
+  border-color: oklch(0.72 0.02 82);
+}
+
+.field[data-invalid='true'] .signature-pad__canvas {
+  border-color: oklch(0.55 0.19 30);
+}
+
+.signature-pad__clear {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-chip);
+  background: var(--color-card);
+  color: var(--color-ink-soft);
+  cursor: pointer;
+}
+
+.signature-pad__clear:hover {
+  border-color: oklch(0.72 0.02 82);
+}
+
+.signature-pad__clear:focus-visible {
+  border-color: var(--color-ember);
+  outline: 2px solid oklch(0.67 0.15 47 / 0.25);
+  outline-offset: 1px;
+}
