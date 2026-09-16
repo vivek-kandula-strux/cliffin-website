@@ -29,7 +29,7 @@ The user has the `caveman` skill active by default at **full** intensity.
 ```text
 index.html, about.html, adventure-workshops.html, camp-sites.html,
 contact.html, corporate-packages.html, gallery.html, school-programs.html,
-waiver.html
+waiver.html, waiver-conditions.html
 
 css/
   main.css          @imports variables → reset → base → layout → components → animations → utilities → print → modal
@@ -150,9 +150,10 @@ Flat color = secondary/utility. Gradient = premium surfaces (hero, CTA-dark, sta
 
 ## 7. Forms and webhook
 
-- Contact form and register-interest form POST to a Google Apps Script Web App URL configured in `js/config.js` (`WEBHOOK_URL`).
-- Until a real URL is set, the form logs the payload to the console and shows the success UI.
-- The Apps Script expects headers: `timestamp | form | page | fullName | firstName | lastName | email | phone | trip | groupSize | notes | message`. The script appends whatever keys the payload contains.
+- Contact and register-interest forms dual-write to the Pabbly webhook and the Google Apps Script web app; both URLs live in `js/config.js` (`WEBHOOK_URL`, `FORMS_WEBHOOK_URL`). The waiver form posts only to the Apps Script (`FORMS_WEBHOOK_URL`).
+- In the Apps Script ([apps-script/](apps-script/)): waiver submissions generate a PDF from a Google Doc template (signature embedded), saved to a Drive folder, and emailed to the participant; every submission is appended as a row to the "Cliff-Inn Submissions" sheet (the dashboard) when `SHEET_ID` is configured.
+- Until the script URL is set, the form logs the payload to the console and shows the success UI.
+- The sheet has fixed columns: `submittedAt | form | fullName | email | phone | audience | trip | experiences | activity | activityDate | tripStartDate | tripEndDate | dateOfBirth | emergencyContactName | emergencyContactPhone | declaration | message | pdf | page`.
 
 ## 8. Accessibility
 

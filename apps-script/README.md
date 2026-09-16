@@ -24,11 +24,11 @@ participant. The temporary Doc is trashed — the PDF is the only artifact.
    shows "unverified app", click **Advanced → Go to … (unsafe)** — this is
    your own script.
 6. Copy the **Web app URL** (`https://script.google.com/macros/s/…/exec`).
-7. Paste it into `WAIVER_WEBHOOK_URL` in `js/config.js`.
+7. Paste it into `FORMS_WEBHOOK_URL` in `js/config.js`.
 
 ## Testing
 
-- Until `WAIVER_WEBHOOK_URL` is set, the form runs in dev mode: the payload
+- Until `FORMS_WEBHOOK_URL` is set, the form runs in dev mode: the payload
   (including the signature data URL) is logged to the console and the success
   panel shows.
 - After deploying, submit a real waiver and confirm: PDF lands in the Drive
@@ -72,6 +72,25 @@ as a template:
 The script makes a copy of the template for each submission, fills it in, and
 exports the copy as PDF — the template itself is never modified. Until
 `TEMPLATE_ID` is set, the script keeps using the built-in plain layout.
+
+## Log entries to a Google Sheet (the dashboard)
+
+The script can append every form submission — waivers **and** enquiries — as a
+row in a Google Sheet. The sheet is your dashboard: filter, sort, search,
+share read-only with your team.
+
+1. In the Apps Script editor, select the `setupSheet` function in the toolbar
+   dropdown and click **Run**. Authorize when prompted.
+2. Check the execution log (or **View → Logs**): it prints
+   `SHEET_ID = …`. A new spreadsheet "Cliff-Inn Submissions" appears in your
+   Drive with the header row.
+3. Paste that ID into `SHEET_ID` at the top of `waiver.gs`.
+4. Redeploy as a **new version** (see below).
+
+From then on every submission adds a row (`submittedAt`, `form`, contact
+details, waiver fields, and the waiver's PDF filename in the `pdf` column).
+If `SHEET_ID` is empty, sheet logging is silently skipped and everything else
+keeps working.
 
 ## Updating the script later
 

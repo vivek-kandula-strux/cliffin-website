@@ -70,7 +70,7 @@ function setupForm(form, formIndex) {
     setSubmitting(submit, status, true);
 
     try {
-      await sendToWebhook(payload, webhookUrlFor(form));
+      await Promise.all(webhookTargetsFor(form).map((url) => sendToWebhook(payload, url)));
       showSuccess(form, success);
       form.reset();
     } catch (error) {
@@ -521,8 +521,18 @@ function showSuccess(form, panel) {
   if (panel) panel.hidden = false;
 }
 
-function webhookUrlFor(form) {
-  return form.dataset.form === 'waiver' ? config.WAIVER_WEBHOOK_URL : config.WEBHOOK_URL;
+/**
+ * Where a form posts. The waiver goes only to the Apps Script (PDF + sheet
+ * log); the enquiry forms dual-write to the Pabbly webhook and the Apps
+ * Script (sheet log). Empty list = dev mode, handled inside sendToWebhook.
+ */
+function webhookTargetsFor(form) {
+  if (form.dataset.form === 'waiver') {
+    return [config.FORMS_WEBHOOK_URL].filter(Boolean);
+  }
+  const targets = [config.WEBHOOK_URL, config.FORMS_WEBHOOK_URL].filter(Boolean);
+  // Empty config = dev mode: one no-op send so the payload is logged.
+  return targets.length ? targets : [''];
 }
 
 async function sendToWebhook(payload, url) {

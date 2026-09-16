@@ -37,10 +37,19 @@ function setupPad(canvas) {
   };
 
   fit();
-  on(window, 'resize', () => {
-    // Only re-fit while untouched — resizing would wipe a drawn signature.
-    if (empty) fit();
-  });
+  if (typeof ResizeObserver === 'function') {
+    // Re-fit when the canvas becomes visible (e.g. a consent gate reveals the
+    // form) — a hidden canvas measures 0×0 and fit() safely no-ops until then.
+    const observer = new ResizeObserver(() => {
+      if (empty) fit();
+    });
+    observer.observe(canvas);
+  } else {
+    on(window, 'resize', () => {
+      // Only re-fit while untouched — resizing would wipe a drawn signature.
+      if (empty) fit();
+    });
+  }
 
   const point = (event) => {
     const rect = canvas.getBoundingClientRect();

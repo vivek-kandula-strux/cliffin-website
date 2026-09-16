@@ -1,11 +1,12 @@
 /**
- * Cliff-Inn Adventures — waiver endpoint (Google Apps Script).
+ * Cliff-Inn Adventures — forms endpoint (Google Apps Script).
  *
- * Receives the waiver form payload from waiver.html (JSON, content-type
- * text/plain to avoid a CORS preflight), builds a Google Doc with the
- * participant details and the embedded signature, exports it as a PDF,
- * saves the PDF into a Drive folder, emails a copy to the participant,
- * and trashes the temporary Doc (the PDF is the artifact).
+ * Receives form payloads from the website (JSON, content-type text/plain to
+ * avoid a CORS preflight). For waiver submissions it builds a Google Doc from
+ * the template, embeds the signature, exports a PDF, saves it into a Drive
+ * folder and emails a copy to the participant. Every submission (waiver or
+ * not) is appended as a row to a Google Sheet, which doubles as the
+ * entries dashboard.
  *
  * Deploy: see README.md in this folder.
  */
@@ -24,12 +25,17 @@ const OWNER_COPY_EMAIL = 'cliffinnadventures@gmail.com';
 // Google Docs (logo, colors, waiver text) and the PDF inherits the styling.
 // Leave as-is to use the built-in plain layout. See README.md "PDF template".
 const TEMPLATE_ID = '1r723Nn98dsk7lAJFLSn_ICLB7klSwhdR4OQYWkdafZ4';
+
+// Optional: ID of the Google Sheet that logs every submission (the dashboard).
+// Run setupSheet() once (see README.md) to create the sheet, then paste its ID
+// here. Leave '' to skip sheet logging — PDF/email flow still works.
+const SHEET_ID = '1ZVfZZsaBjsz6VUoZKFgUptipfuBZbpXVAz-DeSghhbQ';
 // -----------------------------------------------------------------------------
 
 const PLACEHOLDERS = [
   'fullName', 'dateOfBirth', 'email', 'phone',
   'emergencyContactName', 'emergencyContactPhone',
-  'activity', 'activityDate', 'declaration',
+  'activity', 'activityDate', 'tripStartDate', 'tripEndDate', 'declaration',
   'submittedAt', 'signedOn', 'signature',
 ];
 
@@ -42,36 +48,26 @@ const FIELD_LABELS = {
   emergencyContactPhone: 'Emergency contact phone',
   activity: 'Programme / activity',
   activityDate: 'Activity date',
+  tripStartDate: 'Trip start date',
+  tripEndDate: 'Trip end date',
   declaration: 'Declaration',
 };
 
 function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents);
-    const pdf = buildWaiverPdf_(data);
-    const folder = DriveApp.getFolderById(FOLDER_ID);
-    const fileName = 'Waiver - ' + sanitize_(data.fullName || 'Participant') + ' - ' + fileStamp_();
-    folder.createFile(pdf.setName(fileName));
+    let pdfFileName = '';
 
-    const emailBody =
-      'Hi ' + (data.fullName || 'there') + ',\n\n' +
-      'Thank you for signing the Cliff-Inn Adventures release of liability waiver ' +
-      'for "' + (data.activity || 'your activity') + '". Your signed copy is attached.\n\n' +
-      'See you out there!\n' +
-      'Team Cliff-Inn Adventures';
+    if (data.form === 'waiver') {
+      pdfFileName = handleWaiver_(data);
+    }
 
-    MailApp.sendEmail({
-      to: data.email,
-      replyTo: OWNER_COPY_EMAIL || undefined,
-      subject: 'Your signed Cliff-Inn Adventures waiver',
-      body: emailBody,
-      attachments: [pdf],
-    });
-
-    if (OWNER_COPY_EMAIL && data.email !== OWNER_COPY_EMAIL) {
-      MailApp.sendEmail(OWNER_COPY_EMAIL, 'Waiver signed: ' + (data.fullName || 'Participant'),
-        'Programme: ' + (data.activity || '-') + '\nDate: ' + (data.activityDate || '-') +
-        '\nEmail: ' + (data.email || '-'));
+    // Sheet logging is best-effort: a sheet problem must not block the
+    // waiver PDF/email or the enquiry submission.
+    try {
+      logToSheet_(data, pdfFileName);
+    } catch (sheetErr) {
+      console.error('logToSheet failed: ' + sheetErr);
     }
 
     return json_({ ok: true });
@@ -80,12 +76,44 @@ function doPost(e) {
   }
 }
 
+/** Waiver pipeline: template PDF → Drive folder → participant + owner email. */
+function handleWaiver_(data) {
+  const pdf = buildWaiverPdf_(data);
+  const folder = DriveApp.getFolderById(FOLDER_ID);
+  const fileName = 'Waiver - ' + sanitize_(data.fullName || 'Participant') + ' - ' + fileStamp_();
+  folder.createFile(pdf.setName(fileName));
+
+  const emailBody =
+    'Hi ' + (data.fullName || 'there') + ',\n\n' +
+    'Thank you for signing the Cliff-Inn Adventures release of liability waiver ' +
+    'for "' + (data.activity || 'your activity') + '". Your signed copy is attached.\n\n' +
+    'See you out there!\n' +
+    'Team Cliff-Inn Adventures';
+
+  MailApp.sendEmail({
+    to: data.email,
+    replyTo: OWNER_COPY_EMAIL || undefined,
+    subject: 'Your signed Cliff-Inn Adventures waiver',
+    body: emailBody,
+    attachments: [pdf],
+  });
+
+  if (OWNER_COPY_EMAIL && data.email !== OWNER_COPY_EMAIL) {
+    MailApp.sendEmail(OWNER_COPY_EMAIL, 'Waiver signed: ' + (data.fullName || 'Participant'),
+      'Programme: ' + (data.activity || '-') + '\nDate: ' + (data.activityDate || '-') +
+      '\nEmail: ' + (data.email || '-'));
+  }
+
+  return fileName;
+}
+
 function doGet() {
   return json_({
     ok: true,
     service: 'cliff-inn-waiver',
-    version: 2,
+    version: 3,
     templateActive: Boolean(TEMPLATE_ID && TEMPLATE_ID !== 'PASTE_TEMPLATE_DOC_ID'),
+    sheetActive: Boolean(SHEET_ID),
   });
 }
 
@@ -174,6 +202,46 @@ function buildPlain_(data) {
   const pdf = DriveApp.getFileById(doc.getId()).getAs('application/pdf');
   DriveApp.getFileById(doc.getId()).setTrashed(true); // source doc is scratch; the PDF is the artifact
   return pdf;
+}
+
+// Fixed column order for the submissions sheet — keep stable, append only.
+const SHEET_COLUMNS = [
+  'submittedAt', 'form', 'fullName', 'email', 'phone',
+  'audience', 'trip', 'experiences', 'activity', 'activityDate',
+  'tripStartDate', 'tripEndDate', 'dateOfBirth',
+  'emergencyContactName', 'emergencyContactPhone', 'declaration', 'message',
+  'pdf', 'page',
+];
+
+/**
+ * One-time setup (run manually from the editor: Run → review permissions).
+ * Creates the submissions spreadsheet with the header row and logs its ID —
+ * paste that ID into SHEET_ID above, then redeploy as a new version.
+ */
+function setupSheet() {
+  const sheet = SpreadsheetApp.create('Cliff-Inn Submissions');
+  sheet.getActiveSheet().setName('Submissions').appendRow(SHEET_COLUMNS);
+  console.log('SHEET_ID = ' + sheet.getId());
+  return sheet.getId();
+}
+
+/** Append one row per submission. No-op when SHEET_ID is not configured. */
+function logToSheet_(data, pdfFileName) {
+  if (!SHEET_ID) return;
+  const row = SHEET_COLUMNS.map(function (key) {
+    if (key === 'pdf') return pdfFileName;
+    // The browser sends UTC ISO strings — display them in IST instead.
+    if (key === 'submittedAt' && data.submittedAt) {
+      return Utilities.formatDate(new Date(data.submittedAt), 'Asia/Kolkata', 'yyyy-MM-dd HH:mm:ss');
+    }
+    const value = data[key];
+    if (Array.isArray(value)) return value.join(', ');
+    return value === undefined || value === null ? '' : String(value);
+  });
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  // Prefer a tab named "Submissions"; otherwise use whichever tab exists.
+  const tab = ss.getSheetByName('Submissions') || ss.getSheets()[0];
+  tab.appendRow(row);
 }
 
 function sanitize_(name) {
